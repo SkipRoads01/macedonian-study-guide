@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Македонски — Study Guide</title>
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#8a6a1f">
+<meta name="application-name" content="Македонски">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --surface2: #f0ece4;
+    --border: #ddd8cc;
+    --gold: #8a6a1f;
+    --gold-light: #6b500f;
+    --red: #c0392b;
+    --text: #1a1612;
+    --muted: #7a7060;
+    --cyrillic: #1a1612;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: 'МК';
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 10rem;
+    font-weight: 900;
+    color: #e0dbd0;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    user-select: none;
+  }
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--cyrillic);
+  }
+  h1 span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 4rem;
+    overflow-x: auto;
+  }
+  nav button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav button:hover { color: var(--text); }
+  nav button.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* MAIN */
+  main { padding: 3rem 4rem; max-width: 1100px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--cyrillic);
+    margin-bottom: 0.4rem;
+  }
+  .section-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ALPHABET GRID */
+  .alpha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .alpha-card {
+    background: var(--surface);
+    padding: 1.2rem 1rem;
+    transition: background 0.15s;
+  }
+  .alpha-card:hover { background: var(--surface2); }
+  .alpha-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--cyrillic);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .alpha-latin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+  .alpha-example {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .alpha-example-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--gold);
+    margin-top: 0.15rem;
+  }
+
+  /* PHRASE TABLE */
+  .phrase-group { margin-bottom: 2.5rem; }
+  .phrase-group-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1px;
+  }
+  .phrase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 1px;
+  }
+  .phrase-row:first-of-type { border-top: none; }
+  .phrase-cell {
+    background: var(--surface);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition: background 0.15s;
+  }
+  .phrase-row:hover .phrase-cell { background: var(--surface2); }
+  .phrase-cell.cyr {
+    font-family: 'Playfair Display', serif;
+    color: var(--cyrillic);
+    font-size: 1rem;
+  }
+  .phrase-cell.lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold-light);
+  }
+  .phrase-cell.eng {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .col-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .col-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* NATIONALITY TABLE */
+  .nat-group { margin-bottom: 2.5rem; }
+  .nat-intro {
+    background: var(--surface);
+    border-left: 3px solid var(--gold);
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .nat-intro strong { color: var(--gold); }
+
+  /* VERB SECTION */
+  .verb-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .verb-group-card { background: var(--surface); padding: 1.5rem; }
+  .verb-group-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .verb-headword {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--cyrillic);
+    margin-bottom: 0.15rem;
+  }
+  .verb-headword-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    margin-bottom: 0.1rem;
+  }
+  .verb-headword-eng {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .conj-row {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: 0.5rem 1rem;
+    align-items: baseline;
+    margin-bottom: 0.35rem;
+    font-size: 0.82rem;
+  }
+  .conj-pronoun {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .conj-cyr { color: var(--cyrillic); }
+  .conj-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+  .verb-note {
+    background: var(--surface);
+    border-left: 3px solid var(--red);
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .verb-note strong { color: var(--text); }
+
+  /* SUM table */
+  .sum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .sum-cell {
+    background: var(--surface);
+    padding: 1rem 1.2rem;
+    transition: background 0.15s;
+  }
+  .sum-cell:hover { background: var(--surface2); }
+  .sum-pronoun {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .sum-cyr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cyrillic);
+  }
+  .sum-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    margin-top: 0.1rem;
+  }
+  .sum-eng { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* EXERCISES */
+  .exercise-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .exercise-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cyrillic);
+    margin-bottom: 0.3rem;
+  }
+  .exercise-q-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    margin-bottom: 0.2rem;
+  }
+  .exercise-eng { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+  .answer-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .answer-toggle:hover { background: var(--surface2); border-color: var(--gold); }
+  .answer { display: none; margin-top: 0.75rem; }
+  .answer.visible { display: block; }
+  .answer-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 0.2rem;
+  }
+
+  /* SEARCH */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 4rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .search-bar input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+    max-width: 420px;
+  }
+  .search-bar input:focus { border-color: var(--gold); }
+  .search-bar input::placeholder { color: var(--muted); }
+  .search-icon {
+    font-size: 0.9rem;
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .search-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    min-width: 80px;
+  }
+  .search-clear {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0 0.2rem;
+    line-height: 1;
+    display: none;
+  }
+  .search-clear.visible { display: block; }
+  .search-clear:hover { color: var(--text); }
+
+  /* SEARCH RESULTS VIEW */
+  #search-results { display: none; }
+  #search-results.active { display: block; }
+
+  .result-group-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+    margin-top: 1.5rem;
+  }
+  .result-group-title:first-child { margin-top: 0; }
+
+  .no-results {
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    padding: 2rem 0;
+  }
+
+  mark {
+    background: #ffe066;
+    color: #1a1612;
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  @media (max-width: 700px) {
+    header, nav, main { padding-left: 1.5rem; padding-right: 1.5rem; }
+    h1 { font-size: 2rem; }
+    header::before { display: none; }
+    .verb-groups { grid-template-columns: 1fr; }
+    .phrase-row { grid-template-columns: 1fr; }
+    .phrase-cell { border-bottom: 1px solid var(--border); }
+  }
+
+  /* FLASHCARDS */
+  .fc-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .fc-filter {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .fc-filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fc-filter-btn:hover { color: var(--text); }
+  .fc-filter-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .fc-counter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .fc-shuffle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fc-shuffle:hover { color: var(--text); border-color: var(--text); }
+
+  .fc-scene {
+    perspective: 1200px;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  .fc-card {
+    width: 100%;
+    height: 280px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .fc-card.flipped { transform: rotateY(180deg); }
+  .fc-front, .fc-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--surface);
+    transition: background 0.15s;
+  }
+  .fc-front:hover { background: var(--surface2); }
+  .fc-back { transform: rotateY(180deg); background: var(--surface2); justify-content: flex-start; padding: 1.5rem 2rem; }
+  .fc-group-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    align-self: flex-start;
+  }
+  .fc-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--cyrillic);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    text-align: center;
+  }
+  .fc-word-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+  }
+  .fc-word-eng {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .fc-hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 1rem;
+  }
+  .fc-back-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    align-self: flex-start;
+  }
+  .fc-conj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 2rem;
+    width: 100%;
+  }
+  .fc-conj-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+  .fc-conj-pronoun {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .fc-conj-form {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--cyrillic);
+  }
+  .fc-conj-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--gold-light);
+  }
+  .fc-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+  .fc-nav-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+  .fc-nav-btn:hover { background: var(--surface2); }
+  .fc-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .fc-progress {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 3px;
+    background: var(--border);
+  }
+  .fc-progress-bar {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  /* ABC FLASHCARDS */
+  .afc-scene {
+    width: 100%;
+    max-width: 520px;
+    height: 300px;
+    perspective: 900px;
+    cursor: pointer;
+    margin: 0 auto 1.8rem;
+  }
+  .afc-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .afc-card.flipped { transform: rotateY(180deg); }
+  .afc-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  .afc-front { background: var(--surface); }
+  .afc-front-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    color: var(--cyrillic);
+    line-height: 1;
+    user-select: none;
+  }
+  .afc-hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    position: absolute;
+    bottom: 1rem;
+  }
+  .afc-back {
+    background: var(--surface2);
+    transform: rotateY(180deg);
+    gap: 0.4rem;
+  }
+  .afc-back-letters {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--cyrillic);
+    line-height: 1;
+  }
+  .afc-back-latin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--gold);
+  }
+  .afc-divider {
+    width: 36px;
+    height: 1px;
+    background: var(--border);
+    margin: 0.5rem 0;
+  }
+  .afc-example-cyr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--cyrillic);
+  }
+  .afc-example-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+  }
+  .afc-example-eng {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .afc-speak-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: absolute;
+    top: 0.9rem;
+    right: 0.9rem;
+  }
+  .afc-speak-btn:hover { background: var(--surface2); border-color: var(--gold); }
+  .afc-speak-btn.speaking { color: var(--red); border-color: var(--red); }
+</style>
+<style>
+/* ── QUIZ ── */
+.quiz-btn-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem}
+.quiz-sel-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:.4rem .9rem;cursor:pointer;transition:all .15s}
+.quiz-sel-btn:hover{color:var(--text)}
+.quiz-sel-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+.quiz-go-btn{background:var(--gold);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.12em;padding:.75rem 2rem;cursor:pointer;margin-top:1.5rem;display:inline-block;transition:opacity .15s}
+.quiz-go-btn:hover{opacity:.85}
+.quiz-hud{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:.5rem}
+.quiz-hud-score{color:var(--gold);font-weight:500}
+.quiz-prog-wrap{height:3px;background:var(--border);margin-bottom:2rem}
+.quiz-prog-bar{height:100%;background:var(--gold);transition:width .3s ease;width:0}
+.quiz-play-btn{background:var(--gold);color:#fff;border:none;font-family:'IBM Plex Mono',monospace;font-size:1rem;letter-spacing:.1em;padding:1rem 2.5rem;cursor:pointer;transition:opacity .15s;display:block;margin:0 auto}
+.quiz-play-btn:hover{opacity:.85}
+.quiz-q-cyr{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--cyrillic);line-height:1.2;margin-bottom:.3rem}
+.quiz-q-lat{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--gold-light);margin-bottom:1.5rem}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem}
+.quiz-opt{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.88rem;padding:.9rem 1rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.3}
+.quiz-opt:hover:not(:disabled){background:var(--surface2);border-color:var(--gold)}
+.quiz-opt.correct{background:#e8f5e9;border-color:#4caf50;color:#2e7d32;font-weight:500}
+.quiz-opt.wrong{background:#ffebee;border-color:#ef9a9a;color:#c62828}
+.quiz-opt:disabled{cursor:default}
+.quiz-fb{background:var(--surface);border-left:3px solid var(--border);padding:.75rem 1.2rem;font-size:.83rem;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.quiz-fb.ok{border-left-color:#4caf50}
+.quiz-fb.bad{border-left-color:var(--red)}
+.quiz-next-btn{background:none;border:1px solid var(--border);color:var(--gold);font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;padding:.35rem .8rem;cursor:pointer;white-space:nowrap;transition:all .15s}
+.quiz-next-btn:hover{background:var(--surface2);border-color:var(--gold)}
+.quiz-done-score{font-family:'Playfair Display',serif;font-size:4rem;color:var(--cyrillic);line-height:1;margin:1.5rem 0 .4rem}
+.quiz-done-label{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.3rem}
+.quiz-done-sub{font-size:.85rem;color:var(--muted);margin-bottom:.5rem}
+/* Speak buttons */
+.speak-btn{background:none;border:1px solid var(--border);color:var(--gold);font-size:.72rem;padding:.15rem .5rem;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all .15s;flex-shrink:0;margin-left:.5rem}
+.speak-btn:hover{background:var(--surface2)}
+@media(max-width:700px){.quiz-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-label">Lesson Materials — Consolidated</div>
+  <h1>Македонски
+    <span>Macedonian Language Study Guide</span>
+  </h1>
+</header>
+
+<nav>
+  <button class="active" onclick="show('alphabet', this)">Alphabet</button>
+  <button onclick="show('alpha-cards', this)">ABC Cards</button>
+  <button onclick="show('phrases', this)">Phrases</button>
+  <button onclick="show('nationalities', this)">Nationalities</button>
+  <button onclick="show('verbs', this)">Verbs</button>
+  <button onclick="show('sum', this)">To Be — Сум</button>
+  <button onclick="show('flashcards', this)">Flashcards</button>
+  <button onclick="show('numbers', this)">Numbers &amp; Plurals</button>
+  <button onclick="show('quiz', this)">Quiz</button>
+  <button onclick="show('exercises', this)">Exercises</button>
+</nav>
+
+<div class="search-bar">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="search-input" placeholder="Search in Cyrillic, Latin, or English…" oninput="doSearch(this.value)" />
+  <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  <span class="search-count" id="search-count"></span>
+</div>
+
+<main>
+
+<!-- ─── ALPHABET ─── -->
+<div id="alphabet" class="section active">
+  <div class="section-title">Кирилица — The Cyrillic Alphabet</div>
+  <div class="section-sub">31 letters · Macedonian Cyrillic</div>
+  <div class="alpha-grid">
+    <div class="alpha-card"><div class="alpha-letter">А а</div><div class="alpha-latin">/a/</div><div class="alpha-example">авион<div class="alpha-example-lat">avion — airplane</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Б б</div><div class="alpha-latin">/b/</div><div class="alpha-example">баба<div class="alpha-example-lat">baba — grandmother</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">В в</div><div class="alpha-latin">/v/</div><div class="alpha-example">воз<div class="alpha-example-lat">voz — train</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Г г</div><div class="alpha-latin">/g/</div><div class="alpha-example">град<div class="alpha-example-lat">grad — city</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Д д</div><div class="alpha-latin">/d/</div><div class="alpha-example">дом<div class="alpha-example-lat">dom — home</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ѓ ѓ</div><div class="alpha-latin">/gj/</div><div class="alpha-example">Ѓурѓа<div class="alpha-example-lat">Gjurgja — name</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Е е</div><div class="alpha-latin">/e/</div><div class="alpha-example">еден<div class="alpha-example-lat">eden — one</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ж ж</div><div class="alpha-latin">/zh/</div><div class="alpha-example">жаба<div class="alpha-example-lat">zhaba — frog</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">З з</div><div class="alpha-latin">/z/</div><div class="alpha-example">заб<div class="alpha-example-lat">zab — tooth</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ѕ ѕ</div><div class="alpha-latin">/dz/</div><div class="alpha-example">ѕид<div class="alpha-example-lat">dzid — wall</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">И и</div><div class="alpha-latin">/i/</div><div class="alpha-example">Иво<div class="alpha-example-lat">Ivo — name</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ј ј</div><div class="alpha-latin">/j/</div><div class="alpha-example">јаве<div class="alpha-example-lat">jave — announcement</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">К к</div><div class="alpha-latin">/k/</div><div class="alpha-example">кафе<div class="alpha-example-lat">kafe — coffee</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Л л</div><div class="alpha-latin">/l/</div><div class="alpha-example">лав<div class="alpha-example-lat">lav — lion</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Љ љ</div><div class="alpha-latin">/lj/</div><div class="alpha-example">љубов<div class="alpha-example-lat">ljubov — love</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">М м</div><div class="alpha-latin">/m/</div><div class="alpha-example">мама<div class="alpha-example-lat">mama — mother</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Н н</div><div class="alpha-latin">/n/</div><div class="alpha-example">не<div class="alpha-example-lat">ne — no</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Њ њ</div><div class="alpha-latin">/nj/</div><div class="alpha-example">Њујорк<div class="alpha-example-lat">Njujork — New York</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">О о</div><div class="alpha-latin">/o/</div><div class="alpha-example">око<div class="alpha-example-lat">oko — eye</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">П п</div><div class="alpha-latin">/p/</div><div class="alpha-example">пазар<div class="alpha-example-lat">pazar — market</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Р р</div><div class="alpha-latin">/r/</div><div class="alpha-example">роза<div class="alpha-example-lat">roza — rose</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">С с</div><div class="alpha-latin">/s/</div><div class="alpha-example">сон<div class="alpha-example-lat">son — dream</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Т т</div><div class="alpha-latin">/t/</div><div class="alpha-example">таа<div class="alpha-example-lat">taa — she</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ќ ќ</div><div class="alpha-latin">/kj/</div><div class="alpha-example">куќа<div class="alpha-example-lat">kukja — house</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">У у</div><div class="alpha-latin">/u/</div><div class="alpha-example">уво<div class="alpha-example-lat">uvo — ear</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ф ф</div><div class="alpha-latin">/f/</div><div class="alpha-example">фока<div class="alpha-example-lat">foka — seal</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Х х</div><div class="alpha-latin">/h/</div><div class="alpha-example">Хаваи<div class="alpha-example-lat">Havai — Hawaii</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ц ц</div><div class="alpha-latin">/ts/</div><div class="alpha-example">цвет<div class="alpha-example-lat">tsvet — flower</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ч ч</div><div class="alpha-latin">/ch/</div><div class="alpha-example">час<div class="alpha-example-lat">chas — hour</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Џ џ</div><div class="alpha-latin">/dj/</div><div class="alpha-example">џуџе<div class="alpha-example-lat">djudje — dwarf</div></div></div>
+    <div class="alpha-card"><div class="alpha-letter">Ш ш</div><div class="alpha-latin">/sh/</div><div class="alpha-example">Штип<div class="alpha-example-lat">Shtip — city name</div></div></div>
+  </div>
+</div>
+
+<!-- ─── ABC FLASHCARDS ─── -->
+<div id="alpha-cards" class="section">
+  <div class="section-title">Азбука — Alphabet Cards</div>
+  <div class="section-sub">31 letters · Click to flip · Audio pronunciation</div>
+
+  <div class="fc-controls">
+    <div class="fc-filter">
+      <button class="fc-filter-btn active" onclick="afcShuffle()">⇄ Shuffle</button>
+      <button class="fc-filter-btn" onclick="afcReset()">Reset Order</button>
+    </div>
+    <span class="fc-counter" id="afc-counter"></span>
+  </div>
+
+  <div class="fc-progress" style="max-width:100%;margin-bottom:1.5rem">
+    <div class="fc-progress-bar" id="afc-progress-bar" style="width:0%"></div>
+  </div>
+
+  <div class="afc-scene" onclick="afcFlip()">
+    <div class="afc-card" id="afc-card">
+      <div class="afc-face afc-front">
+        <div class="afc-front-letter" id="afc-front-letter"></div>
+        <button class="afc-speak-btn" id="afc-speak-front" onclick="event.stopPropagation();afcSpeak('front')">♪ Listen</button>
+        <span class="afc-hint">click to flip</span>
+      </div>
+      <div class="afc-face afc-back">
+        <div class="afc-back-letters" id="afc-back-letters"></div>
+        <div class="afc-back-latin" id="afc-back-latin"></div>
+        <div class="afc-divider"></div>
+        <div class="afc-example-cyr" id="afc-example-cyr"></div>
+        <div class="afc-example-lat" id="afc-example-lat"></div>
+        <div class="afc-example-eng" id="afc-example-eng"></div>
+        <button class="afc-speak-btn" id="afc-speak-back" onclick="event.stopPropagation();afcSpeak('back')">♪ Listen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-nav">
+    <button class="fc-nav-btn" id="afc-prev" onclick="afcNav(-1)">← Prev</button>
+    <button class="fc-nav-btn" id="afc-next" onclick="afcNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ─── PHRASES ─── -->
+<div id="phrases" class="section">
+  <div class="section-title">Основни Фрази — Basic Phrases</div>
+  <div class="section-sub">Greetings · Politeness · Meeting People · Questions</div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Поздрави — Greetings</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Здраво!</div><div class="phrase-cell lat">Zdravo!</div><div class="phrase-cell eng">Hi! / Hello!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Добро утро!</div><div class="phrase-cell lat">Dobro utro!</div><div class="phrase-cell eng">Good morning!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Добар ден!</div><div class="phrase-cell lat">Dobar den!</div><div class="phrase-cell eng">Good afternoon!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Добра вечер!</div><div class="phrase-cell lat">Dobra vecher!</div><div class="phrase-cell eng">Good evening!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Добра ноќ!</div><div class="phrase-cell lat">Dobra noḱ!</div><div class="phrase-cell eng">Good night!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Пријатно!</div><div class="phrase-cell lat">Prijatno!</div><div class="phrase-cell eng">Goodbye! (pleasant)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Се гледаме!</div><div class="phrase-cell lat">Se gledame!</div><div class="phrase-cell eng">See you!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Имај убав ден!</div><div class="phrase-cell lat">Imaj ubav den!</div><div class="phrase-cell eng">Have a nice day!</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Како си? — How Are You?</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Како си?</div><div class="phrase-cell lat">Kako si?</div><div class="phrase-cell eng">How are you? (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Kako сте?</div><div class="phrase-cell lat">Kako ste?</div><div class="phrase-cell eng">How are you? (formal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Добро сум, благодарам.</div><div class="phrase-cell lat">Dobro sum, blagodaram.</div><div class="phrase-cell eng">I'm good, thank you.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Одлично, благодарам!</div><div class="phrase-cell lat">Odlichno, blagodaram!</div><div class="phrase-cell eng">Excellent, thank you!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">А, ти?</div><div class="phrase-cell lat">A, ti?</div><div class="phrase-cell eng">And you? (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">А, вие?</div><div class="phrase-cell lat">A, vie?</div><div class="phrase-cell eng">And you? (formal)</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Учтивост — Politeness</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Благодарам!</div><div class="phrase-cell lat">Blagodaram!</div><div class="phrase-cell eng">Thank you!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Фала!</div><div class="phrase-cell lat">Fala!</div><div class="phrase-cell eng">Thanks! (casual)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Нема на што!</div><div class="phrase-cell lat">Nema na shto!</div><div class="phrase-cell eng">You're welcome!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Извини!</div><div class="phrase-cell lat">Izvini!</div><div class="phrase-cell eng">Sorry! (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Извинете!</div><div class="phrase-cell lat">Izvinete!</div><div class="phrase-cell eng">Sorry! (formal/plural)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Нема проблем!</div><div class="phrase-cell lat">Nema problem!</div><div class="phrase-cell eng">No problem!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Те молам!</div><div class="phrase-cell lat">Te molam!</div><div class="phrase-cell eng">Please! (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Ве молам!</div><div class="phrase-cell lat">Ve molam!</div><div class="phrase-cell eng">Please! (formal)</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Запознавање — Meeting People</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Kako се викаш?</div><div class="phrase-cell lat">Kako se vikash?</div><div class="phrase-cell eng">What's your name? (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Се викам...</div><div class="phrase-cell lat">Se vikam...</div><div class="phrase-cell eng">My name is...</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Јас сум...</div><div class="phrase-cell lat">Jas sum...</div><div class="phrase-cell eng">I am...</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Мило ми е!</div><div class="phrase-cell lat">Milo mi e!</div><div class="phrase-cell eng">Nice to meet you!</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Од каде си?</div><div class="phrase-cell lat">Od kade si?</div><div class="phrase-cell eng">Where are you from? (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Јас сум од...</div><div class="phrase-cell lat">Jas sum od...</div><div class="phrase-cell eng">I'm from...</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде живееш?</div><div class="phrase-cell lat">Kade zhiveesh?</div><div class="phrase-cell eng">Where do you live? (informal)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Живеам во...</div><div class="phrase-cell lat">Zhiveam vo...</div><div class="phrase-cell eng">I live in...</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Од кој град си?</div><div class="phrase-cell lat">Od koj grad si?</div><div class="phrase-cell eng">Which city are you from?</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Прашалници — Question Words</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Што?</div><div class="phrase-cell lat">Shto?</div><div class="phrase-cell eng">What?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Зошто?</div><div class="phrase-cell lat">Zoshto?</div><div class="phrase-cell eng">Why?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Kako?</div><div class="phrase-cell lat">Kako?</div><div class="phrase-cell eng">How?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Кој?</div><div class="phrase-cell lat">Koj?</div><div class="phrase-cell eng">Who?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Кога?</div><div class="phrase-cell lat">Koga?</div><div class="phrase-cell eng">When?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде?</div><div class="phrase-cell lat">Kade?</div><div class="phrase-cell eng">Where?</div></div>
+  </div>
+</div>
+
+<!-- ─── NATIONALITIES ─── -->
+<div id="nationalities" class="section">
+  <div class="section-title">Националности — Nationalities</div>
+  <div class="section-sub">Masculine · Feminine · Plural</div>
+
+  <div class="nat-intro">
+    <strong>Pattern:</strong> Masculine ends in <strong>-ец</strong> · Feminine ends in <strong>-ка</strong> · Masc. plural ends in <strong>-ци</strong> · Fem. plural ends in <strong>-ки</strong>
+  </div>
+
+  <div class="col-headers" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:0.5rem;">
+    <div class="col-header">Country</div>
+    <div class="col-header">Masc. sg.</div>
+    <div class="col-header">Fem. sg.</div>
+    <div class="col-header">Masc. pl.</div>
+    <div class="col-header">Fem. pl.</div>
+  </div>
+
+  <style>
+    .nat-row { display: grid; grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:1px; }
+    .nat-cell { background:var(--surface); padding:0.65rem 0.85rem; font-size:0.85rem; transition:background 0.15s; }
+    .nat-row:hover .nat-cell { background:var(--surface2); }
+    .nat-cell.country { color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; }
+    .nat-cell.cyr { font-family:'Playfair Display',serif; color:var(--cyrillic); }
+    .nat-cell.lat { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--gold-light); }
+  </style>
+
+  <!-- Country rows -->
+  <div class="nat-row">
+    <div class="nat-cell country">Македонија<br>Macedonia</div>
+    <div class="nat-cell cyr">Македонец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Makedonets</span></div>
+    <div class="nat-cell cyr">Македонка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Makedonka</span></div>
+    <div class="nat-cell cyr">Македонци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Makedonci</span></div>
+    <div class="nat-cell cyr">Македонки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Makedonki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Америка / САД<br>USA / America</div>
+    <div class="nat-cell cyr">Американец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Amerikanets</span></div>
+    <div class="nat-cell cyr">Американка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Amerikanka</span></div>
+    <div class="nat-cell cyr">Американци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Amerikanci</span></div>
+    <div class="nat-cell cyr">Американки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Amerikanki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Јапонија<br>Japan</div>
+    <div class="nat-cell cyr">Јапонец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Japonets</span></div>
+    <div class="nat-cell cyr">Јапонка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Japonka</span></div>
+    <div class="nat-cell cyr">Јапонци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Japonci</span></div>
+    <div class="nat-cell cyr">Јапонки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Japonki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Мексико<br>Mexico</div>
+    <div class="nat-cell cyr">Мексиканец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Meksikanets</span></div>
+    <div class="nat-cell cyr">Мексиканка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Meksikanka</span></div>
+    <div class="nat-cell cyr">Мексиканци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Meksikanci</span></div>
+    <div class="nat-cell cyr">Мексиканки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Meksikanki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Англија<br>England / UK</div>
+    <div class="nat-cell cyr">Британец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Britanets</span></div>
+    <div class="nat-cell cyr">Британка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Britanka</span></div>
+    <div class="nat-cell cyr">Британци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Britanci</span></div>
+    <div class="nat-cell cyr">Британки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Britanki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Германија<br>Germany</div>
+    <div class="nat-cell cyr">Германец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Germanets</span></div>
+    <div class="nat-cell cyr">Германка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Germanka</span></div>
+    <div class="nat-cell cyr">Германци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Germanci</span></div>
+    <div class="nat-cell cyr">Германки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Germanki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Шпанија<br>Spain</div>
+    <div class="nat-cell cyr">Шпанец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Shpanets</span></div>
+    <div class="nat-cell cyr">Шпанка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Shpanka</span></div>
+    <div class="nat-cell cyr">Шпанци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Shpanci</span></div>
+    <div class="nat-cell cyr">Шпанки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Shpanki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Австралија<br>Australia</div>
+    <div class="nat-cell cyr">Австралиец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Avstraliets</span></div>
+    <div class="nat-cell cyr">Австралијка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Avstralijka</span></div>
+    <div class="nat-cell cyr">Австралијци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Avstralijci</span></div>
+    <div class="nat-cell cyr">Австралијки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Avstralijki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Бразил<br>Brazil</div>
+    <div class="nat-cell cyr">Бразилец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Brazilets</span></div>
+    <div class="nat-cell cyr">Бразилка<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Brazilka</span></div>
+    <div class="nat-cell cyr">Бразилци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Brazilci</span></div>
+    <div class="nat-cell cyr">Бразилки<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Brazilki</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Ирска<br>Ireland</div>
+    <div class="nat-cell cyr">Ирец<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Irets</span></div>
+    <div class="nat-cell cyr">Иркина<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Irkina</span></div>
+    <div class="nat-cell cyr">Ирци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Irci</span></div>
+    <div class="nat-cell cyr">Иркини<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Irkini</span></div>
+  </div>
+  <div class="nat-row">
+    <div class="nat-cell country">Турција<br>Turkey</div>
+    <div class="nat-cell cyr">Турчин<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turchin</span></div>
+    <div class="nat-cell cyr">Туркина<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turkina</span></div>
+    <div class="nat-cell cyr">Турци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turci</span></div>
+    <div class="nat-cell cyr">Туркини<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turkini</span></div>
+  </div>
+
+  <br>
+  <div class="nat-intro" style="border-left-color:var(--red)">
+    <strong>Adjective forms:</strong> nationality adjectives also agree in gender:<br>
+    Американ<strong>ски</strong> цртан филм · Американ<strong>ска</strong> музика · Американ<strong>ско</strong> село<br>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">American (m.) cartoon · American (f.) music · American (n.) village</span>
+  </div>
+</div>
+
+<!-- ─── VERBS ─── -->
+<div id="verbs" class="section">
+  <div class="section-title">Глаголи — Verbs</div>
+  <div class="section-sub">3 conjugation groups · Present tense</div>
+
+  <div class="verb-note">
+    Macedonian verbs are grouped by the <strong>3rd person singular ending</strong> (тој/таа/тоа — he/she/it) in the present tense: Group 1 ends in <strong>-а</strong>, Group 2 in <strong>-е</strong>, Group 3 in <strong>-и</strong>.
+  </div>
+
+  <div class="verb-groups">
+    <!-- GROUP 1 -->
+    <div class="verb-group-card">
+      <div class="verb-group-label">Група 1 — Group 1 · 3sg ends in -А</div>
+      <div class="verb-headword">Зборува</div>
+      <div class="verb-headword-lat">Zboruva</div>
+      <div class="verb-headword-eng">to speak</div>
+      <div class="conj-row"><span class="conj-pronoun">Јас</span><span class="conj-cyr">зборувам</span><span class="conj-lat">zboruvam</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ти</span><span class="conj-cyr">зборуваш</span><span class="conj-lat">zboruvash</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тој/таа</span><span class="conj-cyr">зборува</span><span class="conj-lat">zboruva</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ние</span><span class="conj-cyr">зборуваме</span><span class="conj-lat">zboruvame</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Вие</span><span class="conj-cyr">зборувате</span><span class="conj-lat">zboruvate</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тие</span><span class="conj-cyr">зборуваат</span><span class="conj-lat">zboruvaat</span></div>
+      <hr class="divider">
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem">Other -а verbs:</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">шета</span><span class="conj-lat">sheta</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to walk/stroll</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">сака</span><span class="conj-lat">saka</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to want / to love</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">игра</span><span class="conj-lat">igra</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to play</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">сурфа</span><span class="conj-lat">surfa</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to surf</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">слуша</span><span class="conj-lat">slusha</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to listen</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">гледа</span><span class="conj-lat">gleda</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">to watch / look at</div>
+    </div>
+
+    <!-- GROUP 2 -->
+    <div class="verb-group-card">
+      <div class="verb-group-label">Група 2 — Group 2 · 3sg ends in -Е</div>
+      <div class="verb-headword">Пие</div>
+      <div class="verb-headword-lat">Pie</div>
+      <div class="verb-headword-eng">to drink</div>
+      <div class="conj-row"><span class="conj-pronoun">Јас</span><span class="conj-cyr">пијам</span><span class="conj-lat">pijam</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ти</span><span class="conj-cyr">пиеш</span><span class="conj-lat">piesh</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тој/таа</span><span class="conj-cyr">пие</span><span class="conj-lat">pie</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ние</span><span class="conj-cyr">пиеме</span><span class="conj-lat">pieme</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Вие</span><span class="conj-cyr">пиете</span><span class="conj-lat">piete</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тие</span><span class="conj-cyr">пијат</span><span class="conj-lat">pijat</span></div>
+      <hr class="divider">
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem">Other -е verbs:</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">јаде</span><span class="conj-lat">jade</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to eat</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">спие</span><span class="conj-lat">spie</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to sleep</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">живее</span><span class="conj-lat">zhivee</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">to live</div>
+    </div>
+
+    <!-- GROUP 3 -->
+    <div class="verb-group-card">
+      <div class="verb-group-label">Група 3 — Group 3 · 3sg ends in -И</div>
+      <div class="verb-headword">Мисли</div>
+      <div class="verb-headword-lat">Misli</div>
+      <div class="verb-headword-eng">to think</div>
+      <div class="conj-row"><span class="conj-pronoun">Јас</span><span class="conj-cyr">мислам</span><span class="conj-lat">misleam</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ти</span><span class="conj-cyr">мислиш</span><span class="conj-lat">mislesh</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тој/таа</span><span class="conj-cyr">мисли</span><span class="conj-lat">misli</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ние</span><span class="conj-cyr">мислиме</span><span class="conj-lat">misleme</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Вие</span><span class="conj-cyr">мислите</span><span class="conj-lat">mislete</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тие</span><span class="conj-cyr">мислат</span><span class="conj-lat">misleat</span></div>
+      <hr class="divider">
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem">Other -и verbs:</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">работи</span><span class="conj-lat">raboti</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to work</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">чита</span><span class="conj-lat">chita</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to read</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">учи</span><span class="conj-lat">uchi</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to study / learn</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">седи</span><span class="conj-lat">sedi</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">to sit</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">готви</span><span class="conj-lat">gotvi</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">to cook</div>
+    </div>
+  </div>
+
+  <!-- Conjugation comparison table -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2rem">Споредба — Group Comparison</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    All three groups share the same <strong>-м / -ш</strong> endings for јас and ти. From тој/таа/тоа onwards, the stem vowel (<strong>-а</strong>, <strong>-е</strong>, or <strong>-и</strong>) carries through each form. Blue highlight = Groups 1 &amp; 3 share the same suffix pattern.
+  </div>
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+      <thead>
+        <tr>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Person</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Group 1 — -А<br><span style="font-weight:400;color:var(--muted)">гледа / gleda / to watch</span></th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Group 2 — -Е<br><span style="font-weight:400;color:var(--muted)">пие / pie / to drink</span></th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Group 3 — -И<br><span style="font-weight:400;color:var(--muted)">мисли / misli / to think</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- јас -->
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">јас / jas / I</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледам</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledam</span><br><span style="font-size:0.72rem;color:var(--muted)">I watch</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пијам</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijam</span><br><span style="font-size:0.72rem;color:var(--muted)">I drink</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислам</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">mislam</span><br><span style="font-size:0.72rem;color:var(--muted)">I think</span></span></td>
+        </tr>
+        <!-- ти -->
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">ти / ti / you</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledaš</span><br><span style="font-size:0.72rem;color:var(--muted)">you watch</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пијаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijaš</span><br><span style="font-size:0.72rem;color:var(--muted)">you drink</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">mislaš</span><br><span style="font-size:0.72rem;color:var(--muted)">you think</span></span></td>
+        </tr>
+        <!-- тој/таа/тоа -->
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">тој/таа/тоа<br>he/she/it</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледа</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gleda</span><br><span style="font-size:0.72rem;color:var(--muted)">he/she/it watches</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пие</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pie</span><br><span style="font-size:0.72rem;color:var(--muted)">he/she/it drinks</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мисли</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">misli</span><br><span style="font-size:0.72rem;color:var(--muted)">he/she/it thinks</span></span></td>
+        </tr>
+        <!-- ние -->
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">ние / nie / we</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледаме</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledame</span><br><span style="font-size:0.72rem;color:var(--muted)">we watch</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пиеме</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pieme</span><br><span style="font-size:0.72rem;color:var(--muted)">we drink</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислиме</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">mislime</span><br><span style="font-size:0.72rem;color:var(--muted)">we think</span></span></td>
+        </tr>
+        <!-- вие -->
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">вие / vie / you (pl.)</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледате</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledate</span><br><span style="font-size:0.72rem;color:var(--muted)">you (pl.) watch</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пиете</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">piete</span><br><span style="font-size:0.72rem;color:var(--muted)">you (pl.) drink</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислите</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">mislite</span><br><span style="font-size:0.72rem;color:var(--muted)">you (pl.) think</span></span></td>
+        </tr>
+        <!-- тие -->
+        <tr>
+          <td style="padding:9px 12px;color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">тие / tie / they</td>
+          <td style="padding:9px 12px"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледаат</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledaat</span><br><span style="font-size:0.72rem;color:var(--muted)">they watch</span></span></td>
+          <td style="padding:9px 12px"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пијат</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijat</span><br><span style="font-size:0.72rem;color:var(--muted)">they drink</span></span></td>
+          <td style="padding:9px 12px"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислат</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">misleat</span><br><span style="font-size:0.72rem;color:var(--muted)">they think</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DA structure & negation -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2rem">Да + Глагол — The "Da" Construction</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    <strong>Key rule:</strong> Macedonian has no plain infinitive. Instead, use <strong>да + conjugated verb</strong>. Both verbs are conjugated — this is essential.
+    <br><br>
+    <strong>да</strong> can mean two things: <strong>(1) "yes"</strong> as a response · <strong>(2) "to" / "that"</strong> as a connector
+    <br><br>
+    <strong>не</strong> can also mean two things: <strong>(1) "no"</strong> as a response · <strong>(2) negation</strong> ("don't / not") before a verb
+  </div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Сакам да готвам.</div><div class="phrase-cell lat">Sakam da gotvam.</div><div class="phrase-cell eng">I want to cook.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Сакам да играм фудбал.</div><div class="phrase-cell lat">Sakam da igram fudbal.</div><div class="phrase-cell eng">I want to play football.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Сакам да гледам хокеј.</div><div class="phrase-cell lat">Sakam da gledam hokey.</div><div class="phrase-cell eng">I want to watch hockey.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Сакам да спијам.</div><div class="phrase-cell lat">Sakam da spijam.</div><div class="phrase-cell eng">I want to sleep.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Да, сакам да готвам.</div><div class="phrase-cell lat">Da, sakam da gotvam.</div><div class="phrase-cell eng">Yes, I want to cook. (да = yes + да = to)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Не, не сакам.</div><div class="phrase-cell lat">Ne, ne sakam.</div><div class="phrase-cell eng">No, I don't want to.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Не, не сакам да готвам.</div><div class="phrase-cell lat">Ne, ne sakam da gotvam.</div><div class="phrase-cell eng">No, I don't want to cook.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Не сакам да готвам.</div><div class="phrase-cell lat">Ne sakam da gotvam.</div><div class="phrase-cell eng">I don't want to cook. (shortened)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Таа не чита.</div><div class="phrase-cell lat">Taa ne chita.</div><div class="phrase-cell eng">She doesn't read.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Тие гледаат фудбал.</div><div class="phrase-cell lat">Tie gledaat fudbal.</div><div class="phrase-cell eng">They watch football.</div></div>
+  <br>
+  <div class="nat-intro" style="margin-top:1rem;border-left-color:var(--gold)">
+    <strong>Што правиш во слободно време?</strong> — What do you do in your free time?<br>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Shto pravish vo slobodno vreme?</span>
+  </div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Читам.</div><div class="phrase-cell lat">Chitam.</div><div class="phrase-cell eng">I read.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Слушам музика.</div><div class="phrase-cell lat">Slusham muzika.</div><div class="phrase-cell eng">I listen to music.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Играм игри.</div><div class="phrase-cell lat">Igram igri.</div><div class="phrase-cell eng">I play games.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Готвам.</div><div class="phrase-cell lat">Gotvam.</div><div class="phrase-cell eng">I cook.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Учам македонски.</div><div class="phrase-cell lat">Ucham makedonski.</div><div class="phrase-cell eng">I study Macedonian.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Работам.</div><div class="phrase-cell lat">Rabotam.</div><div class="phrase-cell eng">I work.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Спијам.</div><div class="phrase-cell lat">Spijam.</div><div class="phrase-cell eng">I sleep.</div></div>
+  <br>
+
+  <!-- Verb vocabulary -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:1rem">Глаголски речник — Verb Vocabulary</div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">шета</div><div class="phrase-cell lat">sheta</div><div class="phrase-cell eng">to walk, stroll</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">игра</div><div class="phrase-cell lat">igra</div><div class="phrase-cell eng">to play</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">чита</div><div class="phrase-cell lat">chita</div><div class="phrase-cell eng">to read</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">пие</div><div class="phrase-cell lat">pie</div><div class="phrase-cell eng">to drink</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">јаде</div><div class="phrase-cell lat">jade</div><div class="phrase-cell eng">to eat</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">спие</div><div class="phrase-cell lat">spie</div><div class="phrase-cell eng">to sleep</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">сурфа</div><div class="phrase-cell lat">surfa</div><div class="phrase-cell eng">to surf</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">работи</div><div class="phrase-cell lat">raboti</div><div class="phrase-cell eng">to work</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">зборува</div><div class="phrase-cell lat">zboruva</div><div class="phrase-cell eng">to speak</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">живее</div><div class="phrase-cell lat">zhivee</div><div class="phrase-cell eng">to live</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">учи</div><div class="phrase-cell lat">uchi</div><div class="phrase-cell eng">to study / learn</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">мисли</div><div class="phrase-cell lat">misli</div><div class="phrase-cell eng">to think</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">седи</div><div class="phrase-cell lat">sedi</div><div class="phrase-cell eng">to sit</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">гледа</div><div class="phrase-cell lat">gleda</div><div class="phrase-cell eng">to watch / look at</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">сака</div><div class="phrase-cell lat">saka</div><div class="phrase-cell eng">to want / to love</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">слуша</div><div class="phrase-cell lat">slusha</div><div class="phrase-cell eng">to listen</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">готви</div><div class="phrase-cell lat">gotvi</div><div class="phrase-cell eng">to cook</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">прави</div><div class="phrase-cell lat">pravi</div><div class="phrase-cell eng">to do / to make</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">оди</div><div class="phrase-cell lat">odi</div><div class="phrase-cell eng">to go</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">доаѓа</div><div class="phrase-cell lat">doagja</div><div class="phrase-cell eng">to come</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">заминува</div><div class="phrase-cell lat">zaminuva</div><div class="phrase-cell eng">to leave</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">поминува</div><div class="phrase-cell lat">pominuva</div><div class="phrase-cell eng">to pass</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">пишува</div><div class="phrase-cell lat">pishuva</div><div class="phrase-cell eng">to write</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">пее</div><div class="phrase-cell lat">pee</div><div class="phrase-cell eng">to sing</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">свири</div><div class="phrase-cell lat">sviri</div><div class="phrase-cell eng">to play (instrument) / to whistle</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">плива</div><div class="phrase-cell lat">pliva</div><div class="phrase-cell eng">to swim</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">вози</div><div class="phrase-cell lat">vozi</div><div class="phrase-cell eng">to drive</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">почнува</div><div class="phrase-cell lat">pochnuva</div><div class="phrase-cell eng">to start</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">завршува</div><div class="phrase-cell lat">zavrshuva</div><div class="phrase-cell eng">to finish</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">бара</div><div class="phrase-cell lat">bara</div><div class="phrase-cell eng">to search / ask for</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">наоѓа</div><div class="phrase-cell lat">naogja</div><div class="phrase-cell eng">to find</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">прашува</div><div class="phrase-cell lat">prashuva</div><div class="phrase-cell eng">to ask</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">одговара</div><div class="phrase-cell lat">odgovara</div><div class="phrase-cell eng">to answer</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">купува</div><div class="phrase-cell lat">kupuva</div><div class="phrase-cell eng">to buy</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">продава</div><div class="phrase-cell lat">prodava</div><div class="phrase-cell eng">to sell</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">чека</div><div class="phrase-cell lat">cheka</div><div class="phrase-cell eng">to wait</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">помага</div><div class="phrase-cell lat">pomaga</div><div class="phrase-cell eng">to help</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">почитува</div><div class="phrase-cell lat">pochituva</div><div class="phrase-cell eng">to respect</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">се смее</div><div class="phrase-cell lat">se smee</div><div class="phrase-cell eng">to laugh</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">се насмевнува</div><div class="phrase-cell lat">se nasmevnuva</div><div class="phrase-cell eng">to smile</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">плаче</div><div class="phrase-cell lat">plache</div><div class="phrase-cell eng">to cry</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">заборава</div><div class="phrase-cell lat">zaborava</div><div class="phrase-cell eng">to forget</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">се сеќава</div><div class="phrase-cell lat">se sekjava</div><div class="phrase-cell eng">to remember</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">има</div><div class="phrase-cell lat">ima</div><div class="phrase-cell eng">to have</div></div>
+
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2rem">Речник — General Vocabulary</div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">книга / книги</div><div class="phrase-cell lat">kniga / knigi</div><div class="phrase-cell eng">book / books</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">пица</div><div class="phrase-cell lat">piza</div><div class="phrase-cell eng">pizza</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">пиво</div><div class="phrase-cell lat">pivo</div><div class="phrase-cell eng">beer</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">вино</div><div class="phrase-cell lat">vino</div><div class="phrase-cell eng">wine</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">ресторан</div><div class="phrase-cell lat">restoran</div><div class="phrase-cell eng">restaurant</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">парк</div><div class="phrase-cell lat">park</div><div class="phrase-cell eng">park</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">музика</div><div class="phrase-cell lat">muzika</div><div class="phrase-cell eng">music</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">игри</div><div class="phrase-cell lat">igri</div><div class="phrase-cell eng">games</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">слободно време</div><div class="phrase-cell lat">slobodno vreme</div><div class="phrase-cell eng">free time</div></div>
+</div>
+
+<!-- ─── TO BE ─── -->
+<div id="sum" class="section">
+  <div class="section-title">Сум — To Be</div>
+  <div class="section-sub">Present tense · All persons</div>
+
+  <div class="sum-grid">
+    <div class="sum-cell"><div class="sum-pronoun">1st sg. — I</div><div class="sum-cyr">Јас сум</div><div class="sum-lat">Jas sum</div><div class="sum-eng">I am</div></div>
+    <div class="sum-cell"><div class="sum-pronoun">1st pl. — We</div><div class="sum-cyr">Ние сме</div><div class="sum-lat">Nie sme</div><div class="sum-eng">We are</div></div>
+    <div class="sum-cell"><div class="sum-pronoun">2nd sg. — You (informal)</div><div class="sum-cyr">Ти си</div><div class="sum-lat">Ti si</div><div class="sum-eng">You are</div></div>
+    <div class="sum-cell"><div class="sum-pronoun">2nd pl. — You (formal/pl.)</div><div class="sum-cyr">Вие сте</div><div class="sum-lat">Vie ste</div><div class="sum-eng">You are</div></div>
+    <div class="sum-cell"><div class="sum-pronoun">3rd sg. — He / She / It</div><div class="sum-cyr">Тој / таа / тоа е</div><div class="sum-lat">Toj / taa / toa e</div><div class="sum-eng">He / she / it is</div></div>
+    <div class="sum-cell"><div class="sum-pronoun">3rd pl. — They</div><div class="sum-cyr">Тие се</div><div class="sum-lat">Tie se</div><div class="sum-eng">They are</div></div>
+  </div>
+
+  <div class="nat-intro" style="margin-bottom:1.5rem">
+    <strong>Example sentences:</strong>
+  </div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Јас сум Американец.</div><div class="phrase-cell lat">Jas sum Amerikanets.</div><div class="phrase-cell eng">I am American. (m.)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Ти си од Австралија.</div><div class="phrase-cell lat">Ti si od Avstralija.</div><div class="phrase-cell eng">You are from Australia.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Тој е Македонец.</div><div class="phrase-cell lat">Toj e Makedonets.</div><div class="phrase-cell eng">He is Macedonian.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Таа е Американка.</div><div class="phrase-cell lat">Taa e Amerikanka.</div><div class="phrase-cell eng">She is American. (f.)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Ние сме од Македонија.</div><div class="phrase-cell lat">Nie sme od Makedonija.</div><div class="phrase-cell eng">We are from Macedonia.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Вие сте од Америка.</div><div class="phrase-cell lat">Vie ste od Amerika.</div><div class="phrase-cell eng">You are from America.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Тие се Американци.</div><div class="phrase-cell lat">Tie se Amerikanci.</div><div class="phrase-cell eng">They are Americans. (m.)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Јас сум во Канада.</div><div class="phrase-cell lat">Jas sum vo Kanada.</div><div class="phrase-cell eng">I am in Canada.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Живеам во Скопје.</div><div class="phrase-cell lat">Zhiveam vo Skopje.</div><div class="phrase-cell eng">I live in Skopje.</div></div>
+</div>
+
+<!-- ─── FLASHCARDS ─── -->
+<div id="flashcards" class="section">
+  <div class="section-title">Флешкарти — Flashcards</div>
+  <div class="section-sub">Click a card to flip · Filter by group · Shuffle</div>
+
+  <div class="fc-controls">
+    <div class="fc-filter">
+      <button class="fc-filter-btn active" onclick="fcFilter('all', this)">All</button>
+      <button class="fc-filter-btn" onclick="fcFilter('1', this)">Group 1 · -А</button>
+      <button class="fc-filter-btn" onclick="fcFilter('2', this)">Group 2 · -Е</button>
+      <button class="fc-filter-btn" onclick="fcFilter('3', this)">Group 3 · -И</button>
+    </div>
+    <button class="fc-shuffle" onclick="fcShuffle()">⇄ Shuffle</button>
+    <span class="fc-counter" id="fc-counter"></span>
+  </div>
+
+  <div class="fc-progress"><div class="fc-progress-bar" id="fc-progress-bar"></div></div>
+  <br>
+
+  <div class="fc-scene">
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <div class="fc-front" id="fc-front">
+        <div class="fc-group-badge" id="fc-badge"></div>
+        <div class="fc-word" id="fc-word"></div>
+        <div class="fc-word-lat" id="fc-lat"></div>
+        <div class="fc-word-eng" id="fc-eng"></div>
+        <span class="fc-hint">click to flip</span>
+      </div>
+      <div class="fc-back" id="fc-back">
+        <div class="fc-back-title">Full Conjugation</div>
+        <div class="fc-conj-grid" id="fc-conj-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-nav">
+    <button class="fc-nav-btn" id="fc-prev" onclick="fcNav(-1)">← Prev</button>
+    <button class="fc-nav-btn" id="fc-next" onclick="fcNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ─── NUMBERS & PLURALS ─── -->
+<div id="numbers" class="section">
+  <div class="section-title">Броеви и Множина — Numbers &amp; Plurals</div>
+  <div class="section-sub">1–10 · Колку има? · Plural rules</div>
+
+  <!-- Numbers 1–10 -->
+  <div class="nat-intro">
+    <strong>Броеви</strong> — Numbers 1–10
+  </div>
+  <div class="col-headers"><div class="col-header">#</div><div class="col-header">Македонски</div><div class="col-header">Latinica</div></div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">1</div>
+    <div class="phrase-cell cyr">Еден / Една</div><div class="phrase-cell lat">eden / edna</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">2</div>
+    <div class="phrase-cell cyr">Два / Две</div><div class="phrase-cell lat">dva / dve</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">3</div>
+    <div class="phrase-cell cyr">Три</div><div class="phrase-cell lat">tri</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">4</div>
+    <div class="phrase-cell cyr">Четири</div><div class="phrase-cell lat">chetiri</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">5</div>
+    <div class="phrase-cell cyr">Пет</div><div class="phrase-cell lat">pet</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">6</div>
+    <div class="phrase-cell cyr">Шест</div><div class="phrase-cell lat">shest</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">7</div>
+    <div class="phrase-cell cyr">Седум</div><div class="phrase-cell lat">sedum</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">8</div>
+    <div class="phrase-cell cyr">Осум</div><div class="phrase-cell lat">osum</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">9</div>
+    <div class="phrase-cell cyr">Девет</div><div class="phrase-cell lat">devet</div>
+  </div>
+  <div class="phrase-row" style="grid-template-columns:60px 1fr 1fr">
+    <div class="phrase-cell" style="color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:0.8rem">10</div>
+    <div class="phrase-cell cyr">Десет</div><div class="phrase-cell lat">deset</div>
+  </div>
+
+  <!-- Колку има? -->
+  <div class="nat-intro" style="margin-top:2.5rem">
+    <strong>Колку има?</strong> <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Kolku ima?</span> — How many are there?
+  </div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Има четири чаши.</div><div class="phrase-cell lat">Ima chetiri chashi.</div><div class="phrase-cell eng">There are four glasses.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Има три мачки.</div><div class="phrase-cell lat">Ima tri machki.</div><div class="phrase-cell eng">There are three cats.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Има пет кучиња.</div><div class="phrase-cell lat">Ima pet kuchinja.</div><div class="phrase-cell eng">There are five dogs.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Има девет шишиња.</div><div class="phrase-cell lat">Ima devet shishinja.</div><div class="phrase-cell eng">There are nine bottles.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Има десет пенкала.</div><div class="phrase-cell lat">Ima deset penkala.</div><div class="phrase-cell eng">There are ten pens.</div></div>
+
+  <!-- Plural rules -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Множина — Plural Rules</div>
+  <div class="section-sub" style="margin-bottom:1.5rem">Three patterns based on singular ending</div>
+
+  <div class="verb-groups" style="grid-template-columns:repeat(3,1fr)">
+    <div class="verb-group-card">
+      <div class="verb-group-label">Pattern 1</div>
+      <div class="verb-headword">–А → –И</div>
+      <div class="verb-headword-lat">-a → -i</div>
+      <div class="verb-headword-eng">words ending in -a</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">мачка</span><span class="conj-lat">machka</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">мачки</span><span class="conj-lat">machki</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">чаша</span><span class="conj-lat">chasha</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">чаши</span><span class="conj-lat">chashi</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">песна</span><span class="conj-lat">pesna</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">песни</span><span class="conj-lat">pesni</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label">Pattern 2</div>
+      <div class="verb-headword">–Е → –ИЊА</div>
+      <div class="verb-headword-lat">-e → -inja</div>
+      <div class="verb-headword-eng">words ending in -e · <span style="font-size:0.7rem">њ = "nj" like lasa<strong>gn</strong>a</span></div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">кафе</span><span class="conj-lat">kafe</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">кафиња</span><span class="conj-lat">kafinja</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">куче</span><span class="conj-lat">kuche</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">кучиња</span><span class="conj-lat">kuchinja</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">шише</span><span class="conj-lat">shishe</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">шишиња</span><span class="conj-lat">shishinja</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label">Pattern 3</div>
+      <div class="verb-headword">–О → –А</div>
+      <div class="verb-headword-lat">-o → -a</div>
+      <div class="verb-headword-eng">words ending in -o</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">пенкало</span><span class="conj-lat">penkalo</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">пенкала</span><span class="conj-lat">penkala</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">море</span><span class="conj-lat">more</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">мориња</span><span class="conj-lat">morinja</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">маче</span><span class="conj-lat">mache</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">мачиња</span><span class="conj-lat">machinja</span></div>
+    </div>
+  </div>
+
+  <!-- Plural exercises from PDF -->
+  <div class="section-title" style="font-size:1.2rem;margin-top:2rem;margin-bottom:0.4rem">Вежби — Plural Practice</div>
+  <div class="nat-intro" style="margin-bottom:1.5rem">Tap <strong>Show Answer</strong> to reveal the plural form.</div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">едно кафе → ?</div>
+    <div class="exercise-q-lat">edno kafe → ?</div>
+    <div class="exercise-eng">one coffee → (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">кафиња</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kafinja</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">Ends in –е → Pattern 2: –inja</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">едно море → ?</div>
+    <div class="exercise-q-lat">edno more → ?</div>
+    <div class="exercise-eng">one sea → (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">мориња</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">morinja</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">Ends in –е → Pattern 2: –inja</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">една песна → ?</div>
+    <div class="exercise-q-lat">edna pesna → ?</div>
+    <div class="exercise-eng">one song → (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">песни</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pesni</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">Ends in –а → Pattern 1: –i</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">едно маче → ?</div>
+    <div class="exercise-q-lat">edno mache → ?</div>
+    <div class="exercise-eng">one kitten → (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">мачиња</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">machinja</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">Ends in –е → Pattern 2: –inja</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">едно куче → ?</div>
+    <div class="exercise-q-lat">edno kuche → ?</div>
+    <div class="exercise-eng">one dog → (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">кучиња</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kuchinja</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">Ends in –е → Pattern 2: –inja</div></div>
+  </div>
+</div>
+
+<!-- ─── QUIZ ─── -->
+<div id="quiz" class="section">
+  <div class="section-title">Квиз — Quiz</div>
+  <div class="section-sub">Read it · Hear it · All categories</div>
+
+  <!-- Setup screen -->
+  <div id="quiz-setup">
+    <div class="phrase-group-title" style="margin-bottom:.75rem">Category</div>
+    <div class="quiz-btn-row">
+      <button class="quiz-sel-btn active" onclick="qPick('cat','all',this)">All</button>
+      <button class="quiz-sel-btn" onclick="qPick('cat','numbers',this)">Numbers</button>
+      <button class="quiz-sel-btn" onclick="qPick('cat','vocab',this)">Vocabulary</button>
+      <button class="quiz-sel-btn" onclick="qPick('cat','plurals',this)">Plurals</button>
+      <button class="quiz-sel-btn" onclick="qPick('cat','verbs',this)">Verbs</button>
+    </div>
+    <div class="phrase-group-title" style="margin-bottom:.75rem;margin-top:1.5rem">Mode</div>
+    <div class="quiz-btn-row">
+      <button class="quiz-sel-btn active" onclick="qPick('mode','read',this)">📖 Read it — see the word, pick the meaning</button>
+      <button class="quiz-sel-btn" onclick="qPick('mode','listen',this)">🎧 Hear it — listen, pick the meaning</button>
+    </div>
+    <button class="quiz-go-btn" onclick="qStart()">Start Quiz →</button>
+  </div>
+
+  <!-- Active quiz -->
+  <div id="quiz-active" style="display:none">
+    <div class="quiz-hud">
+      <span id="q-num"></span>
+      <span id="q-tally" class="quiz-hud-score"></span>
+    </div>
+    <div class="quiz-prog-wrap"><div class="quiz-prog-bar" id="q-prog"></div></div>
+
+    <!-- Listen zone -->
+    <div id="q-listen-zone" style="display:none;text-align:center;margin:1rem 0 1.5rem">
+      <button class="quiz-play-btn" id="q-play-btn" onclick="qPlay()">▶ Play</button>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:.5rem;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em">tap to hear again · choose the meaning below</div>
+    </div>
+
+    <!-- Read zone -->
+    <div id="q-read-zone">
+      <div class="quiz-q-cyr" id="q-cyr"></div>
+      <div class="quiz-q-lat" id="q-qlat"></div>
+    </div>
+
+    <div class="quiz-opts" id="q-opts"></div>
+
+    <div id="q-fb" class="quiz-fb" style="display:none">
+      <span id="q-fb-text"></span>
+      <button class="quiz-next-btn" onclick="qAdvance()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Results screen -->
+  <div id="quiz-done" style="display:none;text-align:center;padding:1rem 0 2rem">
+    <div class="quiz-done-score" id="q-done-score"></div>
+    <div class="quiz-done-label" id="q-done-label"></div>
+    <div class="quiz-done-sub" id="q-done-sub"></div>
+    <button class="quiz-go-btn" onclick="qReset()">Try Again →</button>
+  </div>
+</div>
+
+<!-- ─── EXERCISES ─── -->
+<div id="exercises" class="section">
+  <div class="section-title">Вежби — Exercises</div>
+  <div class="section-sub">Fill in the blank · Conjugation · Rearrange</div>
+
+  <div class="nat-intro" style="margin-bottom:2rem">Tap <strong>Show Answer</strong> to reveal each solution.</div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Баба и дедо не __________ (зборува) англиски.</div>
+    <div class="exercise-q-lat">Baba i dedo ne __________ (zboruva) angliski.</div>
+    <div class="exercise-eng">Grandma and grandpa don't speak English.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">зборуваат → Баба и дедо не зборуваат англиски.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">zboruvaat</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">They (3rd pl.) → Group 1, -ваат ending</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Таа __________ (работи) денеска.</div>
+    <div class="exercise-q-lat">Taa __________ (raboti) deneska.</div>
+    <div class="exercise-eng">She works today.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">работи → Таа работи денеска.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">raboti</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">She (3rd sg.) → Group 3, -и ending</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Јас __________ (пие) кафе.</div>
+    <div class="exercise-q-lat">Jas __________ (pie) kafe.</div>
+    <div class="exercise-eng">I drink coffee.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">пијам → Јас пијам кафе.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijam</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">I (1st sg.) → Group 2, -јам ending</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Ние __________ (работи) овде.</div>
+    <div class="exercise-q-lat">Nie __________ (raboti) ovde.</div>
+    <div class="exercise-eng">We work here.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">работиме → Ние работиме овде.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">rabotime</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">We (1st pl.) → Group 3, -име ending</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Мира и Андреј __________ (седи) и __________ (пие) кафе.</div>
+    <div class="exercise-q-lat">Mira i Andrej __________ (sedi) i __________ (pie) kafe.</div>
+    <div class="exercise-eng">Mira and Andrej are sitting and drinking coffee.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">седат · пијат → Мира и Андреј седат и пијат кафе.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">sedat · pijat</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">They (3rd pl.) → Group 3: -ат · Group 2: -јат</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Вие __________ (живее) во Скопје.</div>
+    <div class="exercise-q-lat">Vie __________ (zhivee) vo Skopje.</div>
+    <div class="exercise-eng">You live in Skopje. (formal/plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">живеете → Вие живеете во Скопје.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">zhiveete</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">You pl. (2nd pl.) → Group 2, -ете ending</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Таа __________ (чита) сега.</div>
+    <div class="exercise-q-lat">Taa __________ (chita) sega.</div>
+    <div class="exercise-eng">She is reading now.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">чита → Таа чита сега.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">chita</div><div style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem">She (3rd sg.) → Group 1, -а ending</div></div>
+  </div>
+
+  <div class="nat-intro" style="margin-top:2rem;border-left-color:var(--red)">
+    <strong>Nationality fill-ins:</strong>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">___ (a man from Macedonia) зборува македонски.</div>
+    <div class="exercise-eng">A Macedonian man speaks Macedonian.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Македонец зборува македонски.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Таа е ___ (a woman from the USA).</div>
+    <div class="exercise-eng">She is American.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Таа е Американка.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Тие се ___ (people from Macedonia).</div>
+    <div class="exercise-eng">They are Macedonians. (plural)</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Тие се Македонци.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Вие сте __________ (Germans).</div>
+    <div class="exercise-eng">You are Germans.</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Вие сте Германци.</div></div>
+  </div>
+</div>
+
+<div id="search-results" class="section"></div>
+
+</main>
+
+<script>
+  // ── Navigation ──
+  function show(id, btn) {
+    clearSearch();
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  function toggleAnswer(btn) {
+    const ans = btn.nextElementSibling;
+    const visible = ans.classList.toggle('visible');
+    btn.textContent = visible ? 'Hide Answer' : 'Show Answer';
+  }
+
+  // ── Search ──
+  // Build a flat index of all searchable rows at load time
+  const searchIndex = [];
+
+  function buildIndex() {
+    // Phrase rows (3-cell rows)
+    document.querySelectorAll('.phrase-row').forEach(row => {
+      const cells = row.querySelectorAll('.phrase-cell');
+      if (cells.length >= 3) {
+        searchIndex.push({
+          type: 'phrase',
+          cyr: cells[0].textContent,
+          lat: cells[1].textContent,
+          eng: cells[2].textContent,
+          // find nearest group title
+          group: nearestGroupTitle(row),
+          section: row.closest('.section')?.id || '',
+        });
+      }
+    });
+
+    // Alphabet cards
+    document.querySelectorAll('.alpha-card').forEach(card => {
+      const letter = card.querySelector('.alpha-letter')?.textContent || '';
+      const latin  = card.querySelector('.alpha-latin')?.textContent || '';
+      const ex     = card.querySelector('.alpha-example')?.textContent || '';
+      searchIndex.push({ type: 'alpha', cyr: letter, lat: latin, eng: ex, group: 'Alphabet', section: 'alphabet' });
+    });
+
+    // Nationality rows (5-cell)
+    document.querySelectorAll('.nat-row').forEach(row => {
+      const cells = row.querySelectorAll('.nat-cell');
+      if (cells.length >= 5) {
+        searchIndex.push({
+          type: 'nat',
+          cyr: Array.from(cells).map(c => c.textContent).join(' · '),
+          lat: '',
+          eng: cells[0].textContent,
+          group: 'Nationalities',
+          section: 'nationalities',
+        });
+      }
+    });
+
+    // Verb conj rows
+    document.querySelectorAll('.conj-row').forEach(row => {
+      const pronoun = row.querySelector('.conj-pronoun')?.textContent || '';
+      const cyr     = row.querySelector('.conj-cyr')?.textContent || '';
+      const lat     = row.querySelector('.conj-lat')?.textContent || '';
+      if (cyr) searchIndex.push({ type: 'conj', cyr: `${pronoun} ${cyr}`, lat, eng: '', group: 'Verb Conjugation', section: 'verbs' });
+    });
+
+    // Sum cells
+    document.querySelectorAll('.sum-cell').forEach(cell => {
+      const cyr = cell.querySelector('.sum-cyr')?.textContent || '';
+      const lat = cell.querySelector('.sum-lat')?.textContent || '';
+      const eng = cell.querySelector('.sum-eng')?.textContent || '';
+      if (cyr) searchIndex.push({ type: 'sum', cyr, lat, eng, group: 'Сум — To Be', section: 'sum' });
+    });
+
+    // Exercise blocks
+    document.querySelectorAll('.exercise-block').forEach(block => {
+      const q   = block.querySelector('.exercise-q')?.textContent || '';
+      const ql  = block.querySelector('.exercise-q-lat')?.textContent || '';
+      const eng = block.querySelector('.exercise-eng')?.textContent || '';
+      const ans = block.querySelector('.answer-text')?.textContent || '';
+      if (q) searchIndex.push({ type: 'exercise', cyr: q, lat: ql, eng: `${eng} → ${ans}`, group: 'Exercises', section: 'exercises' });
+    });
+  }
+
+  function nearestGroupTitle(el) {
+    let prev = el.previousElementSibling;
+    while (prev) {
+      if (prev.classList.contains('phrase-group-title')) return prev.textContent;
+      if (prev.classList.contains('section-title')) return prev.textContent;
+      prev = prev.previousElementSibling;
+    }
+    // walk up
+    const parent = el.closest('.phrase-group');
+    if (parent) {
+      const t = parent.querySelector('.phrase-group-title');
+      if (t) return t.textContent;
+    }
+    return el.closest('.section')?.querySelector('.section-title')?.textContent || '';
+  }
+
+  function highlight(text, query) {
+    if (!query) return text;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+  }
+
+  function doSearch(query) {
+    const q = query.trim();
+    const clearBtn = document.getElementById('search-clear');
+    const countEl  = document.getElementById('search-count');
+    const resultsDiv = document.getElementById('search-results');
+
+    clearBtn.classList.toggle('visible', q.length > 0);
+
+    if (q.length < 2) {
+      // Restore normal view
+      resultsDiv.classList.remove('active');
+      document.querySelectorAll('.section:not(#search-results)').forEach(s => {
+        if (s.dataset.wasActive) { s.classList.add('active'); delete s.dataset.wasActive; }
+      });
+      countEl.textContent = '';
+      return;
+    }
+
+    // Hide all regular sections, show results
+    document.querySelectorAll('.section:not(#search-results)').forEach(s => {
+      if (s.classList.contains('active')) { s.dataset.wasActive = '1'; s.classList.remove('active'); }
+      else s.classList.remove('active');
+    });
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    resultsDiv.classList.add('active');
+
+    const matches = searchIndex.filter(item => {
+      const haystack = `${item.cyr} ${item.lat} ${item.eng}`.toLowerCase();
+      return haystack.includes(q.toLowerCase());
+    });
+
+    countEl.textContent = matches.length ? `${matches.length} result${matches.length > 1 ? 's' : ''}` : '';
+
+    if (matches.length === 0) {
+      resultsDiv.innerHTML = `<div class="section-title" style="margin-bottom:0.5rem">Search Results</div><p class="no-results">No results for "<strong>${q}</strong>"</p>`;
+      return;
+    }
+
+    // Group by section
+    const grouped = {};
+    matches.forEach(m => {
+      const key = m.group || m.section;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(m);
+    });
+
+    let html = `<div class="section-title" style="margin-bottom:0.3rem">Search Results</div>
+                <div class="section-sub" style="margin-bottom:1.5rem">${matches.length} match${matches.length > 1 ? 'es' : ''} for "<strong style="color:var(--text)">${q}</strong>"</div>`;
+
+    Object.entries(grouped).forEach(([group, items]) => {
+      html += `<div class="result-group-title">${group}</div>`;
+      items.forEach(item => {
+        if (item.type === 'alpha') {
+          html += `<div class="phrase-row">
+            <div class="phrase-cell cyr">${highlight(item.cyr, q)}</div>
+            <div class="phrase-cell lat">${highlight(item.lat, q)}</div>
+            <div class="phrase-cell eng">${highlight(item.eng, q)}</div>
+          </div>`;
+        } else if (item.type === 'nat') {
+          html += `<div class="phrase-row"><div class="phrase-cell cyr" style="grid-column:span 3">${highlight(item.cyr, q)}</div></div>`;
+        } else {
+          html += `<div class="phrase-row">
+            <div class="phrase-cell cyr">${highlight(item.cyr, q)}</div>
+            <div class="phrase-cell lat">${highlight(item.lat, q)}</div>
+            <div class="phrase-cell eng">${highlight(item.eng, q)}</div>
+          </div>`;
+        }
+      });
+    });
+
+    resultsDiv.innerHTML = html;
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('search-input');
+    input.value = '';
+    doSearch('');
+  }
+
+  // Build index after DOM is ready
+  window.addEventListener('load', buildIndex);
+
+  // ── Flashcards ──
+  const FC_ALL = [
+    { group:'1', cyr:'Сум', lat:'sum', eng:'to be',
+      conj:[['Јас','сум','sum'],['Ти','си','si'],['Тој/таа','е','e'],['Ние','сме','sme'],['Вие','сте','ste'],['Тие','се','se']] },
+    { group:'1', cyr:'Има', lat:'ima', eng:'to have',
+      conj:[['Јас','имам','imam'],['Ти','имаш','imash'],['Тој/таа','има','ima'],['Ние','имаме','imame'],['Вие','имате','imate'],['Тие','имаат','imaat']] },
+    { group:'1', cyr:'Зборува', lat:'zboruva', eng:'to speak',
+      conj:[['Јас','зборувам','zboruvam'],['Ти','зборуваш','zboruvash'],['Тој/таа','зборува','zboruva'],['Ние','зборуваме','zboruvame'],['Вие','зборувате','zboruvate'],['Тие','зборуваат','zboruvaat']] },
+    { group:'1', cyr:'Гледа', lat:'gleda', eng:'to watch / see',
+      conj:[['Јас','гледам','gledam'],['Ти','гледаш','gledash'],['Тој/таа','гледа','gleda'],['Ние','гледаме','gledame'],['Вие','гледате','gledate'],['Тие','гледаат','gledaat']] },
+    { group:'1', cyr:'Слуша', lat:'slusha', eng:'to listen',
+      conj:[['Јас','слушам','slusham'],['Ти','слушаш','slushash'],['Тој/таа','слуша','slusha'],['Ние','слушаме','lushame'],['Вие','слушате','slushate'],['Тие','слушаат','slushaat']] },
+    { group:'1', cyr:'Сака', lat:'saka', eng:'to want / to love',
+      conj:[['Јас','сакам','sakam'],['Ти','сакаш','sakash'],['Тој/таа','сака','saka'],['Ние','сакаме','sakame'],['Вие','сакате','sakate'],['Тие','сакаат','sakaat']] },
+    { group:'1', cyr:'Игра', lat:'igra', eng:'to play / to dance',
+      conj:[['Јас','играм','igram'],['Ти','играш','igrash'],['Тој/таа','игра','igra'],['Ние','играме','igrame'],['Вие','играте','igrate'],['Тие','играат','igraat']] },
+    { group:'1', cyr:'Шета', lat:'sheta', eng:'to walk / stroll',
+      conj:[['Јас','шетам','shetam'],['Ти','шеташ','shetash'],['Тој/таа','шета','sheta'],['Ние','шетаме','shetame'],['Вие','шетате','shetate'],['Тие','шетаат','shetaat']] },
+    { group:'1', cyr:'Чита', lat:'chita', eng:'to read',
+      conj:[['Јас','читам','chitam'],['Ти','читаш','chitash'],['Тој/таа','чита','chita'],['Ние','читаме','chitame'],['Вие','читате','chitate'],['Тие','читаат','chitaat']] },
+    { group:'1', cyr:'Плива', lat:'pliva', eng:'to swim',
+      conj:[['Јас','пливам','plivam'],['Ти','пливаш','plivash'],['Тој/таа','плива','pliva'],['Ние','пливаме','plivame'],['Вие','пливате','plivate'],['Тие','пливаат','plivaat']] },
+    { group:'1', cyr:'Сурфа', lat:'surfa', eng:'to surf',
+      conj:[['Јас','сурфам','surfam'],['Ти','сурфаш','surfash'],['Тој/таа','сурфа','surfa'],['Ние','сурфаме','surfame'],['Вие','сурфате','surfate'],['Тие','сурфаат','surfaat']] },
+    { group:'1', cyr:'Доаѓа', lat:'doagja', eng:'to come',
+      conj:[['Јас','доаѓам','doagjam'],['Ти','доаѓаш','doagjash'],['Тој/таа','доаѓа','doagja'],['Ние','доаѓаме','doagjame'],['Вие','доаѓате','doagjate'],['Тие','доаѓаат','doagjaat']] },
+    { group:'1', cyr:'Заминува', lat:'zaminuva', eng:'to leave',
+      conj:[['Јас','заминувам','zaminuvam'],['Ти','заминуваш','zaminuvash'],['Тој/таа','заминува','zaminuva'],['Ние','заминуваме','zaminuvame'],['Вие','заминувате','zaminuvate'],['Тие','заминуваат','zaminuvaat']] },
+    { group:'1', cyr:'Поминува', lat:'pominuva', eng:'to pass',
+      conj:[['Јас','поминувам','pominuvam'],['Ти','поминуваш','pominuvash'],['Тој/таа','поминува','pominuva'],['Ние','поминуваме','pominuvame'],['Вие','поминувате','pominuvate'],['Тие','поминуваат','pominuvaat']] },
+    { group:'1', cyr:'Пишува', lat:'pishuva', eng:'to write',
+      conj:[['Јас','пишувам','pishuvam'],['Ти','пишуваш','pishuvash'],['Тој/таа','пишува','pishuva'],['Ние','пишуваме','pishuvame'],['Вие','пишувате','pishuvate'],['Тие','пишуваат','pishuvaat']] },
+    { group:'1', cyr:'Почнува', lat:'pochnuva', eng:'to start',
+      conj:[['Јас','почнувам','pochnuvam'],['Ти','почнуваш','pochnuvash'],['Тој/таа','почнува','pochnuva'],['Ние','почнуваме','pochnuvame'],['Вие','почнувате','pochnuvate'],['Тие','почнуваат','pochnuvaat']] },
+    { group:'1', cyr:'Завршува', lat:'zavrshuva', eng:'to finish',
+      conj:[['Јас','завршувам','zavrshuvam'],['Ти','завршуваш','zavrshuvash'],['Тој/таа','завршува','zavrshuva'],['Ние','завршуваме','zavrshuvame'],['Вие','завршувате','zavrshuvate'],['Тие','завршуваат','zavrshuvaat']] },
+    { group:'1', cyr:'Бара', lat:'bara', eng:'to search / ask for',
+      conj:[['Јас','барам','baram'],['Ти','бараш','barash'],['Тој/таа','бара','bara'],['Ние','бараме','barame'],['Вие','барате','barate'],['Тие','бараат','baraat']] },
+    { group:'1', cyr:'Наоѓа', lat:'naogja', eng:'to find',
+      conj:[['Јас','наоѓам','naogjam'],['Ти','наоѓаш','naogjash'],['Тој/таа','наоѓа','naogja'],['Ние','наоѓаме','naogjame'],['Вие','наоѓате','naogjate'],['Тие','наоѓаат','naogjaat']] },
+    { group:'1', cyr:'Прашува', lat:'prashuva', eng:'to ask',
+      conj:[['Јас','прашувам','prashuvam'],['Ти','прашуваш','prashuvash'],['Тој/таа','прашува','prashuva'],['Ние','прашуваме','prashuvame'],['Вие','прашувате','prashuvate'],['Тие','прашуваат','prashuvaat']] },
+    { group:'1', cyr:'Одговара', lat:'odgovara', eng:'to answer',
+      conj:[['Јас','одговарам','odgovaram'],['Ти','одговараш','odgovarash'],['Тој/таа','одговара','odgovara'],['Ние','одговараме','odgovarame'],['Вие','одговарате','odgovarate'],['Тие','одговараат','odgovaraat']] },
+    { group:'1', cyr:'Купува', lat:'kupuva', eng:'to buy',
+      conj:[['Јас','купувам','kupuvam'],['Ти','купуваш','kupuvash'],['Тој/таа','купува','kupuva'],['Ние','купуваме','kupuvame'],['Вие','купувате','kupuvate'],['Тие','купуваат','kupuvaat']] },
+    { group:'1', cyr:'Продава', lat:'prodava', eng:'to sell',
+      conj:[['Јас','продавам','prodavam'],['Ти','продаваш','prodavash'],['Тој/таа','продава','prodava'],['Ние','продаваме','prodavame'],['Вие','продавате','prodavate'],['Тие','продаваат','prodavaat']] },
+    { group:'1', cyr:'Чека', lat:'cheka', eng:'to wait',
+      conj:[['Јас','чекам','chekam'],['Ти','чекаш','chekash'],['Тој/таа','чека','cheka'],['Ние','чекаме','chekame'],['Вие','чекате','chekate'],['Тие','чекаат','chekaat']] },
+    { group:'1', cyr:'Помага', lat:'pomaga', eng:'to help',
+      conj:[['Јас','помагам','pomagam'],['Ти','помагаш','pomagash'],['Тој/таа','помага','pomaga'],['Ние','помагаме','pomag ame'],['Вие','помагате','pomagate'],['Тие','помагаат','pomagaat']] },
+    { group:'1', cyr:'Почитува', lat:'pochituva', eng:'to respect',
+      conj:[['Јас','почитувам','pochituvam'],['Ти','почитуваш','pochituvash'],['Тој/таа','почитува','pochituva'],['Ние','почитуваме','pochituvame'],['Вие','почитувате','pochituvate'],['Тие','почитуваат','pochituvaat']] },
+    { group:'1', cyr:'Заборава', lat:'zaborava', eng:'to forget',
+      conj:[['Јас','заборавам','zaboavam'],['Ти','забораваш','zaboravash'],['Тој/таа','заборава','zaborava'],['Ние','забораваме','zaboravame'],['Вие','заборавате','zaboravate'],['Тие','забораваат','zaboravaat']] },
+    { group:'1', cyr:'Се сеќава', lat:'se sekjava', eng:'to remember',
+      conj:[['Јас','се сеќавам','se sekjavam'],['Ти','се сеќаваш','se sekjavash'],['Тој/таа','се сеќава','se sekjava'],['Ние','се сеќаваме','se sekjavame'],['Вие','се сеќавате','se sekjavate'],['Тие','се сеќаваат','se sekjavaat']] },
+    { group:'1', cyr:'Се насмевнува', lat:'se nasmevnuva', eng:'to smile',
+      conj:[['Јас','се насмевнувам','se nasmevnuvam'],['Ти','се насмевнуваш','se nasmevnuvash'],['Тој/таа','се насмевнува','se nasmevnuva'],['Ние','се насмевнуваме','se nasmevnuvame'],['Вие','се насмевнувате','se nasmevnuvate'],['Тие','се насмевнуваат','se nasmevnuvaat']] },
+    { group:'2', cyr:'Пие', lat:'pie', eng:'to drink',
+      conj:[['Јас','пијам','pijam'],['Ти','пиеш','piesh'],['Тој/таа','пие','pie'],['Ние','пиеме','pieme'],['Вие','пиете','piete'],['Тие','пијат','pijat']] },
+    { group:'2', cyr:'Јаде', lat:'jade', eng:'to eat',
+      conj:[['Јас','јадам','jadam'],['Ти','јадеш','jadesh'],['Тој/таа','јаде','jade'],['Ние','јадеме','jademe'],['Вие','јадете','jadete'],['Тие','јадат','jadat']] },
+    { group:'2', cyr:'Спие', lat:'spie', eng:'to sleep',
+      conj:[['Јас','спијам','spijam'],['Ти','спиеш','spiesh'],['Тој/таа','спие','spie'],['Ние','спиеме','spieme'],['Вие','спиете','spiete'],['Тие','спијат','spijat']] },
+    { group:'2', cyr:'Живее', lat:'zhivee', eng:'to live',
+      conj:[['Јас','живеам','zhiveam'],['Ти','живееш','zhiveesh'],['Тој/таа','живее','zhivee'],['Ние','живееме','zhiveeme'],['Вие','живеете','zhiveete'],['Тие','живеат','zhiveat']] },
+    { group:'2', cyr:'Пее', lat:'pee', eng:'to sing',
+      conj:[['Јас','пеам','peam'],['Ти','пееш','peesh'],['Тој/таа','пее','pee'],['Ние','пееме','peeme'],['Вие','пеете','peete'],['Тие','пеат','peat']] },
+    { group:'2', cyr:'Плаче', lat:'plache', eng:'to cry',
+      conj:[['Јас','плачам','placham'],['Ти','плачеш','plachesh'],['Тој/таа','плаче','plache'],['Ние','плачеме','placheme'],['Вие','плачете','plachete'],['Тие','плачат','plachat']] },
+    { group:'2', cyr:'Се смее', lat:'se smee', eng:'to laugh',
+      conj:[['Јас','се смеам','se smeam'],['Ти','се смееш','se smeesh'],['Тој/таа','се смее','se smee'],['Ние','се смееме','se smeeme'],['Вие','се смеете','se smeete'],['Тие','се смеат','se smeat']] },
+    { group:'3', cyr:'Работи', lat:'raboti', eng:'to work',
+      conj:[['Јас','работам','rabotam'],['Ти','работиш','rabotish'],['Тој/таа','работи','raboti'],['Ние','работиме','rabotime'],['Вие','работите','rabotite'],['Тие','работат','rabotat']] },
+    { group:'3', cyr:'Учи', lat:'uchi', eng:'to study / learn',
+      conj:[['Јас','учам','ucham'],['Ти','учиш','uchish'],['Тој/таа','учи','uchi'],['Ние','учиме','uchime'],['Вие','учите','uchite'],['Тие','учат','uchat']] },
+    { group:'3', cyr:'Мисли', lat:'misli', eng:'to think',
+      conj:[['Јас','мислам','misleam'],['Ти','мислиш','mislesh'],['Тој/таа','мисли','misli'],['Ние','мислиме','misleme'],['Вие','мислите','mislete'],['Тие','мислат','misleat']] },
+    { group:'3', cyr:'Готви', lat:'gotvi', eng:'to cook',
+      conj:[['Јас','готвам','gotvam'],['Ти','готвиш','gotvish'],['Тој/таа','готви','gotvi'],['Ние','готвиме','gotvime'],['Вие','готвите','gotvite'],['Тие','готват','gotvat']] },
+    { group:'3', cyr:'Седи', lat:'sedi', eng:'to sit',
+      conj:[['Јас','седам','sedam'],['Ти','седиш','sedish'],['Тој/таа','седи','sedi'],['Ние','седиме','sedime'],['Вие','седите','sedite'],['Тие','седат','sedat']] },
+    { group:'3', cyr:'Слуша', lat:'slusha', eng:'to listen',
+      conj:[['Јас','слушам','slusham'],['Ти','слушаш','slushash'],['Тој/таа','слуша','slusha'],['Ние','слушаме','slushame'],['Вие','слушате','slushate'],['Тие','слушаат','slushaat']] },
+    { group:'3', cyr:'Прави', lat:'pravi', eng:'to do / to make',
+      conj:[['Јас','правам','pravam'],['Ти','правиш','pravish'],['Тој/таа','прави','pravi'],['Ние','правиме','pravime'],['Вие','правите','pravite'],['Тие','прават','pravat']] },
+    { group:'3', cyr:'Оди', lat:'odi', eng:'to go',
+      conj:[['Јас','одам','odam'],['Ти','одиш','odish'],['Тој/таа','оди','odi'],['Ние','одиме','odime'],['Вие','одите','odite'],['Тие','одат','odat']] },
+    { group:'3', cyr:'Свири', lat:'sviri', eng:'to play (instrument)',
+      conj:[['Јас','свирам','sviram'],['Ти','свириш','svirish'],['Тој/таа','свири','sviri'],['Ние','свириме','svirime'],['Вие','свирите','svirite'],['Тие','свират','svirat']] },
+    { group:'3', cyr:'Вози', lat:'vozi', eng:'to drive',
+      conj:[['Јас','возам','vozam'],['Ти','возиш','vozish'],['Тој/таа','вози','vozi'],['Ние','возиме','vozime'],['Вие','возите','vozite'],['Тие','возат','vozat']] },
+  ];
+
+  let fcDeck = [...FC_ALL];
+  let fcIndex = 0;
+  let fcFilterVal = 'all';
+
+  function fcFilter(val, btn) {
+    document.querySelectorAll('.fc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    fcFilterVal = val;
+    fcDeck = val === 'all' ? [...FC_ALL] : FC_ALL.filter(c => c.group === val);
+    fcIndex = 0;
+    fcRender();
+  }
+
+  function fcShuffle() {
+    for (let i = fcDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [fcDeck[i], fcDeck[j]] = [fcDeck[j], fcDeck[i]];
+    }
+    fcIndex = 0;
+    fcRender();
+  }
+
+  function fcFlip() {
+    document.getElementById('fc-card').classList.toggle('flipped');
+  }
+
+  function fcNav(dir) {
+    fcIndex = Math.max(0, Math.min(fcDeck.length - 1, fcIndex + dir));
+    document.getElementById('fc-card').classList.remove('flipped');
+    setTimeout(fcRender, 10);
+  }
+
+  function fcRender() {
+    if (!fcDeck.length) return;
+    const card = fcDeck[fcIndex];
+    const groupLabels = { '1': 'Group 1 · -А', '2': 'Group 2 · -Е', '3': 'Group 3 · -И', };
+    document.getElementById('fc-badge').textContent = groupLabels[card.group] || '';
+    document.getElementById('fc-word').textContent = card.cyr;
+    document.getElementById('fc-lat').textContent = card.lat;
+    document.getElementById('fc-eng').textContent = card.eng;
+    const grid = document.getElementById('fc-conj-grid');
+    grid.innerHTML = card.conj.map(([pron, cyr, lat]) =>
+      `<div class="fc-conj-item">
+        <span class="fc-conj-pronoun">${pron}</span>
+        <span class="fc-conj-form">${cyr}</span>
+        <span class="fc-conj-lat">${lat}</span>
+      </div>`
+    ).join('');
+    document.getElementById('fc-counter').textContent = `${fcIndex + 1} / ${fcDeck.length}`;
+    document.getElementById('fc-prev').disabled = fcIndex === 0;
+    document.getElementById('fc-next').disabled = fcIndex === fcDeck.length - 1;
+    document.getElementById('fc-progress-bar').style.width = `${((fcIndex + 1) / fcDeck.length) * 100}%`;
+  }
+
+  window.addEventListener('load', () => { buildIndex(); fcRender(); afcRender(); });
+
+  // ── Alphabet flashcard data ──
+  const AFC_DATA = [
+    { upper:'А', lower:'а', pair:'А а', latin:'/a/ — like "father"',  exCyr:'авион', exLat:'avion',  exEng:'airplane' },
+    { upper:'Б', lower:'б', pair:'Б б', latin:'/b/ — like "brother"', exCyr:'баба',  exLat:'baba',   exEng:'grandmother' },
+    { upper:'В', lower:'в', pair:'В в', latin:'/v/ — like "very"',    exCyr:'воз',   exLat:'voz',    exEng:'train' },
+    { upper:'Г', lower:'г', pair:'Г г', latin:'/g/ — like "goat"',    exCyr:'град',  exLat:'grad',   exEng:'city' },
+    { upper:'Д', lower:'д', pair:'Д д', latin:'/d/ — like "dog"',     exCyr:'дом',   exLat:'dom',    exEng:'home' },
+    { upper:'Ѓ', lower:'ѓ', pair:'Ѓ ѓ', latin:'/gj/ — like "gift"',   exCyr:'ѓеврек',exLat:'gjevrek',exEng:'sesame ring' },
+    { upper:'Е', lower:'е', pair:'Е е', latin:'/e/ — like "elbow"',   exCyr:'еден',  exLat:'eden',   exEng:'one' },
+    { upper:'Ж', lower:'ж', pair:'Ж ж', latin:'/zh/ — like "pleasure"',exCyr:'жаба', exLat:'zhaba',  exEng:'frog' },
+    { upper:'З', lower:'з', pair:'З з', latin:'/z/ — like "zebra"',   exCyr:'заб',   exLat:'zab',    exEng:'tooth' },
+    { upper:'Ѕ', lower:'ѕ', pair:'Ѕ ѕ', latin:'/dz/ — like "kids"',   exCyr:'ѕид',   exLat:'dzid',   exEng:'wall' },
+    { upper:'И', lower:'и', pair:'И и', latin:'/i/ — like "ear"',     exCyr:'Иво',   exLat:'Ivo',    exEng:'name: Ivo' },
+    { upper:'Ј', lower:'ј', pair:'Ј ј', latin:'/j/ — like "yes"',     exCyr:'јога',  exLat:'joga',   exEng:'yoga' },
+    { upper:'К', lower:'к', pair:'К к', latin:'/k/ — like "coffee"',  exCyr:'кафе',  exLat:'kafe',   exEng:'coffee' },
+    { upper:'Л', lower:'л', pair:'Л л', latin:'/l/ — like "lake"',    exCyr:'лав',   exLat:'lav',    exEng:'lion' },
+    { upper:'Љ', lower:'љ', pair:'Љ љ', latin:'/lj/ — soft l+j',      exCyr:'љубов', exLat:'ljubov', exEng:'love' },
+    { upper:'М', lower:'м', pair:'М м', latin:'/m/ — like "mother"',  exCyr:'мама',  exLat:'mama',   exEng:'mother' },
+    { upper:'Н', lower:'н', pair:'Н н', latin:'/n/ — like "nose"',    exCyr:'небо',  exLat:'nebo',   exEng:'sky' },
+    { upper:'Њ', lower:'њ', pair:'Њ њ', latin:'/nj/ — like "canyon"', exCyr:'њоки',  exLat:'njoki',  exEng:'gnocchi' },
+    { upper:'О', lower:'о', pair:'О о', latin:'/o/ — like "ocean"',   exCyr:'око',   exLat:'oko',    exEng:'eye' },
+    { upper:'П', lower:'п', pair:'П п', latin:'/p/ — like "pizza"',   exCyr:'пазар', exLat:'pazar',  exEng:'market' },
+    { upper:'Р', lower:'р', pair:'Р р', latin:'/r/ — rolled R',       exCyr:'река',  exLat:'reka',   exEng:'river' },
+    { upper:'С', lower:'с', pair:'С с', latin:'/s/ — like "such"',    exCyr:'сон',   exLat:'son',    exEng:'dream' },
+    { upper:'Т', lower:'т', pair:'Т т', latin:'/t/ — like "Tom"',     exCyr:'таа',   exLat:'taa',    exEng:'she' },
+    { upper:'Ќ', lower:'ќ', pair:'Ќ ќ', latin:'/kj/ — like "cute"',   exCyr:'куќа',  exLat:'kukja',  exEng:'house' },
+    { upper:'У', lower:'у', pair:'У у', latin:'/u/ — like "look"',    exCyr:'уво',   exLat:'uvo',    exEng:'ear' },
+    { upper:'Ф', lower:'ф', pair:'Ф ф', latin:'/f/ — like "fountain"',exCyr:'кафе',  exLat:'kafe',   exEng:'coffee' },
+    { upper:'Х', lower:'х', pair:'Х х', latin:'/h/ — like "Bach"',    exCyr:'хотел', exLat:'hotel',  exEng:'hotel' },
+    { upper:'Ц', lower:'ц', pair:'Ц ц', latin:'/ts/ — like "tsar"',   exCyr:'сонце', exLat:'sonce',  exEng:'sun' },
+    { upper:'Ч', lower:'ч', pair:'Ч ч', latin:'/ch/ — like "Charlie"',exCyr:'чај',   exLat:'chaj',   exEng:'tea' },
+    { upper:'Џ', lower:'џ', pair:'Џ џ', latin:'/dj/ — like "John"',   exCyr:'џуџе',  exLat:'djudje', exEng:'dwarf/gnome' },
+    { upper:'Ш', lower:'ш', pair:'Ш ш', latin:'/sh/ — like "shark"',  exCyr:'што',   exLat:'shto',   exEng:'what' },
+  ];
+
+  let afcDeck = [...AFC_DATA];
+  let afcIndex = 0;
+
+  function afcRender() {
+    const card = afcDeck[afcIndex];
+    document.getElementById('afc-front-letter').textContent = card.upper;
+    document.getElementById('afc-back-letters').textContent = card.pair;
+    document.getElementById('afc-back-latin').textContent = card.latin;
+    document.getElementById('afc-example-cyr').textContent = card.exCyr;
+    document.getElementById('afc-example-lat').textContent = card.exLat + ' — ' + card.exEng;
+    document.getElementById('afc-example-eng').textContent = '';
+    document.getElementById('afc-counter').textContent = `${afcIndex + 1} / ${afcDeck.length}`;
+    document.getElementById('afc-prev').disabled = afcIndex === 0;
+    document.getElementById('afc-next').disabled = afcIndex === afcDeck.length - 1;
+    document.getElementById('afc-progress-bar').style.width = `${((afcIndex + 1) / afcDeck.length) * 100}%`;
+  }
+
+  function afcFlip() {
+    document.getElementById('afc-card').classList.toggle('flipped');
+  }
+
+  function afcNav(dir) {
+    afcIndex = Math.max(0, Math.min(afcDeck.length - 1, afcIndex + dir));
+    document.getElementById('afc-card').classList.remove('flipped');
+    setTimeout(afcRender, 10);
+  }
+
+  function afcShuffle() {
+    for (let i = afcDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [afcDeck[i], afcDeck[j]] = [afcDeck[j], afcDeck[i]];
+    }
+    afcIndex = 0;
+    document.getElementById('afc-card').classList.remove('flipped');
+    afcRender();
+  }
+
+  function afcReset() {
+    afcDeck = [...AFC_DATA];
+    afcIndex = 0;
+    document.getElementById('afc-card').classList.remove('flipped');
+    afcRender();
+  }
+
+  // ── Web Speech API ──
+  // iOS loads voices asynchronously — cache them on voiceschanged
+  let _cyrVoice = null;
+  let _voiceChecked = false;
+
+  function _loadVoices() {
+    const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    if (!all.length) return;
+    _voiceChecked = true;
+    _cyrVoice = all.find(v => v.lang === 'mk' || v.lang.startsWith('mk-'))
+             || all.find(v => ['sr','hr','bs','bg','ru'].some(l => v.lang.startsWith(l)))
+             || null;
+  }
+
+  if (window.speechSynthesis) {
+    _loadVoices(); // works on desktop where voices are sync
+    window.speechSynthesis.addEventListener('voiceschanged', _loadVoices);
+  }
+
+  function hasCyrVoice() { return _cyrVoice !== null; }
+
+  function makeUtter(text) {
+    const u = new SpeechSynthesisUtterance(text);
+    if (_cyrVoice) { u.voice = _cyrVoice; u.lang = 'mk'; }
+    // If no Cyrillic voice, don't force lang — let browser use default
+    // (caller should pass Latin text in that case)
+    u.rate = 0.8;
+    u.pitch = 1;
+    return u;
+  }
+
+  function afcSpeak(side) {
+    if (!window.speechSynthesis) return;
+    // Re-check voices in case they loaded since last time
+    if (!_voiceChecked) _loadVoices();
+
+    const card = afcDeck[afcIndex];
+    const btnId = side === 'front' ? 'afc-speak-front' : 'afc-speak-back';
+    const btn = document.getElementById(btnId);
+
+    window.speechSynthesis.cancel();
+    btn.classList.add('speaking');
+    btn.textContent = '♪ …';
+
+    const done = () => { btn.classList.remove('speaking'); btn.textContent = '♪ Listen'; };
+
+    if (hasCyrVoice()) {
+      // Has a Cyrillic-capable voice — speak example word (never bare letter, TTS reads those as "Cyrillic capital letter...")
+      if (side === 'front') {
+        const u = makeUtter(card.exCyr);
+        u.onend = done; u.onerror = done;
+        window.speechSynthesis.speak(u);
+      } else {
+        const u1 = makeUtter(card.exCyr);
+        const u2 = makeUtter(card.exCyr);
+        u2.rate = 0.65; // slower repeat
+        u2.onend = done; u2.onerror = done; u1.onerror = done;
+        u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 800);
+        window.speechSynthesis.speak(u1);
+      }
+    } else {
+      // No Cyrillic voice (common on iOS) — speak Latin example word
+      if (side === 'front') {
+        const u = new SpeechSynthesisUtterance(card.exLat);
+        u.rate = 0.8; u.pitch = 1;
+        u.onend = done; u.onerror = done;
+        window.speechSynthesis.speak(u);
+      } else {
+        const u1 = new SpeechSynthesisUtterance(card.exLat);
+        const u2 = new SpeechSynthesisUtterance(card.exLat);
+        u1.rate = 0.8; u1.pitch = 1;
+        u2.rate = 0.65; u2.pitch = 1;
+        u2.onend = done; u2.onerror = done; u1.onerror = done;
+        u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 800);
+        window.speechSynthesis.speak(u1);
+      }
+    }
+  }
+
+  // ── Speak buttons on Numbers tab ──
+  // Latin equivalents for the number words (for iOS fallback)
+  const NUM_LAT = {
+    'Еден':'eden','Една':'edna','Два':'dva','Две':'dve','Три':'tri',
+    'Четири':'chetiri','Пет':'pet','Шест':'shest','Седум':'sedum',
+    'Осум':'osum','Девет':'devet','Десет':'deset'
+  };
+
+  function initSpeakBtns() {
+    const numSection = document.getElementById('numbers');
+    if (!numSection) return;
+    numSection.querySelectorAll('.phrase-cell.cyr').forEach(cell => {
+      if (cell.querySelector('.speak-btn')) return;
+      const cyrText = cell.textContent.split('/')[0].trim();
+      const btn = document.createElement('button');
+      btn.className = 'speak-btn';
+      btn.title = 'Listen';
+      btn.textContent = '♪';
+      btn.onclick = e => {
+        e.stopPropagation();
+        if (!window.speechSynthesis) return;
+        if (!_voiceChecked) _loadVoices();
+        window.speechSynthesis.cancel();
+        const text = hasCyrVoice() ? cyrText : (NUM_LAT[cyrText] || cyrText);
+        const u = new SpeechSynthesisUtterance(text);
+        if (hasCyrVoice()) { u.voice = _cyrVoice; u.lang = 'mk'; }
+        u.rate = 0.8; u.pitch = 1;
+        window.speechSynthesis.speak(u);
+      };
+      cell.style.cssText += 'display:flex;align-items:center';
+      cell.appendChild(btn);
+    });
+  }
+
+  // ── QUIZ ENGINE ──
+  const Q_NUMS = [
+    {mk:'Еден',lat:'eden',eng:'one'},{mk:'Два',lat:'dva',eng:'two'},
+    {mk:'Три',lat:'tri',eng:'three'},{mk:'Четири',lat:'chetiri',eng:'four'},
+    {mk:'Пет',lat:'pet',eng:'five'},{mk:'Шест',lat:'shest',eng:'six'},
+    {mk:'Седум',lat:'sedum',eng:'seven'},{mk:'Осум',lat:'osum',eng:'eight'},
+    {mk:'Девет',lat:'devet',eng:'nine'},{mk:'Десет',lat:'deset',eng:'ten'},
+  ];
+  const Q_VOCAB = [
+    {mk:'мачка',lat:'machka',eng:'cat'},{mk:'куче',lat:'kuche',eng:'dog'},
+    {mk:'кафе',lat:'kafe',eng:'coffee'},{mk:'книга',lat:'kniga',eng:'book'},
+    {mk:'музика',lat:'muzika',eng:'music'},{mk:'пица',lat:'piza',eng:'pizza'},
+    {mk:'пиво',lat:'pivo',eng:'beer'},{mk:'вино',lat:'vino',eng:'wine'},
+    {mk:'ресторан',lat:'restoran',eng:'restaurant'},{mk:'баба',lat:'baba',eng:'grandmother'},
+    {mk:'мама',lat:'mama',eng:'mother'},{mk:'дом',lat:'dom',eng:'home'},
+    {mk:'град',lat:'grad',eng:'city'},{mk:'река',lat:'reka',eng:'river'},
+    {mk:'небо',lat:'nebo',eng:'sky'},{mk:'море',lat:'more',eng:'sea'},
+    {mk:'сонце',lat:'sonce',eng:'sun'},{mk:'вода',lat:'voda',eng:'water'},
+    {mk:'леб',lat:'leb',eng:'bread'},{mk:'парк',lat:'park',eng:'park'},
+  ];
+  const Q_PLURALS = [
+    {mk:'мачка → ?',lat:'machka',ans:'мачки',ansLat:'machki',eng:'cats'},
+    {mk:'куче → ?',lat:'kuche',ans:'кучиња',ansLat:'kuchinja',eng:'dogs'},
+    {mk:'кафе → ?',lat:'kafe',ans:'кафиња',ansLat:'kafinja',eng:'coffees'},
+    {mk:'пенкало → ?',lat:'penkalo',ans:'пенкала',ansLat:'penkala',eng:'pens'},
+    {mk:'море → ?',lat:'more',ans:'мориња',ansLat:'morinja',eng:'seas'},
+    {mk:'шише → ?',lat:'shishe',ans:'шишиња',ansLat:'shishinja',eng:'bottles'},
+    {mk:'песна → ?',lat:'pesna',ans:'песни',ansLat:'pesni',eng:'songs'},
+    {mk:'чаша → ?',lat:'chasha',ans:'чаши',ansLat:'chashi',eng:'glasses'},
+    {mk:'маче → ?',lat:'mache',ans:'мачиња',ansLat:'machinja',eng:'kittens'},
+  ];
+  const Q_VERBS = [
+    {mk:'Јас + пие',lat:'jas + pie',ans:'пијам',ansLat:'pijam',eng:'I drink'},
+    {mk:'Таа + чита',lat:'taa + chita',ans:'чита',ansLat:'chita',eng:'she reads'},
+    {mk:'Ние + готви',lat:'nie + gotvi',ans:'готвиме',ansLat:'gotvime',eng:'we cook'},
+    {mk:'Јас + шета',lat:'jas + sheta',ans:'шетам',ansLat:'shetam',eng:'I walk'},
+    {mk:'Ти + работи',lat:'ti + raboti',ans:'работиш',ansLat:'rabotish',eng:'you work'},
+    {mk:'Тие + гледа',lat:'tie + gleda',ans:'гледаат',ansLat:'gledaat',eng:'they watch'},
+    {mk:'Јас + зборува',lat:'jas + zboruva',ans:'зборувам',ansLat:'zboruvam',eng:'I speak'},
+    {mk:'Таа + живее',lat:'taa + zhivee',ans:'живее',ansLat:'zhivee',eng:'she lives'},
+    {mk:'Вие + учи',lat:'vie + uchi',ans:'учите',ansLat:'uchite',eng:'you (pl.) study'},
+    {mk:'Тој + оди',lat:'toj + odi',ans:'оди',ansLat:'odi',eng:'he goes'},
+    {mk:'Јас + сака',lat:'jas + saka',ans:'сакам',ansLat:'sakam',eng:'I want'},
+    {mk:'Ние + пие',lat:'nie + pie',ans:'пиеме',ansLat:'pieme',eng:'we drink'},
+  ];
+
+  let qCat = 'all', qMode = 'read';
+  let qDeck = [], qIdx = 0, qCorrect = 0, qCurrent = null;
+  let _qAudioText = '';
+
+  function qPick(type, val, btn) {
+    const rows = document.querySelectorAll('.quiz-btn-row');
+    const row = type === 'cat' ? rows[0] : rows[1];
+    row.querySelectorAll('.quiz-sel-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (type === 'cat') qCat = val; else qMode = val;
+  }
+
+  function qShuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function qBuildDeck() {
+    let pool = [];
+    if (qCat==='all'||qCat==='numbers') pool.push(...Q_NUMS.map(q=>({...q,cat:'numbers'})));
+    if (qCat==='all'||qCat==='vocab')   pool.push(...Q_VOCAB.map(q=>({...q,cat:'vocab'})));
+    if (qCat==='all'||qCat==='plurals') pool.push(...Q_PLURALS.map(q=>({...q,cat:'plurals'})));
+    if (qCat==='all'||qCat==='verbs')   pool.push(...Q_VERBS.map(q=>({...q,cat:'verbs'})));
+    return qShuffle(pool).slice(0, 10);
+  }
+
+  function qStart() {
+    qDeck = qBuildDeck(); qIdx = 0; qCorrect = 0;
+    document.getElementById('quiz-setup').style.display = 'none';
+    document.getElementById('quiz-done').style.display = 'none';
+    document.getElementById('quiz-active').style.display = 'block';
+    qRender();
+  }
+
+  function qReset() {
+    document.getElementById('quiz-done').style.display = 'none';
+    document.getElementById('quiz-active').style.display = 'none';
+    document.getElementById('quiz-setup').style.display = 'block';
+  }
+
+  function qRender() {
+    const q = qDeck[qIdx]; qCurrent = q;
+    const total = qDeck.length;
+    const isComplex = q.cat === 'plurals' || q.cat === 'verbs';
+
+    document.getElementById('q-num').textContent = `${qIdx + 1} / ${total}`;
+    document.getElementById('q-tally').textContent = `✓ ${qCorrect}  ✗ ${qIdx - qCorrect}`;
+    document.getElementById('q-prog').style.width = `${(qIdx / total) * 100}%`;
+    document.getElementById('q-fb').style.display = 'none';
+
+    if (qMode === 'listen') {
+      document.getElementById('q-listen-zone').style.display = 'block';
+      document.getElementById('q-read-zone').style.display = 'none';
+      // Use Latin if no Cyrillic voice (iOS)
+      if (hasCyrVoice()) {
+        _qAudioText = isComplex ? q.ans : q.mk;
+      } else {
+        _qAudioText = isComplex ? (q.ansLat || q.ans) : (q.lat || q.mk);
+      }
+      qBuildOptions('eng', q.eng);
+      setTimeout(qPlay, 500);
+    } else {
+      document.getElementById('q-listen-zone').style.display = 'none';
+      document.getElementById('q-read-zone').style.display = 'block';
+      document.getElementById('q-cyr').textContent = q.mk;
+      document.getElementById('q-qlat').textContent = q.lat;
+      // Plurals/verbs: answer is a MK form; numbers/vocab: answer is English
+      if (isComplex) qBuildOptions('mk', q.ans);
+      else qBuildOptions('eng', q.eng);
+    }
+  }
+
+  function qBuildOptions(type, correct) {
+    const allPool = [...Q_NUMS, ...Q_VOCAB, ...Q_PLURALS, ...Q_VERBS];
+    let pool;
+    if (type === 'eng') {
+      pool = [...new Set(allPool.map(q => q.eng))].filter(e => e && e !== correct);
+    } else {
+      pool = [...new Set([...Q_PLURALS, ...Q_VERBS].map(q => q.ans))].filter(a => a && a !== correct);
+    }
+    const wrongs = qShuffle(pool).slice(0, 3);
+    const opts = qShuffle([correct, ...wrongs]);
+
+    const container = document.getElementById('q-opts');
+    container.innerHTML = '';
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt;
+      btn.dataset.val = opt;
+      btn.dataset.correct = correct;
+      btn.onclick = function() { qCheck(this); };
+      container.appendChild(btn);
+    });
+  }
+
+  function qCheck(btn) {
+    const chosen = btn.dataset.val;
+    const correct = btn.dataset.correct;
+    const q = qCurrent;
+    const isCorrect = chosen === correct;
+    const isComplex = q.cat === 'plurals' || q.cat === 'verbs';
+
+    document.querySelectorAll('.quiz-opt').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.val === correct) b.classList.add('correct');
+    });
+    if (!isCorrect) btn.classList.add('wrong'); else qCorrect++;
+
+    document.getElementById('q-tally').textContent = `✓ ${qCorrect}  ✗ ${(qIdx + 1) - qCorrect}`;
+
+    const fb = document.getElementById('q-fb');
+    const fbText = document.getElementById('q-fb-text');
+    fb.className = 'quiz-fb ' + (isCorrect ? 'ok' : 'bad');
+
+    let msg;
+    if (isCorrect) {
+      msg = isComplex ? `✓  ${q.ans} — ${q.eng}` : '✓  Correct!';
+    } else {
+      if (isComplex) msg = `✗  ${q.ans} (${q.ansLat}) — ${q.eng}`;
+      else if (qMode === 'listen') msg = `✗  ${q.mk} (${q.lat}) = ${q.eng}`;
+      else msg = `✗  Answer: ${q.eng}`;
+    }
+    fbText.textContent = msg;
+    fb.style.display = 'flex';
+
+    // In listen mode, replay the word in feedback
+    if (qMode === 'listen' && window.speechSynthesis) {
+      setTimeout(() => window.speechSynthesis.speak(makeUtter(_qAudioText)), 300);
+    }
+  }
+
+  function qAdvance() {
+    qIdx++;
+    if (qIdx >= qDeck.length) qShowDone(); else qRender();
+  }
+
+  function qShowDone() {
+    document.getElementById('quiz-active').style.display = 'none';
+    document.getElementById('quiz-done').style.display = 'block';
+    const pct = Math.round((qCorrect / qDeck.length) * 100);
+    document.getElementById('q-done-score').textContent = `${qCorrect} / ${qDeck.length}`;
+    document.getElementById('q-done-label').textContent =
+      pct >= 90 ? 'Одлично! — Excellent!' :
+      pct >= 70 ? 'Добро! — Good job!' :
+      pct >= 50 ? 'Продолжи! — Keep going!' : 'Вежбај! — Keep practicing!';
+    document.getElementById('q-done-sub').textContent = `${pct}% correct`;
+  }
+
+  function qPlay() {
+    if (!window.speechSynthesis) return;
+    if (!_voiceChecked) _loadVoices();
+    const btn = document.getElementById('q-play-btn');
+    window.speechSynthesis.cancel();
+    btn.textContent = '♪ …';
+    const u = new SpeechSynthesisUtterance(_qAudioText);
+    if (hasCyrVoice()) { u.voice = _cyrVoice; u.lang = 'mk'; }
+    u.rate = 0.8; u.pitch = 1;
+    u.onend = u.onerror = () => { btn.textContent = '▶ Play'; };
+    window.speechSynthesis.speak(u);
+  }
+
+  window.addEventListener('load', () => { buildIndex(); fcRender(); afcRender(); initSpeakBtns(); });
+
+</script>
+<script>
+  // ── PWA Manifest (self-contained, no server needed) ──
+  (function() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512; canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#f7f5f0';
+    ctx.fillRect(0, 0, 512, 512);
+
+    // Gold top & bottom bars
+    ctx.fillStyle = '#8a6a1f';
+    ctx.fillRect(0, 0, 512, 52);
+    ctx.fillRect(0, 460, 512, 52);
+
+    // Subtle inner border
+    ctx.strokeStyle = '#ddd8cc';
+    ctx.lineWidth = 6;
+    ctx.strokeRect(24, 24, 464, 464);
+
+    // "МК" main text
+    ctx.fillStyle = '#1a1612';
+    ctx.font = '900 260px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('МК', 256, 256);
+
+    // Small latin label under МК
+    ctx.fillStyle = '#8a6a1f';
+    ctx.font = '400 52px monospace';
+    ctx.fillText('makedonski', 256, 390);
+
+    const icon = canvas.toDataURL('image/png');
+
+    const manifest = {
+      name: 'Македонски Study Guide',
+      short_name: 'Македонски',
+      description: 'Macedonian language study guide',
+      display: 'standalone',
+      background_color: '#f7f5f0',
+      theme_color: '#8a6a1f',
+      start_url: '.',
+      icons: [
+        { src: icon, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+        { src: icon, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+      ]
+    };
+
+    const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('link');
+    link.rel = 'manifest';
+    link.href = url;
+    document.head.appendChild(link);
+  })();
+</script>
+</body>
+</html>
