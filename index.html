@@ -2119,8 +2119,7 @@
 
   function afcNav(dir) {
     afcIndex = Math.max(0, Math.min(afcDeck.length - 1, afcIndex + dir));
-    document.getElementById('afc-card').classList.remove('flipped');
-    setTimeout(afcRender, 10);
+    afcRender();
   }
 
   function afcShuffle() {
@@ -2186,37 +2185,17 @@
 
     const done = () => { btn.classList.remove('speaking'); btn.textContent = '♪ Listen'; };
 
+    let u;
     if (hasCyrVoice()) {
       // Has a Cyrillic-capable voice — speak example word (never bare letter, TTS reads those as "Cyrillic capital letter...")
-      if (side === 'front') {
-        const u = makeUtter(card.exCyr);
-        u.onend = done; u.onerror = done;
-        window.speechSynthesis.speak(u);
-      } else {
-        const u1 = makeUtter(card.exCyr);
-        const u2 = makeUtter(card.exCyr);
-        u2.rate = 0.65; // slower repeat
-        u2.onend = done; u2.onerror = done; u1.onerror = done;
-        u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 800);
-        window.speechSynthesis.speak(u1);
-      }
+      u = makeUtter(card.exCyr);
     } else {
       // No Cyrillic voice (common on iOS) — speak Latin example word
-      if (side === 'front') {
-        const u = new SpeechSynthesisUtterance(card.exLat);
-        u.rate = 0.8; u.pitch = 1;
-        u.onend = done; u.onerror = done;
-        window.speechSynthesis.speak(u);
-      } else {
-        const u1 = new SpeechSynthesisUtterance(card.exLat);
-        const u2 = new SpeechSynthesisUtterance(card.exLat);
-        u1.rate = 0.8; u1.pitch = 1;
-        u2.rate = 0.65; u2.pitch = 1;
-        u2.onend = done; u2.onerror = done; u1.onerror = done;
-        u1.onend = () => setTimeout(() => window.speechSynthesis.speak(u2), 800);
-        window.speechSynthesis.speak(u1);
-      }
+      u = new SpeechSynthesisUtterance(card.exLat);
+      u.rate = 0.8; u.pitch = 1;
     }
+    u.onend = done; u.onerror = done;
+    window.speechSynthesis.speak(u);
   }
 
   // ── Speak buttons on Numbers tab ──
