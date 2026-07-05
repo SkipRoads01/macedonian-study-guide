@@ -1,0 +1,6 @@
+# Python cache from generate_audio.py
+__pycache__/
+*.pyc
+
+# Local editor / Claude Code tooling config
+.claude/
