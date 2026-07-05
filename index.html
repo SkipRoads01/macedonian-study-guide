@@ -641,6 +641,36 @@
   }
   .fc-nav-btn:hover { background: var(--surface2); }
   .fc-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  /* "I know this" learned-card controls */
+  .afc-know-row {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+  .afc-know-btn {
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .afc-know-btn:hover { background: var(--gold); color: #fff; }
+  .afc-done {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+  }
+  .afc-done-emoji { font-size: 3rem; line-height: 1; }
+  .afc-done-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin: 0.6rem 0 0.25rem;
+  }
+  .afc-done-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
   .fc-progress {
     width: 100%;
     max-width: 600px;
@@ -871,6 +901,7 @@
     <div class="fc-filter">
       <button class="fc-filter-btn active" onclick="afcShuffle()">⇄ Shuffle</button>
       <button class="fc-filter-btn" onclick="afcReset()">Reset Order</button>
+      <button class="fc-filter-btn" id="afc-clear-btn" onclick="afcClearLearned()" style="display:none">↺ Reset learned (<span id="afc-learned-count">0</span>)</button>
     </div>
     <span class="fc-counter" id="afc-counter"></span>
   </div>
@@ -879,7 +910,14 @@
     <div class="fc-progress-bar" id="afc-progress-bar" style="width:0%"></div>
   </div>
 
-  <div class="afc-scene" onclick="afcFlip()">
+  <div class="afc-done" id="afc-done" style="display:none">
+    <div class="afc-done-emoji">🎉</div>
+    <div class="afc-done-title">Сите научени!</div>
+    <div class="afc-done-sub">You've marked all 31 letters as learned.</div>
+    <button class="fc-nav-btn" onclick="afcClearLearned()">↺ Start over</button>
+  </div>
+
+  <div class="afc-scene" id="afc-scene" onclick="afcFlip()">
     <div class="afc-card" id="afc-card">
       <div class="afc-face afc-front">
         <div class="afc-front-letter" id="afc-front-letter"></div>
@@ -898,9 +936,13 @@
     </div>
   </div>
 
-  <div class="fc-nav">
+  <div class="fc-nav" id="afc-nav">
     <button class="fc-nav-btn" id="afc-prev" onclick="afcNav(-1)">← Prev</button>
     <button class="fc-nav-btn" id="afc-next" onclick="afcNav(1)">Next →</button>
+  </div>
+
+  <div class="afc-know-row" id="afc-know-row">
+    <button class="afc-know-btn" id="afc-know" onclick="afcMarkLearned()">✓ I know this — set aside</button>
   </div>
 </div>
 
@@ -2247,10 +2289,42 @@
     { upper:'Ш', lower:'ш', pair:'Ш ш', latin:'/sh/ — like "shark"',  exCyr:'што',   exLat:'shto',   exEng:'what' },
   ];
 
-  let afcDeck = [...AFC_DATA];
+  // Cards the user has marked "learned" are set aside; the set persists across
+  // visits in the browser. The working deck is AFC_DATA minus the learned ones.
+  const AFC_LEARNED_KEY = 'mk_afc_learned';
+  let afcLearned = afcLoadLearned();
+  let afcDeck = afcVisibleCards();
   let afcIndex = 0;
 
+  function afcLoadLearned() {
+    try { return new Set(JSON.parse(localStorage.getItem(AFC_LEARNED_KEY) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function afcSaveLearned() {
+    try { localStorage.setItem(AFC_LEARNED_KEY, JSON.stringify([...afcLearned])); } catch (e) {}
+  }
+  function afcVisibleCards() {
+    return AFC_DATA.filter(c => !afcLearned.has(c.upper));
+  }
+
   function afcRender() {
+    // Reflect the learned count / reset button.
+    const n = afcLearned.size;
+    document.getElementById('afc-learned-count').textContent = n;
+    document.getElementById('afc-clear-btn').style.display = n > 0 ? '' : 'none';
+
+    // All cards learned → show the celebratory empty state.
+    const done = afcDeck.length === 0;
+    document.getElementById('afc-scene').style.display = done ? 'none' : '';
+    document.getElementById('afc-nav').style.display = done ? 'none' : '';
+    document.getElementById('afc-know-row').style.display = done ? 'none' : '';
+    document.getElementById('afc-done').style.display = done ? 'block' : 'none';
+    if (done) {
+      document.getElementById('afc-counter').textContent = '';
+      document.getElementById('afc-progress-bar').style.width = '100%';
+      return;
+    }
+
     const card = afcDeck[afcIndex];
     document.getElementById('afc-front-letter').textContent = card.upper;
     document.getElementById('afc-back-letters').textContent = card.pair;
@@ -2258,7 +2332,10 @@
     document.getElementById('afc-example-cyr').textContent = card.exCyr;
     document.getElementById('afc-example-lat').textContent = card.exLat + ' — ' + card.exEng;
     document.getElementById('afc-example-eng').textContent = '';
-    document.getElementById('afc-counter').textContent = `${afcIndex + 1} / ${afcDeck.length}`;
+    const counter = n > 0
+      ? `${afcIndex + 1} / ${afcDeck.length} · ${n} learned`
+      : `${afcIndex + 1} / ${afcDeck.length}`;
+    document.getElementById('afc-counter').textContent = counter;
     document.getElementById('afc-prev').disabled = afcIndex === 0;
     document.getElementById('afc-next').disabled = afcIndex === afcDeck.length - 1;
     document.getElementById('afc-progress-bar').style.width = `${((afcIndex + 1) / afcDeck.length) * 100}%`;
@@ -2273,6 +2350,27 @@
     afcRender();
   }
 
+  // Set the current card aside as "learned"; the deck moves to the next card.
+  function afcMarkLearned() {
+    if (!afcDeck.length) return;
+    afcLearned.add(afcDeck[afcIndex].upper);
+    afcSaveLearned();
+    afcDeck.splice(afcIndex, 1);
+    if (afcIndex > afcDeck.length - 1) afcIndex = Math.max(0, afcDeck.length - 1);
+    document.getElementById('afc-card').classList.remove('flipped');
+    afcRender();
+  }
+
+  // Empty the learned pile and return to the full deck.
+  function afcClearLearned() {
+    afcLearned.clear();
+    afcSaveLearned();
+    afcDeck = afcVisibleCards();
+    afcIndex = 0;
+    document.getElementById('afc-card').classList.remove('flipped');
+    afcRender();
+  }
+
   function afcShuffle() {
     for (let i = afcDeck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -2284,7 +2382,7 @@
   }
 
   function afcReset() {
-    afcDeck = [...AFC_DATA];
+    afcDeck = afcVisibleCards();
     afcIndex = 0;
     document.getElementById('afc-card').classList.remove('flipped');
     afcRender();
