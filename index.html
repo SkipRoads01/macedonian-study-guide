@@ -477,8 +477,10 @@
     header, nav, main { padding-left: 1.5rem; padding-right: 1.5rem; }
     h1 { font-size: 2rem; }
     header::before { display: none; }
-    .verb-groups { grid-template-columns: 1fr; }
-    .phrase-row { grid-template-columns: 1fr; }
+    /* !important so it beats the inline grid-template-columns some
+       instances set (Numbers, Nouns) — otherwise the cards overflow. */
+    .verb-groups { grid-template-columns: 1fr !important; }
+    .phrase-row { grid-template-columns: 1fr !important; }
     .phrase-cell { border-bottom: 1px solid var(--border); }
   }
 
@@ -492,6 +494,7 @@
   }
   .fc-filter {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
   .fc-filter-btn {
@@ -1538,6 +1541,7 @@
     <strong>Pattern:</strong> Masculine ends in <strong>-ец</strong> · Feminine ends in <strong>-ка</strong> · Masc. plural ends in <strong>-ци</strong> · Fem. plural ends in <strong>-ки</strong>
   </div>
 
+  <div class="nat-scroll">
   <div class="col-headers" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr; gap:0.5rem;">
     <div class="col-header">Country</div>
     <div class="col-header">Masc. sg.</div>
@@ -1553,6 +1557,12 @@
     .nat-cell.country { color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; }
     .nat-cell.cyr { font-family:'Playfair Display',serif; color:var(--cyrillic); }
     .nat-cell.lat { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--gold-light); }
+    /* On phones the 5-column table would push the page sideways; instead it
+       scrolls horizontally inside its own box, keeping the labels aligned. */
+    .nat-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    @media (max-width: 700px) {
+      .nat-scroll > .col-headers, .nat-scroll > .nat-row { min-width: 500px; }
+    }
   </style>
 
   <!-- Country rows -->
@@ -1633,6 +1643,7 @@
     <div class="nat-cell cyr">Турци<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turci</span></div>
     <div class="nat-cell cyr">Туркини<br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--gold-light)">Turkini</span></div>
   </div>
+  </div><!-- /.nat-scroll -->
 
   <br>
   <div class="nat-intro" style="border-left-color:var(--red)">
