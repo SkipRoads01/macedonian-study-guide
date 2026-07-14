@@ -81,10 +81,10 @@
   /* NAV */
   nav {
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
     border-bottom: 1px solid var(--border);
     padding: 0 4rem;
-    overflow-x: auto;
   }
   nav button {
     background: none;
@@ -102,6 +102,17 @@
   }
   nav button:hover { color: var(--text); }
   nav button.active { color: var(--gold); border-bottom-color: var(--gold); }
+  /* The guided-lessons entry point gets a distinct, always-visible treatment */
+  nav button.nav-lessons {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  nav button.nav-lessons.active { border-bottom-color: var(--gold); }
+  nav button.nav-lessons::before { content: '📚 '; }
+  @media (max-width: 700px) {
+    nav { padding: 0 1rem; }
+    nav button { padding: 0.8rem 0.9rem; font-size: 0.66rem; }
+  }
 
   /* MAIN */
   main { padding: 3rem 4rem; max-width: 1100px; }
@@ -875,6 +886,167 @@
   @media (max-width: 700px) {
     .noun-row { grid-template-columns: 1fr; }
   }
+
+  /* ─────────── GUIDED LESSONS ─────────── */
+  .les-intro-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2.4rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .les-intro-banner strong { color: var(--gold); font-weight: 600; }
+  .les-progress-summary {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.7rem;
+  }
+  .les-reset-btn {
+    background: none; border: 1px solid var(--border); color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; margin-left: 0.8rem; cursor: pointer;
+  }
+  .les-reset-btn:hover { color: var(--red); border-color: var(--red); }
+
+  .les-unit-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.2rem 0 0.9rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .les-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .les-row {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1rem 1.2rem;
+    transition: all 0.18s;
+    cursor: pointer;
+  }
+  .les-row.locked { opacity: 0.5; cursor: not-allowed; background: var(--surface2); }
+  .les-row:not(.locked):hover { border-color: var(--gold); transform: translateX(3px); }
+  .les-row.done { border-left: 3px solid var(--gold); }
+  .les-status {
+    width: 30px; height: 30px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-size: 0.9rem;
+    border: 1px solid var(--border);
+  }
+  .les-row.done .les-status { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .les-row.available .les-status { border-color: var(--gold); color: var(--gold); }
+  .les-row-body { flex: 1; min-width: 0; }
+  .les-row-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--text); line-height: 1.2;
+  }
+  .les-row-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+  .les-row-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.1em; color: var(--muted); flex-shrink: 0;
+  }
+
+  /* Lesson player */
+  #les-player { display: none; }
+  .les-back-btn {
+    background: none; border: none; color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    padding: 0; margin-bottom: 1.4rem;
+  }
+  .les-back-btn:hover { color: var(--gold-light); }
+  .les-phase-tabs {
+    display: flex; gap: 0; margin-bottom: 1.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .les-phase-tab {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); padding: 0.6rem 1rem;
+    border-bottom: 2px solid transparent;
+  }
+  .les-phase-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .les-phase-tab.locked { opacity: 0.4; }
+
+  .les-teach {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 1.8rem 2rem; line-height: 1.7; font-weight: 300;
+    max-width: 640px; margin: 0 auto 1.6rem;
+  }
+  .les-teach h3 {
+    font-family: 'Playfair Display', serif; font-weight: 500;
+    font-size: 1.5rem; margin-bottom: 0.8rem; color: var(--text);
+  }
+  .les-teach p { margin-bottom: 0.8rem; color: var(--text); }
+  .les-teach .les-key {
+    font-family: 'Playfair Display', serif; color: var(--cyrillic); font-size: 1.1em;
+  }
+  .les-teach .les-lat { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 0.9em; }
+  .les-cta-row { text-align: center; margin: 1.8rem 0; }
+  .les-cta {
+    background: var(--gold); color: #fff; border: none;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.85rem 2rem; cursor: pointer; transition: background 0.18s;
+  }
+  .les-cta:hover { background: var(--gold-light); }
+  .les-cta.secondary { background: none; color: var(--gold); border: 1px solid var(--border); }
+  .les-cta.secondary:hover { border-color: var(--gold); background: var(--surface2); }
+
+  /* Lesson quiz (reuses quiz look, self-contained) */
+  .les-quiz-prompt {
+    text-align: center; margin: 0 auto 1.6rem; max-width: 520px;
+  }
+  .les-quiz-q {
+    font-family: 'Playfair Display', serif; font-size: 3rem;
+    color: var(--cyrillic); line-height: 1.15;
+  }
+  .les-quiz-q.small { font-size: 2rem; }
+  .les-quiz-qlat {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+    color: var(--gold); margin-top: 0.3rem;
+  }
+  .les-quiz-ask { font-size: 0.9rem; color: var(--muted); margin-top: 0.8rem; }
+  .les-opts { display: flex; flex-direction: column; gap: 0.6rem; max-width: 460px; margin: 0 auto; }
+  .les-opt {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 0.9rem 1.2rem; text-align: left; cursor: pointer;
+    font-size: 1rem; color: var(--text); transition: all 0.15s;
+  }
+  .les-opt:hover:not(:disabled) { border-color: var(--gold); }
+  .les-opt.correct { background: #e8f3e8; border-color: #4a8a4a; color: #2a5a2a; }
+  .les-opt.wrong { background: #f7e8e6; border-color: var(--red); color: var(--red); }
+  .les-opt:disabled { cursor: default; }
+  .les-quiz-head {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    color: var(--muted); max-width: 460px; margin: 0 auto 1.2rem;
+  }
+  .les-done {
+    text-align: center; background: var(--surface);
+    border: 1px solid var(--border); padding: 2.4rem;
+    max-width: 480px; margin: 0 auto;
+  }
+  .les-done-emoji { font-size: 3rem; margin-bottom: 0.6rem; }
+  .les-done-title {
+    font-family: 'Playfair Display', serif; font-size: 1.8rem;
+    color: var(--text); margin-bottom: 0.4rem;
+  }
+  .les-done-sub { color: var(--muted); margin-bottom: 1.6rem; line-height: 1.5; }
+  .les-done-score {
+    font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem;
+    color: var(--gold); margin-bottom: 1.6rem;
+  }
 </style>
 <style>
 /* ── QUIZ ── */
@@ -922,7 +1094,8 @@
 </header>
 
 <nav>
-  <button class="active" onclick="show('alphabet', this)">Alphabet</button>
+  <button class="nav-lessons active" onclick="show('lessons', this)">Lessons</button>
+  <button onclick="show('alphabet', this)">Alphabet</button>
   <button onclick="show('alpha-cards', this)">ABC Cards</button>
   <button onclick="show('phrases', this)">Phrases</button>
   <button onclick="show('restaurant', this)">Restaurant &amp; Café</button>
@@ -945,8 +1118,107 @@
 
 <main>
 
+<!-- ─── GUIDED LESSONS ─── -->
+<div id="lessons" class="section active">
+  <!-- Home: the lesson path -->
+  <div id="les-home">
+    <div class="section-title">Патека — Your Learning Path</div>
+    <div class="section-sub">Start at Lesson 1 and work down · Finish a lesson to unlock the next</div>
+
+    <div class="les-intro-banner">
+      New to Macedonian? <strong>Start here.</strong> These lessons take you step by step —
+      first learning to <strong>read</strong> the Cyrillic alphabet, then greetings, then talking
+      about yourself, then the grammar to build real sentences. Everything else in the top menu is
+      your <strong>reference guide</strong> — dip into it any time.
+      <div class="les-progress-summary">
+        <span id="les-progress-text">0 of 14 lessons complete</span>
+        <button class="les-reset-btn" onclick="lesResetAll()">↺ Reset progress</button>
+      </div>
+    </div>
+
+    <div id="les-map"></div>
+  </div>
+
+  <!-- Player: a single lesson -->
+  <div id="les-player">
+    <button class="les-back-btn" onclick="lesBackToMap()">← All lessons</button>
+    <div class="section-title" id="les-p-title" style="margin-bottom:0.2rem"></div>
+    <div class="section-sub" id="les-p-sub"></div>
+
+    <div class="les-phase-tabs">
+      <div class="les-phase-tab" id="les-tab-learn" data-phase="learn">1 · Learn</div>
+      <div class="les-phase-tab" id="les-tab-study" data-phase="study">2 · Study cards</div>
+      <div class="les-phase-tab" id="les-tab-quiz" data-phase="quiz">3 · Quiz</div>
+    </div>
+
+    <!-- Phase: teach -->
+    <div id="les-teach-phase">
+      <div class="les-teach" id="les-teach-body"></div>
+      <div class="les-cta-row">
+        <button class="les-cta" onclick="lesGotoStudy()">Study the cards →</button>
+      </div>
+    </div>
+
+    <!-- Phase: study (flip cards) -->
+    <div id="les-study-phase" style="display:none">
+      <div class="fc-controls">
+        <span></span>
+        <span class="fc-counter" id="les-study-counter"></span>
+      </div>
+      <div class="fc-progress" style="max-width:100%;margin-bottom:1.5rem">
+        <div class="fc-progress-bar" id="les-study-bar" style="width:0%"></div>
+      </div>
+
+      <div class="afc-scene" id="les-study-scene" onclick="lesStudyFlip()">
+        <div class="afc-card" id="les-study-card">
+          <div class="afc-face afc-front">
+            <div class="afc-front-letter" id="les-study-front" style="font-size:4.5rem"></div>
+            <button class="afc-speak-btn" id="les-study-speak-f" onclick="event.stopPropagation();lesStudySpeak()">♪ Listen</button>
+            <span class="afc-hint">click to flip</span>
+          </div>
+          <div class="afc-face afc-back">
+            <div class="afc-back-latin" id="les-study-lat" style="font-size:1.1rem"></div>
+            <div class="pfc-back-eng" id="les-study-eng"></div>
+            <div class="afc-divider"></div>
+            <div class="afc-example-eng" id="les-study-note"></div>
+            <button class="afc-speak-btn" id="les-study-speak-b" onclick="event.stopPropagation();lesStudySpeak()">♪ Listen</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-nav">
+        <button class="fc-nav-btn" id="les-study-prev" onclick="lesStudyNav(-1)">← Prev</button>
+        <button class="fc-nav-btn" id="les-study-next" onclick="lesStudyNav(1)">Next →</button>
+      </div>
+      <div class="les-cta-row">
+        <button class="les-cta" id="les-study-toquiz" onclick="lesGotoQuiz()">Take the quiz →</button>
+      </div>
+    </div>
+
+    <!-- Phase: quiz -->
+    <div id="les-quiz-phase" style="display:none">
+      <div id="les-quiz-active">
+        <div class="les-quiz-head">
+          <span id="les-quiz-num"></span>
+          <span id="les-quiz-tally"></span>
+        </div>
+        <div class="fc-progress" style="max-width:460px;margin:0 auto 1.6rem">
+          <div class="fc-progress-bar" id="les-quiz-bar" style="width:0%"></div>
+        </div>
+        <div class="les-quiz-prompt">
+          <div class="les-quiz-q" id="les-quiz-q"></div>
+          <div class="les-quiz-qlat" id="les-quiz-qlat"></div>
+          <div class="les-quiz-ask" id="les-quiz-ask"></div>
+        </div>
+        <div class="les-opts" id="les-quiz-opts"></div>
+      </div>
+      <div id="les-quiz-done" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ─── ALPHABET ─── -->
-<div id="alphabet" class="section active">
+<div id="alphabet" class="section">
   <div class="section-title">Кирилица — The Cyrillic Alphabet</div>
   <div class="section-sub">31 letters · Macedonian Cyrillic</div>
   <div class="alpha-grid">
@@ -3421,6 +3693,539 @@
   }
 
   window.addEventListener('load', () => { buildIndex(); fcRender(); afcRender(); initSpeakBtns(); });
+
+  // ─────────────── GUIDED LESSONS ───────────────
+  // A step-by-step path that reuses the guide's material. Lessons unlock in
+  // order; finishing the quiz (≥70%) marks a lesson complete and opens the next.
+  // Every `audio` value below is a key that exists in AUDIO_MAP, so ♪ Listen
+  // plays a real recording (mkPlay falls back to speech if a clip is missing).
+
+  // kinds:  'sound'  → quiz asks which sound a letter makes (no transliteration shown)
+  //         'meaning'→ quiz asks what a word/phrase means (transliteration shown)
+  //         'plural' → quiz asks for the plural form
+  const LESSONS = [
+    // ── Unit 1 · Learning to read ──
+    { id:'l1', unit:'Unit 1 · Learning to read', kind:'sound',
+      title:'Familiar letters', sub:'Six letters that look and sound like English',
+      teach:`<h3>You already know these six</h3>
+        <p>Macedonian is written in <strong>Cyrillic</strong>, but six letters look
+        almost exactly like English letters <em>and</em> make the same sound. Learn these
+        first and you can already read a few words.</p>
+        <p><span class="les-key">А Е К М О Т</span> = <span class="les-lat">a e k m o t</span></p>
+        <p>For example, <span class="les-key">мама</span> (<span class="les-lat">mama</span>)
+        is “mother”, and <span class="les-key">кафе</span> (<span class="les-lat">kafe</span>)
+        is “coffee”.</p>`,
+      cards:[
+        {front:'А а', back:'/a/', eng:'the “a” sound — like “father”', audio:'мама', answer:'a', note:'e.g. мама (mama) — mother'},
+        {front:'Е е', back:'/e/', eng:'the “e” sound — like “elbow”', audio:'еден', answer:'e', note:'e.g. еден (eden) — one'},
+        {front:'К к', back:'/k/', eng:'the “k” sound — like “coffee”', audio:'кафе', answer:'k', note:'e.g. кафе (kafe) — coffee'},
+        {front:'М м', back:'/m/', eng:'the “m” sound — like “mother”', audio:'мама', answer:'m', note:'e.g. мама (mama) — mother'},
+        {front:'О о', back:'/o/', eng:'the “o” sound — like “ocean”', audio:'око', answer:'o', note:'e.g. око (oko) — eye'},
+        {front:'Т т', back:'/t/', eng:'the “t” sound — like “Tom”', audio:'таа', answer:'t', note:'e.g. таа (taa) — she'},
+      ]},
+    { id:'l2', unit:'Unit 1 · Learning to read', kind:'sound',
+      title:'False friends', sub:'Look like English letters, but sound different',
+      teach:`<h3>Careful — these are tricky</h3>
+        <p>These six letters look like letters you know, but they make a
+        <strong>different</strong> sound. They trip up every beginner, so give them
+        extra attention.</p>
+        <p><span class="les-key">В</span>=v · <span class="les-key">Н</span>=n ·
+        <span class="les-key">Р</span>=r · <span class="les-key">С</span>=s ·
+        <span class="les-key">У</span>=u · <span class="les-key">Х</span>=h</p>
+        <p>So <span class="les-key">Р</span> is an “r”, not a “p”, and
+        <span class="les-key">С</span> is an “s”, not a “c”.</p>`,
+      cards:[
+        {front:'В в', back:'/v/', eng:'“v” — like “very” (not w)', audio:'воз', answer:'v', note:'e.g. воз (voz) — train'},
+        {front:'Н н', back:'/n/', eng:'“n” — like “nose” (not h)', audio:'небо', answer:'n', note:'e.g. небо (nebo) — sky'},
+        {front:'Р р', back:'/r/', eng:'rolled “r” (not p)', audio:'река', answer:'r', note:'e.g. река (reka) — river'},
+        {front:'С с', back:'/s/', eng:'“s” — like “such” (not c)', audio:'сон', answer:'s', note:'e.g. сон (son) — dream'},
+        {front:'У у', back:'/u/', eng:'“u” — like “look” (not y)', audio:'уво', answer:'u', note:'e.g. уво (uvo) — ear'},
+        {front:'Х х', back:'/h/', eng:'“h” — like “Bach” (not x)', audio:'хотел', answer:'h', note:'e.g. хотел (hotel) — hotel'},
+      ]},
+    { id:'l3', unit:'Unit 1 · Learning to read', kind:'sound',
+      title:'New shapes, familiar sounds', sub:'Twelve new letters — but sounds you already know',
+      teach:`<h3>New letters, no surprises</h3>
+        <p>These twelve letters have shapes that are new to you, but each one makes a
+        sound that already exists in English. Once you match the shape to the sound,
+        they’re easy.</p>
+        <p>A few to note: <span class="les-key">Ж</span>=zh (the “s” in “pleasure”),
+        <span class="les-key">Ц</span>=ts, <span class="les-key">Ч</span>=ch,
+        <span class="les-key">Ш</span>=sh.</p>`,
+      cards:[
+        {front:'Б б', back:'/b/', eng:'“b” — like “brother”', audio:'баба', answer:'b', note:'e.g. баба (baba) — grandmother'},
+        {front:'Г г', back:'/g/', eng:'“g” — like “goat”', audio:'град', answer:'g', note:'e.g. град (grad) — city'},
+        {front:'Д д', back:'/d/', eng:'“d” — like “dog”', audio:'дом', answer:'d', note:'e.g. дом (dom) — home'},
+        {front:'Ж ж', back:'/zh/', eng:'“zh” — like “pleasure”', audio:'жаба', answer:'zh', note:'e.g. жаба (zhaba) — frog'},
+        {front:'З з', back:'/z/', eng:'“z” — like “zebra”', audio:'заб', answer:'z', note:'e.g. заб (zab) — tooth'},
+        {front:'И и', back:'/i/', eng:'“ee” — like “see”', audio:'Иво', answer:'i', note:'e.g. Иво (Ivo) — a name'},
+        {front:'Л л', back:'/l/', eng:'“l” — like “lake”', audio:'лав', answer:'l', note:'e.g. лав (lav) — lion'},
+        {front:'П п', back:'/p/', eng:'“p” — like “pizza”', audio:'пазар', answer:'p', note:'e.g. пазар (pazar) — market'},
+        {front:'Ф ф', back:'/f/', eng:'“f” — like “fountain”', audio:'кафе', answer:'f', note:'e.g. кафе (kafe) — coffee'},
+        {front:'Ц ц', back:'/ts/', eng:'“ts” — like “cats”', audio:'сонце', answer:'ts', note:'e.g. сонце (sonce) — sun'},
+        {front:'Ч ч', back:'/ch/', eng:'“ch” — like “Charlie”', audio:'чај', answer:'ch', note:'e.g. чај (chaj) — tea'},
+        {front:'Ш ш', back:'/sh/', eng:'“sh” — like “shark”', audio:'што', answer:'sh', note:'e.g. што (shto) — what'},
+      ]},
+    { id:'l4', unit:'Unit 1 · Learning to read', kind:'sound',
+      title:'Uniquely Macedonian letters', sub:'The special seven — and you can read everything',
+      teach:`<h3>The letters that make it Macedonian</h3>
+        <p>These seven letters are special to Macedonian (and its close neighbours).
+        Master them and you can read <strong>any</strong> Macedonian word.</p>
+        <p><span class="les-key">Ј</span>=y (as in “yes”), <span class="les-key">Љ</span>=ly,
+        <span class="les-key">Њ</span>=ny, <span class="les-key">Џ</span>=j (as in “John”),
+        and the soft pair <span class="les-key">Ѓ</span>/<span class="les-key">Ќ</span>.</p>`,
+      cards:[
+        {front:'Ѓ ѓ', back:'/gj/', eng:'soft “g” — like “gift”', audio:'ѓеврек', answer:'gj', note:'e.g. ѓеврек (gjevrek) — sesame ring'},
+        {front:'Ѕ ѕ', back:'/dz/', eng:'“dz” — like “kids”', audio:'ѕид', answer:'dz', note:'e.g. ѕид (dzid) — wall'},
+        {front:'Ј ј', back:'/j/', eng:'“y” — like “yes”', audio:'јога', answer:'y', note:'e.g. јога (joga) — yoga'},
+        {front:'Љ љ', back:'/lj/', eng:'soft “ly” — like “million”', audio:'љубов', answer:'ly', note:'e.g. љубов (ljubov) — love'},
+        {front:'Њ њ', back:'/nj/', eng:'soft “ny” — like “canyon”', audio:'њоки', answer:'ny', note:'e.g. њоки (njoki) — gnocchi'},
+        {front:'Ќ ќ', back:'/kj/', eng:'soft “k” — like “cute”', audio:'куќа', answer:'kj', note:'e.g. куќа (kukja) — house'},
+        {front:'Џ џ', back:'/dj/', eng:'“j” — like “John”', audio:'џуџе', answer:'dj', note:'e.g. џуџе (djudje) — gnome'},
+      ]},
+
+    // ── Unit 2 · First words ──
+    { id:'l5', unit:'Unit 2 · First words', kind:'meaning',
+      title:'Greetings', sub:'Say hello at any time of day',
+      teach:`<h3>Здраво! — Hello!</h3>
+        <p>Now that you can read, here are the greetings you’ll use every day.
+        <span class="les-key">Здраво</span> (<span class="les-lat">zdravo</span>) is a friendly
+        “hi” for anyone.</p>
+        <p>The rest change with the time of day: <span class="les-key">Добро утро</span> (morning),
+        <span class="les-key">Добар ден</span> (day), <span class="les-key">Добра вечер</span> (evening).</p>`,
+      cards:[
+        {front:'Здраво!', back:'zdravo', eng:'Hello / Hi', audio:'Здраво!', answer:'Hello / Hi'},
+        {front:'Добро утро!', back:'dobro utro', eng:'Good morning', audio:'Добро утро!', answer:'Good morning'},
+        {front:'Добар ден!', back:'dobar den', eng:'Good day', audio:'Добар ден!', answer:'Good day'},
+        {front:'Добра вечер!', back:'dobra vecher', eng:'Good evening', audio:'Добра вечер!', answer:'Good evening'},
+        {front:'Добра ноќ!', back:'dobra nokj', eng:'Good night', audio:'Добра ноќ!', answer:'Good night'},
+        {front:'Се гледаме!', back:'se gledame', eng:'See you!', audio:'Се гледаме!', answer:'See you!'},
+        {front:'Пријатно!', back:'prijatno', eng:'Take care! / Enjoy!', audio:'Пријатно!', answer:'Take care! / Enjoy!'},
+      ]},
+    { id:'l6', unit:'Unit 2 · First words', kind:'meaning',
+      title:'Please & thank you', sub:'The politeness words that open every door',
+      teach:`<h3>Благодарам — Thank you</h3>
+        <p><span class="les-key">Благодарам</span> (<span class="les-lat">blagodaram</span>) is
+        “thank you”; the shorter <span class="les-key">Фала</span> is a casual “thanks”.</p>
+        <p>Notice many words come in two forms — informal for friends, and a longer
+        <strong>formal</strong> form for strangers or elders:
+        <span class="les-key">Извини</span> / <span class="les-key">Извинете</span>,
+        <span class="les-key">Те молам</span> / <span class="les-key">Ве молам</span>.</p>`,
+      cards:[
+        {front:'Благодарам!', back:'blagodaram', eng:'Thank you', audio:'Благодарам!', answer:'Thank you'},
+        {front:'Фала!', back:'fala', eng:'Thanks (casual)', audio:'Фала!', answer:'Thanks (casual)'},
+        {front:'Нема на што!', back:'nema na shto', eng:'You’re welcome', audio:'Нема на што!', answer:'You’re welcome'},
+        {front:'Извини!', back:'izvini', eng:'Sorry (informal)', audio:'Извини!', answer:'Sorry (informal)'},
+        {front:'Извинете!', back:'izvinete', eng:'Excuse me (formal)', audio:'Извинете!', answer:'Excuse me (formal)'},
+        {front:'Нема проблем!', back:'nema problem', eng:'No problem', audio:'Нема проблем!', answer:'No problem'},
+        {front:'Те молам!', back:'te molam', eng:'Please (informal)', audio:'Те молам!', answer:'Please (informal)'},
+        {front:'Ве молам!', back:'ve molam', eng:'Please (formal)', audio:'Ве молам!', answer:'Please (formal)'},
+      ]},
+
+    // ── Unit 3 · About yourself ──
+    { id:'l7', unit:'Unit 3 · About yourself', kind:'meaning',
+      title:'“To be” & your name', sub:'Introduce yourself: Јас сум…',
+      teach:`<h3>Јас сум… — I am…</h3>
+        <p><span class="les-key">Сум</span> means “am”. To say who you are, start with
+        <span class="les-key">Јас сум…</span> (<span class="les-lat">jas sum</span>) — “I am…”.</p>
+        <p>Ask a friend’s name with <span class="les-key">Како се викаш?</span> and answer
+        <span class="les-key">Се викам…</span> (“My name is…”). When you meet someone, say
+        <span class="les-key">Мило ми е!</span> — “Nice to meet you!”</p>`,
+      cards:[
+        {front:'Јас сум…', back:'jas sum', eng:'I am…', audio:'Јас сум...', answer:'I am…'},
+        {front:'Како се викаш?', back:'kako se vikash', eng:'What’s your name? (informal)', audio:'Како се викаш?', answer:'What’s your name?'},
+        {front:'Се викам…', back:'se vikam', eng:'My name is…', audio:'Се викам...', answer:'My name is…'},
+        {front:'Мило ми е!', back:'milo mi e', eng:'Nice to meet you!', audio:'Мило ми е!', answer:'Nice to meet you!'},
+        {front:'Како си?', back:'kako si', eng:'How are you? (informal)', audio:'Како си?', answer:'How are you?'},
+        {front:'Добро сум, благодарам.', back:'dobro sum, blagodaram', eng:'I’m well, thank you.', audio:'Добро сум, благодарам.', answer:'I’m well, thank you.'},
+        {front:'А, ти?', back:'a, ti', eng:'And you? (informal)', audio:'А, ти?', answer:'And you?'},
+      ]},
+    { id:'l8', unit:'Unit 3 · About yourself', kind:'meaning',
+      title:'Where you’re from', sub:'Од каде си? — Where are you from?',
+      teach:`<h3>Од каде си? — Where are you from?</h3>
+        <p>Ask where someone is from with <span class="les-key">Од каде си?</span>
+        (<span class="les-lat">od kade si</span>) and answer
+        <span class="les-key">Јас сум од…</span> — “I am from…”.</p>
+        <p>To talk about where you live, use <span class="les-key">Каде живееш?</span>
+        (“Where do you live?”) and <span class="les-key">Живеам во…</span> (“I live in…”).</p>`,
+      cards:[
+        {front:'Од каде си?', back:'od kade si', eng:'Where are you from? (informal)', audio:'Од каде си?', answer:'Where are you from?'},
+        {front:'Јас сум од…', back:'jas sum od', eng:'I am from…', audio:'Јас сум од...', answer:'I am from…'},
+        {front:'Каде живееш?', back:'kade zhiveesh', eng:'Where do you live?', audio:'Каде живееш?', answer:'Where do you live?'},
+        {front:'Живеам во…', back:'zhiveam vo', eng:'I live in…', audio:'Живеам во...', answer:'I live in…'},
+        {front:'Од кој град си?', back:'od koj grad si', eng:'Which city are you from?', audio:'Од кој град си?', answer:'Which city are you from?'},
+        {front:'А, вие?', back:'a, vie', eng:'And you? (formal/plural)', audio:'А, вие?', answer:'And you? (formal)'},
+      ]},
+
+    // ── Unit 4 · Building sentences ──
+    { id:'l9', unit:'Unit 4 · Building sentences', kind:'meaning',
+      title:'Numbers 1–10', sub:'Еден, два, три…',
+      teach:`<h3>Еден, два, три… — One, two, three…</h3>
+        <p>Counting from one to ten. These come up constantly — prices, phone numbers,
+        how many coffees you’d like.</p>
+        <p><span class="les-key">Еден</span> (1) · <span class="les-key">два</span> (2) ·
+        <span class="les-key">три</span> (3) … all the way to
+        <span class="les-key">десет</span> (10).</p>`,
+      cards:[
+        {front:'Еден', back:'eden', eng:'one', audio:'Еден', answer:'one'},
+        {front:'Два', back:'dva', eng:'two', audio:'Два', answer:'two'},
+        {front:'Три', back:'tri', eng:'three', audio:'Три', answer:'three'},
+        {front:'Четири', back:'chetiri', eng:'four', audio:'Четири', answer:'four'},
+        {front:'Пет', back:'pet', eng:'five', audio:'Пет', answer:'five'},
+        {front:'Шест', back:'shest', eng:'six', audio:'Шест', answer:'six'},
+        {front:'Седум', back:'sedum', eng:'seven', audio:'Седум', answer:'seven'},
+        {front:'Осум', back:'osum', eng:'eight', audio:'Осум', answer:'eight'},
+        {front:'Девет', back:'devet', eng:'nine', audio:'Девет', answer:'nine'},
+        {front:'Десет', back:'deset', eng:'ten', audio:'Десет', answer:'ten'},
+      ]},
+    { id:'l10', unit:'Unit 4 · Building sentences', kind:'meaning',
+      title:'Nouns & gender', sub:'Every noun is masculine, feminine or neuter',
+      teach:`<h3>Three genders</h3>
+        <p>Every Macedonian noun has a gender. You can usually tell from the ending:</p>
+        <p><strong>Masculine</strong> — ends in a consonant: <span class="les-key">стол</span> (chair).<br>
+        <strong>Feminine</strong> — usually ends in <span class="les-lat">-а</span>:
+        <span class="les-key">книга</span> (book).<br>
+        <strong>Neuter</strong> — ends in <span class="les-lat">-о</span> or
+        <span class="les-lat">-е</span>: <span class="les-key">село</span> (village).</p>`,
+      cards:[
+        {front:'стол', back:'stol', eng:'chair', audio:'стол', answer:'chair', note:'masculine (m)'},
+        {front:'град', back:'grad', eng:'city', audio:'град', answer:'city', note:'masculine (m)'},
+        {front:'маж', back:'mazh', eng:'man', audio:'маж', answer:'man', note:'masculine (m)'},
+        {front:'книга', back:'kniga', eng:'book', audio:'книга', answer:'book', note:'feminine (f)'},
+        {front:'маса', back:'masa', eng:'table', audio:'маса', answer:'table', note:'feminine (f)'},
+        {front:'жена', back:'zhena', eng:'woman', audio:'жена', answer:'woman', note:'feminine (f)'},
+        {front:'село', back:'selo', eng:'village', audio:'село', answer:'village', note:'neuter (n)'},
+        {front:'куче', back:'kuche', eng:'dog', audio:'куче', answer:'dog', note:'neuter (n)'},
+        {front:'дете', back:'dete', eng:'child', audio:'дете', answer:'child', note:'neuter (n)'},
+      ]},
+    { id:'l11', unit:'Unit 4 · Building sentences', kind:'plural',
+      title:'Making plurals', sub:'One chair → many chairs',
+      teach:`<h3>From one to many</h3>
+        <p>Plurals follow patterns based on gender. Masculine nouns often take
+        <span class="les-lat">-ови</span> or <span class="les-lat">-и</span>, feminine take
+        <span class="les-lat">-и</span>, and neuter <span class="les-lat">-о</span> words take
+        <span class="les-lat">-а</span>.</p>
+        <p><span class="les-key">стол → столови</span> (chair → chairs),
+        <span class="les-key">книга → книги</span> (book → books),
+        <span class="les-key">село → села</span> (village → villages).</p>`,
+      cards:[
+        {front:'стол', back:'stol — chair', eng:'chair → chairs', audio:'столови', answer:'столови', note:'столови (stolovi)'},
+        {front:'град', back:'grad — city', eng:'city → cities', audio:'градови', answer:'градови', note:'градови (gradovi)'},
+        {front:'книга', back:'kniga — book', eng:'book → books', audio:'книги', answer:'книги', note:'книги (knigi)'},
+        {front:'мачка', back:'machka — cat', eng:'cat → cats', audio:'мачки', answer:'мачки', note:'мачки (machki)'},
+        {front:'село', back:'selo — village', eng:'village → villages', audio:'села', answer:'села', note:'села (sela)'},
+        {front:'куче', back:'kuche — dog', eng:'dog → dogs', audio:'кучиња', answer:'кучиња', note:'кучиња (kuchinja)'},
+      ]},
+    { id:'l12', unit:'Unit 4 · Building sentences', kind:'meaning',
+      title:'Verbs — present tense', sub:'I drink, she reads, we cook',
+      teach:`<h3>Doing things</h3>
+        <p>Macedonian verbs change their ending to match who is doing the action —
+        so the pronoun is often optional.</p>
+        <p><span class="les-key">пијам</span> = “I drink”,
+        <span class="les-key">пиеме</span> = “we drink”. Learn the endings by seeing them
+        in action below.</p>`,
+      cards:[
+        {front:'пијам', back:'pijam', eng:'I drink', audio:'пијам', answer:'I drink'},
+        {front:'чита', back:'chita', eng:'she reads', audio:'чита', answer:'she reads'},
+        {front:'готвиме', back:'gotvime', eng:'we cook', audio:'готвиме', answer:'we cook'},
+        {front:'шетам', back:'shetam', eng:'I walk', audio:'шетам', answer:'I walk'},
+        {front:'работиш', back:'rabotish', eng:'you work', audio:'работиш', answer:'you work'},
+        {front:'зборувам', back:'zboruvam', eng:'I speak', audio:'зборувам', answer:'I speak'},
+        {front:'сакам', back:'sakam', eng:'I want / I like', audio:'сакам', answer:'I want / I like'},
+        {front:'оди', back:'odi', eng:'he goes', audio:'оди', answer:'he goes'},
+      ]},
+
+    // ── Unit 5 · Out in the world ──
+    { id:'l13', unit:'Unit 5 · Out in the world', kind:'meaning',
+      title:'In the city', sub:'Streets, buildings and getting around',
+      teach:`<h3>Во градот — In the city</h3>
+        <p>Vocabulary for finding your way around town — the places you’ll point at,
+        ask for, and walk past every day.</p>`,
+      cards:[
+        {front:'град', back:'grad', eng:'city', audio:'град', answer:'city'},
+        {front:'улица', back:'ulica', eng:'street', audio:'улица', answer:'street'},
+        {front:'зграда', back:'zgrada', eng:'building', audio:'зграда', answer:'building'},
+        {front:'кола', back:'kola', eng:'car', audio:'кола', answer:'car'},
+        {front:'парк', back:'park', eng:'park', audio:'парк', answer:'park'},
+        {front:'пазар', back:'pazar', eng:'market', audio:'пазар', answer:'market'},
+        {front:'театар', back:'teatar', eng:'theatre', audio:'театар', answer:'theatre'},
+        {front:'кино', back:'kino', eng:'cinema', audio:'кино', answer:'cinema'},
+        {front:'хотел', back:'hotel', eng:'hotel', audio:'хотел', answer:'hotel'},
+        {front:'планина', back:'planina', eng:'mountain', audio:'планина', answer:'mountain'},
+      ]},
+    { id:'l14', unit:'Unit 5 · Out in the world', kind:'meaning',
+      title:'At the restaurant & café', sub:'Order food and drinks',
+      teach:`<h3>Во ресторан — At the restaurant</h3>
+        <p>The words you need to order and enjoy a meal. Pair them with
+        <span class="les-key">Те молам</span> (“please”) and
+        <span class="les-key">Благодарам</span> (“thank you”) from Unit 2.</p>`,
+      cards:[
+        {front:'кафе', back:'kafe', eng:'coffee', audio:'кафе', answer:'coffee'},
+        {front:'чај', back:'chaj', eng:'tea', audio:'чај', answer:'tea'},
+        {front:'пиво', back:'pivo', eng:'beer', audio:'пиво', answer:'beer'},
+        {front:'вино', back:'vino', eng:'wine', audio:'вино', answer:'wine'},
+        {front:'вода', back:'voda', eng:'water', audio:'вода', answer:'water'},
+        {front:'леб', back:'leb', eng:'bread', audio:'леб', answer:'bread'},
+        {front:'пица', back:'piza', eng:'pizza', audio:'пица', answer:'pizza'},
+        {front:'ресторан', back:'restoran', eng:'restaurant', audio:'ресторан', answer:'restaurant'},
+        {front:'чаша', back:'chasha', eng:'glass', audio:'чаша', answer:'glass'},
+        {front:'маса', back:'masa', eng:'table', audio:'маса', answer:'table'},
+      ]},
+  ];
+
+  const LES_PASS = 0.7;               // fraction correct needed to complete a lesson
+  const LES_DONE_KEY = 'mk_lessons_done';
+
+  function lesLoadDone() {
+    try { return new Set(JSON.parse(localStorage.getItem(LES_DONE_KEY) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function lesSaveDone() {
+    try { localStorage.setItem(LES_DONE_KEY, JSON.stringify([...lesDone])); } catch (e) {}
+  }
+  let lesDone = lesLoadDone();
+  let lesCur = -1;                    // index of lesson open in the player, or -1
+
+  function lesUnlocked(i) { return i === 0 || lesDone.has(LESSONS[i - 1].id); }
+
+  function lesRenderMap() {
+    const map = document.getElementById('les-map');
+    let html = '';
+    let curUnit = null;
+    LESSONS.forEach((les, i) => {
+      if (les.unit !== curUnit) {
+        curUnit = les.unit;
+        html += `<div class="les-unit-label">${curUnit}</div><div class="les-list">`;
+        // close previous list before opening new one (handled by simple concat below)
+      }
+      const done = lesDone.has(les.id);
+      const unlocked = lesUnlocked(i);
+      const state = done ? 'done' : (unlocked ? 'available' : 'locked');
+      const icon = done ? '✓' : (unlocked ? '▶' : '🔒');
+      const click = unlocked ? `onclick="lesOpen(${i})"` : '';
+      html += `<div class="les-row ${state}" ${click}>
+        <div class="les-status">${icon}</div>
+        <div class="les-row-body">
+          <div class="les-row-title">${les.title}</div>
+          <div class="les-row-sub">${les.sub}</div>
+        </div>
+        <div class="les-row-num">L${i + 1}</div>
+      </div>`;
+      // close the list wrapper if the next lesson starts a new unit or this is the last
+      const nextUnit = LESSONS[i + 1] ? LESSONS[i + 1].unit : null;
+      if (nextUnit !== curUnit) html += `</div>`;
+    });
+    map.innerHTML = html;
+
+    const n = lesDone.size;
+    document.getElementById('les-progress-text').textContent =
+      `${n} of ${LESSONS.length} lessons complete`;
+  }
+
+  function lesResetAll() {
+    if (!confirm('Reset all lesson progress? This clears your completed lessons.')) return;
+    lesDone = new Set();
+    lesSaveDone();
+    lesRenderMap();
+  }
+
+  function lesShowHome() {
+    document.getElementById('les-home').style.display = 'block';
+    document.getElementById('les-player').style.display = 'none';
+  }
+  function lesBackToMap() {
+    stopMkAudio();
+    lesCur = -1;
+    lesShowHome();
+    lesRenderMap();
+  }
+
+  function lesOpen(i) {
+    if (!lesUnlocked(i)) return;
+    lesCur = i;
+    const les = LESSONS[i];
+    document.getElementById('les-home').style.display = 'none';
+    document.getElementById('les-player').style.display = 'block';
+    document.getElementById('les-p-title').textContent = `L${i + 1} · ${les.title}`;
+    document.getElementById('les-p-sub').textContent = les.sub;
+    document.getElementById('les-teach-body').innerHTML = les.teach;
+    lesGotoLearn();
+  }
+
+  function lesSetPhase(name) {
+    document.getElementById('les-teach-phase').style.display = name === 'learn' ? 'block' : 'none';
+    document.getElementById('les-study-phase').style.display = name === 'study' ? 'block' : 'none';
+    document.getElementById('les-quiz-phase').style.display  = name === 'quiz'  ? 'block' : 'none';
+    ['learn', 'study', 'quiz'].forEach(p => {
+      document.getElementById('les-tab-' + p).classList.toggle('active', p === name);
+    });
+  }
+
+  function lesGotoLearn() { stopMkAudio(); lesSetPhase('learn'); }
+
+  // ── Study phase (flip cards) ──
+  let lesStudyIdx = 0;
+  function lesGotoStudy() {
+    lesSetPhase('study');
+    lesStudyIdx = 0;
+    lesStudyRender();
+  }
+  function lesStudyRender() {
+    const cards = LESSONS[lesCur].cards;
+    const card = cards[lesStudyIdx];
+    document.getElementById('les-study-card').classList.remove('flipped');
+    document.getElementById('les-study-front').textContent = card.front;
+    document.getElementById('les-study-lat').textContent = card.back;
+    document.getElementById('les-study-eng').textContent = card.eng;
+    document.getElementById('les-study-note').textContent = card.note || '';
+    document.getElementById('les-study-counter').textContent = `${lesStudyIdx + 1} / ${cards.length}`;
+    document.getElementById('les-study-bar').style.width = `${((lesStudyIdx + 1) / cards.length) * 100}%`;
+    document.getElementById('les-study-prev').disabled = lesStudyIdx === 0;
+    document.getElementById('les-study-next').disabled = lesStudyIdx === cards.length - 1;
+    // shrink long phrases so they fit the card face
+    const f = document.getElementById('les-study-front');
+    f.style.fontSize = card.front.length > 9 ? '2rem' : (card.front.length > 5 ? '2.8rem' : '4.5rem');
+  }
+  function lesStudyFlip() { document.getElementById('les-study-card').classList.toggle('flipped'); }
+  function lesStudyNav(d) {
+    stopMkAudio();
+    const cards = LESSONS[lesCur].cards;
+    lesStudyIdx = Math.max(0, Math.min(cards.length - 1, lesStudyIdx + d));
+    lesStudyRender();
+  }
+  function lesStudySpeak() {
+    const card = LESSONS[lesCur].cards[lesStudyIdx];
+    const btns = [document.getElementById('les-study-speak-f'), document.getElementById('les-study-speak-b')];
+    mkPlay(card.audio, card.back, {
+      onstart: () => btns.forEach(b => { b.classList.add('speaking'); b.textContent = '♪ …'; }),
+      ondone:  () => btns.forEach(b => { b.classList.remove('speaking'); b.textContent = '♪ Listen'; }),
+    });
+  }
+
+  // ── Quiz phase ──
+  let lesQuizDeck = [], lesQuizIdx = 0, lesQuizCorrect = 0;
+
+  function lesShuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function lesGotoQuiz() {
+    lesSetPhase('quiz');
+    const cards = LESSONS[lesCur].cards;
+    lesQuizDeck = lesShuffle(cards).slice(0, Math.min(8, cards.length));
+    lesQuizIdx = 0; lesQuizCorrect = 0;
+    document.getElementById('les-quiz-active').style.display = 'block';
+    document.getElementById('les-quiz-done').style.display = 'none';
+    lesQuizRender();
+  }
+
+  function lesQuizRender() {
+    const les = LESSONS[lesCur];
+    const q = lesQuizDeck[lesQuizIdx];
+    const total = lesQuizDeck.length;
+    document.getElementById('les-quiz-num').textContent = `Question ${lesQuizIdx + 1} / ${total}`;
+    document.getElementById('les-quiz-tally').textContent = `✓ ${lesQuizCorrect}`;
+    document.getElementById('les-quiz-bar').style.width = `${(lesQuizIdx / total) * 100}%`;
+
+    const qEl = document.getElementById('les-quiz-q');
+    qEl.textContent = q.front;
+    qEl.classList.toggle('small', q.front.length > 6);
+    // Show transliteration to aid reading — except for the alphabet (that would
+    // give the sound away).
+    document.getElementById('les-quiz-qlat').textContent = les.kind === 'sound' ? '' : q.back;
+
+    document.getElementById('les-quiz-ask').textContent =
+      les.kind === 'sound'  ? 'Which sound does this letter make?' :
+      les.kind === 'plural' ? 'What is the plural form?' :
+                              'What does this mean?';
+
+    // Build options: correct + 3 distractors drawn from this lesson's other answers
+    const others = [...new Set(les.cards.map(c => c.answer))].filter(a => a !== q.answer);
+    const opts = lesShuffle([q.answer, ...lesShuffle(others).slice(0, 3)]);
+    const box = document.getElementById('les-quiz-opts');
+    box.innerHTML = '';
+    opts.forEach(opt => {
+      const b = document.createElement('button');
+      b.className = 'les-opt';
+      b.textContent = opt;
+      b.onclick = () => lesQuizAnswer(b, opt, q.answer);
+      box.appendChild(b);
+    });
+  }
+
+  function lesQuizAnswer(btn, chosen, correct) {
+    const box = document.getElementById('les-quiz-opts');
+    [...box.children].forEach(b => {
+      b.disabled = true;
+      if (b.textContent === correct) b.classList.add('correct');
+    });
+    if (chosen === correct) { btn.classList.add('correct'); lesQuizCorrect++; }
+    else btn.classList.add('wrong');
+    // play the word so the answer sinks in
+    const q = lesQuizDeck[lesQuizIdx];
+    mkPlay(q.audio, q.back);
+    setTimeout(lesQuizAdvance, chosen === correct ? 750 : 1400);
+  }
+
+  function lesQuizAdvance() {
+    lesQuizIdx++;
+    if (lesQuizIdx >= lesQuizDeck.length) lesQuizFinish();
+    else lesQuizRender();
+  }
+
+  function lesQuizFinish() {
+    const total = lesQuizDeck.length;
+    const pct = lesQuizCorrect / total;
+    const passed = pct >= LES_PASS;
+    document.getElementById('les-quiz-active').style.display = 'none';
+    const done = document.getElementById('les-quiz-done');
+    done.style.display = 'block';
+
+    if (passed) {
+      const wasNew = !lesDone.has(LESSONS[lesCur].id);
+      lesDone.add(LESSONS[lesCur].id);
+      lesSaveDone();
+      const hasNext = lesCur + 1 < LESSONS.length;
+      const nextBtn = hasNext
+        ? `<button class="les-cta" onclick="lesOpen(${lesCur + 1})">Next lesson →</button>`
+        : `<button class="les-cta" onclick="lesBackToMap()">Back to path</button>`;
+      done.innerHTML = `<div class="les-done">
+        <div class="les-done-emoji">🎉</div>
+        <div class="les-done-title">Браво! — Well done!</div>
+        <div class="les-done-score">${lesQuizCorrect} / ${total} correct</div>
+        <div class="les-done-sub">${wasNew && hasNext ? 'Lesson complete — the next one is now unlocked.' : 'Lesson complete.'}</div>
+        <div class="les-cta-row" style="margin:0">
+          ${nextBtn}
+          <button class="les-cta secondary" style="margin-left:0.6rem" onclick="lesBackToMap()">All lessons</button>
+        </div>
+      </div>`;
+    } else {
+      done.innerHTML = `<div class="les-done">
+        <div class="les-done-emoji">💪</div>
+        <div class="les-done-title">Речиси! — Almost!</div>
+        <div class="les-done-score">${lesQuizCorrect} / ${total} correct</div>
+        <div class="les-done-sub">You need ${Math.ceil(LES_PASS * total)} of ${total} to pass. Review the cards and try again — you’ve got this.</div>
+        <div class="les-cta-row" style="margin:0">
+          <button class="les-cta" onclick="lesGotoStudy()">Review cards</button>
+          <button class="les-cta secondary" style="margin-left:0.6rem" onclick="lesGotoQuiz()">Retry quiz</button>
+        </div>
+      </div>`;
+    }
+    document.getElementById('les-quiz-bar').style.width = '100%';
+  }
+
+  function lesInit() {
+    document.getElementById('les-tab-learn').onclick = () => { if (lesCur >= 0) lesGotoLearn(); };
+    document.getElementById('les-tab-study').onclick = () => { if (lesCur >= 0) lesGotoStudy(); };
+    document.getElementById('les-tab-quiz').onclick  = () => { if (lesCur >= 0) lesGotoQuiz(); };
+    lesShowHome();
+    lesRenderMap();
+  }
+  window.addEventListener('load', lesInit);
 
 </script>
 <script>
