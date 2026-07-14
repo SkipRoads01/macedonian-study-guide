@@ -784,6 +784,97 @@
   }
   .afc-speak-btn:hover { background: var(--surface2); border-color: var(--gold); }
   .afc-speak-btn.speaking { color: var(--red); border-color: var(--red); }
+
+  /* PHRASE FLASHCARDS */
+  .pfc-front-cyr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--cyrillic);
+    line-height: 1.35;
+    user-select: none;
+  }
+  .pfc-back-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--gold);
+    line-height: 1.4;
+  }
+  .pfc-back-eng {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* NOUNS */
+  .gender-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.12rem 0.5rem;
+    border: 1px solid;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .g-m { color: #2c5f8a; border-color: #2c5f8a; }
+  .g-f { color: #c0392b; border-color: #c0392b; }
+  .g-n { color: #4a7c59; border-color: #4a7c59; }
+
+  /* Latin pronunciation key */
+  .pron-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .pron-cell {
+    background: var(--surface);
+    padding: 0.6rem 0.85rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .pron-cell:hover { background: var(--surface2); }
+  .pron-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cyrillic);
+    min-width: 1.6rem;
+  }
+  .pron-sound { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--gold); }
+  .pron-eng { font-size: 0.72rem; color: var(--muted); }
+
+  /* Noun reference table (5 cols) */
+  .noun-row { grid-template-columns: 1.1fr 1fr 1.1fr 1fr; }
+  .noun-plural { color: var(--cyrillic); }
+  .noun-plural.irregular { color: var(--red); }
+
+  /* Noun flashcard extras */
+  .nfc-badge-row { position: absolute; top: 0.9rem; left: 0.9rem; }
+  .nfc-plural-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .nfc-plural-cyr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--cyrillic);
+  }
+  .nfc-plural-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--gold-light);
+  }
+  @media (max-width: 700px) {
+    .noun-row { grid-template-columns: 1fr; }
+  }
 </style>
 <style>
 /* ── QUIZ ── */
@@ -840,6 +931,7 @@
   <button onclick="show('sum', this)">To Be — Сум</button>
   <button onclick="show('flashcards', this)">Flashcards</button>
   <button onclick="show('numbers', this)">Numbers &amp; Plurals</button>
+  <button onclick="show('nouns', this)">Nouns &amp; Именки</button>
   <button onclick="show('quiz', this)">Quiz</button>
   <button onclick="show('exercises', this)">Exercises</button>
 </nav>
@@ -951,6 +1043,62 @@
   <div class="section-title">Основни Фрази — Basic Phrases</div>
   <div class="section-sub">Greetings · Politeness · Meeting People · Questions</div>
 
+  <!-- ── Flashcard study ── -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem">Флеш-картички — Study Flashcards</div>
+  <div class="section-sub">Click a card to flip · Set aside phrases you've learned</div>
+
+  <div id="pfc-study">
+    <div class="fc-controls">
+      <div class="fc-filter" id="pfc-filter"></div>
+      <span class="fc-counter" id="pfc-counter"></span>
+    </div>
+
+    <div class="fc-filter" style="margin-bottom:1rem">
+      <button class="fc-filter-btn" onclick="pfcShuffle()">⇄ Shuffle</button>
+      <button class="fc-filter-btn" onclick="pfcReset()">Reset Order</button>
+      <button class="fc-filter-btn" id="pfc-clear-btn" onclick="pfcClearLearned()" style="display:none">↺ Reset learned (<span id="pfc-learned-count">0</span>)</button>
+    </div>
+
+    <div class="fc-progress" style="max-width:100%;margin-bottom:1.5rem">
+      <div class="fc-progress-bar" id="pfc-progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="afc-done" id="pfc-done" style="display:none">
+      <div class="afc-done-emoji">🎉</div>
+      <div class="afc-done-title">Сите научени!</div>
+      <div class="afc-done-sub" id="pfc-done-sub">You've set aside every phrase.</div>
+      <button class="fc-nav-btn" onclick="pfcClearLearned()">↺ Start over</button>
+    </div>
+
+    <div class="afc-scene" id="pfc-scene" onclick="pfcFlip()">
+      <div class="afc-card" id="pfc-card">
+        <div class="afc-face afc-front">
+          <div class="pfc-front-cyr" id="pfc-front-cyr"></div>
+          <button class="afc-speak-btn" id="pfc-speak-front" onclick="event.stopPropagation();pfcSpeak()">♪ Listen</button>
+          <span class="afc-hint">click to flip</span>
+        </div>
+        <div class="afc-face afc-back">
+          <div class="pfc-back-lat" id="pfc-back-lat"></div>
+          <div class="afc-divider"></div>
+          <div class="pfc-back-eng" id="pfc-back-eng"></div>
+          <button class="afc-speak-btn" id="pfc-speak-back" onclick="event.stopPropagation();pfcSpeak()">♪ Listen</button>
+          <span class="afc-hint" id="pfc-group-hint"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav" id="pfc-nav">
+      <button class="fc-nav-btn" id="pfc-prev" onclick="pfcNav(-1)">← Prev</button>
+      <button class="fc-nav-btn" id="pfc-next" onclick="pfcNav(1)">Next →</button>
+    </div>
+
+    <div class="afc-know-row" id="pfc-know-row">
+      <button class="afc-know-btn" onclick="pfcMarkLearned()">✓ I know this — set aside</button>
+    </div>
+  </div>
+
+  <!-- ── Reference tables ── -->
+  <div class="section-title" style="font-size:1.2rem;margin-top:2.5rem;margin-bottom:0.4rem">Сите фрази — All Phrases</div>
   <div class="col-headers">
     <div class="col-header">Македонски</div>
     <div class="col-header">Latinica</div>
@@ -1752,6 +1900,167 @@
   </div>
 </div>
 
+<!-- ─── NOUNS ─── -->
+<div id="nouns" class="section">
+  <div class="section-title">Именки — Nouns</div>
+  <div class="section-sub">Gender · Pluralization · Pronunciation · Flashcards</div>
+
+  <!-- Gender overview -->
+  <div class="nat-intro">
+    <strong>Род — Gender.</strong> Every Macedonian noun is <em>masculine</em>, <em>feminine</em>, or <em>neuter</em>. You can usually tell from the ending.
+  </div>
+  <div class="verb-groups" style="grid-template-columns:repeat(3,1fr)">
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-m">m · машки род</span></div>
+      <div class="verb-headword-eng" style="margin:0.6rem 0 0.8rem">usually ends in a <strong>consonant</strong></div>
+      <div class="conj-row"><span class="conj-cyr">стол</span><span class="conj-lat">stol</span><span class="conj-pronoun">chair</span></div>
+      <div class="conj-row"><span class="conj-cyr">град</span><span class="conj-lat">grad</span><span class="conj-pronoun">city</span></div>
+      <div class="conj-row"><span class="conj-cyr">ресторан</span><span class="conj-lat">restoran</span><span class="conj-pronoun">restaurant</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-f">f · женски род</span></div>
+      <div class="verb-headword-eng" style="margin:0.6rem 0 0.8rem">usually ends in <strong>–а</strong></div>
+      <div class="conj-row"><span class="conj-cyr">книга</span><span class="conj-lat">kniga</span><span class="conj-pronoun">book</span></div>
+      <div class="conj-row"><span class="conj-cyr">куќа</span><span class="conj-lat">kuḱa</span><span class="conj-pronoun">house</span></div>
+      <div class="conj-row"><span class="conj-cyr">вода</span><span class="conj-lat">voda</span><span class="conj-pronoun">water</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-n">n · среден род</span></div>
+      <div class="verb-headword-eng" style="margin:0.6rem 0 0.8rem">usually ends in <strong>–о</strong> or <strong>–е</strong></div>
+      <div class="conj-row"><span class="conj-cyr">пенкало</span><span class="conj-lat">penkalo</span><span class="conj-pronoun">pen</span></div>
+      <div class="conj-row"><span class="conj-cyr">море</span><span class="conj-lat">more</span><span class="conj-pronoun">sea</span></div>
+      <div class="conj-row"><span class="conj-cyr">куче</span><span class="conj-lat">kuche</span><span class="conj-pronoun">dog</span></div>
+    </div>
+  </div>
+
+  <!-- Pronunciation guide -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Изговор — Latin Pronunciation Guide</div>
+  <div class="section-sub" style="margin-bottom:1.2rem">The Cyrillic letters whose Latin spelling isn't obvious</div>
+  <div class="pron-grid">
+    <div class="pron-cell"><span class="pron-letter">ж</span><span class="pron-sound">zh</span><span class="pron-eng">plea<strong>s</strong>ure</span></div>
+    <div class="pron-cell"><span class="pron-letter">ч</span><span class="pron-sound">ch</span><span class="pron-eng"><strong>ch</strong>air</span></div>
+    <div class="pron-cell"><span class="pron-letter">ш</span><span class="pron-sound">sh</span><span class="pron-eng"><strong>sh</strong>ip</span></div>
+    <div class="pron-cell"><span class="pron-letter">ц</span><span class="pron-sound">ts</span><span class="pron-eng">ca<strong>ts</strong></span></div>
+    <div class="pron-cell"><span class="pron-letter">ѕ</span><span class="pron-sound">dz</span><span class="pron-eng">kid<strong>s</strong></span></div>
+    <div class="pron-cell"><span class="pron-letter">џ</span><span class="pron-sound">dj</span><span class="pron-eng"><strong>j</strong>am</span></div>
+    <div class="pron-cell"><span class="pron-letter">ќ</span><span class="pron-sound">kj</span><span class="pron-eng"><strong>c</strong>ute</span></div>
+    <div class="pron-cell"><span class="pron-letter">ѓ</span><span class="pron-sound">gj</span><span class="pron-eng"><strong>g</strong>ift</span></div>
+    <div class="pron-cell"><span class="pron-letter">ј</span><span class="pron-sound">j</span><span class="pron-eng"><strong>y</strong>es</span></div>
+    <div class="pron-cell"><span class="pron-letter">љ</span><span class="pron-sound">lj</span><span class="pron-eng">mi<strong>lli</strong>on</span></div>
+    <div class="pron-cell"><span class="pron-letter">њ</span><span class="pron-sound">nj</span><span class="pron-eng">ca<strong>ny</strong>on</span></div>
+    <div class="pron-cell"><span class="pron-letter">х</span><span class="pron-sound">h</span><span class="pron-eng">Ba<strong>ch</strong></span></div>
+    <div class="pron-cell"><span class="pron-letter">г</span><span class="pron-sound">g</span><span class="pron-eng"><strong>g</strong>oat (hard)</span></div>
+    <div class="pron-cell"><span class="pron-letter">р</span><span class="pron-sound">r</span><span class="pron-eng">rolled <strong>r</strong></span></div>
+  </div>
+
+  <!-- Plural patterns -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Множина — How Nouns Become Plural</div>
+  <div class="section-sub" style="margin-bottom:1.5rem">The plural ending depends on the noun's gender &amp; ending</div>
+  <div class="verb-groups" style="grid-template-columns:repeat(2,1fr)">
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-m">m</span> long words</div>
+      <div class="verb-headword">consonant → –И</div>
+      <div class="verb-headword-lat">+ i</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">ресторан</span><span class="conj-lat">restoran</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">ресторани</span><span class="conj-lat">restorani</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-m">m</span> short words</div>
+      <div class="verb-headword">consonant → –ОВИ</div>
+      <div class="verb-headword-lat">+ ovi</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">стол</span><span class="conj-lat">stol</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">столови</span><span class="conj-lat">stolovi</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-f">f</span></div>
+      <div class="verb-headword">–А → –И</div>
+      <div class="verb-headword-lat">-a → -i</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">книга</span><span class="conj-lat">kniga</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">книги</span><span class="conj-lat">knigi</span></div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label"><span class="gender-badge g-n">n</span></div>
+      <div class="verb-headword">–О → –А · –Е → –ИЊА</div>
+      <div class="verb-headword-lat">-o → -a · -e → -inja</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">пенкало</span><span class="conj-lat">penkalo</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">пенкала</span><span class="conj-lat">penkala</span></div>
+      <hr class="divider" style="margin:0.8rem 0">
+      <div class="conj-row"><span class="conj-pronoun">sg.</span><span class="conj-cyr">куче</span><span class="conj-lat">kuche</span></div>
+      <div class="conj-row"><span class="conj-pronoun">pl.</span><span class="conj-cyr">кучиња</span><span class="conj-lat">kuchinja</span></div>
+    </div>
+  </div>
+  <div class="nat-intro" style="margin-top:1.2rem">
+    <strong>Watch out for irregulars</strong> (shown in <span style="color:var(--red)">red</span> below): <em>дете → деца</em> (child → children), <em>око → очи</em> (eye → eyes), <em>уво → уши</em> (ear → ears).
+  </div>
+
+  <!-- Flashcards -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.3rem">Флеш-картички — Noun Flashcards</div>
+  <div class="section-sub">Front: the noun · Flip for pronunciation, meaning &amp; plural · Set aside what you know</div>
+
+  <div id="nfc-study">
+    <div class="fc-controls">
+      <div class="fc-filter" id="nfc-filter"></div>
+      <span class="fc-counter" id="nfc-counter"></span>
+    </div>
+
+    <div class="fc-filter" style="margin-bottom:1rem">
+      <button class="fc-filter-btn" onclick="nfcShuffle()">⇄ Shuffle</button>
+      <button class="fc-filter-btn" onclick="nfcReset()">Reset Order</button>
+      <button class="fc-filter-btn" id="nfc-clear-btn" onclick="nfcClearLearned()" style="display:none">↺ Reset learned (<span id="nfc-learned-count">0</span>)</button>
+    </div>
+
+    <div class="fc-progress" style="max-width:100%;margin-bottom:1.5rem">
+      <div class="fc-progress-bar" id="nfc-progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="afc-done" id="nfc-done" style="display:none">
+      <div class="afc-done-emoji">🎉</div>
+      <div class="afc-done-title">Сите научени!</div>
+      <div class="afc-done-sub" id="nfc-done-sub">You've set aside every noun.</div>
+      <button class="fc-nav-btn" onclick="nfcClearLearned()">↺ Start over</button>
+    </div>
+
+    <div class="afc-scene" id="nfc-scene" onclick="nfcFlip()">
+      <div class="afc-card" id="nfc-card">
+        <div class="afc-face afc-front">
+          <div class="nfc-badge-row" id="nfc-front-badge"></div>
+          <div class="pfc-front-cyr" id="nfc-front-cyr"></div>
+          <button class="afc-speak-btn" id="nfc-speak-front" onclick="event.stopPropagation();nfcSpeak('sg')">♪ Listen</button>
+          <span class="afc-hint">click to flip</span>
+        </div>
+        <div class="afc-face afc-back">
+          <div class="nfc-badge-row" id="nfc-back-badge"></div>
+          <div class="pfc-back-lat" id="nfc-back-lat"></div>
+          <div class="pfc-back-eng" id="nfc-back-eng"></div>
+          <div class="afc-divider"></div>
+          <div class="nfc-plural-label">Множина — Plural</div>
+          <div class="nfc-plural-cyr" id="nfc-plural-cyr"></div>
+          <div class="nfc-plural-lat" id="nfc-plural-lat"></div>
+          <button class="afc-speak-btn" id="nfc-speak-back" onclick="event.stopPropagation();nfcSpeak('pl')">♪ Plural</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav" id="nfc-nav">
+      <button class="fc-nav-btn" id="nfc-prev" onclick="nfcNav(-1)">← Prev</button>
+      <button class="fc-nav-btn" id="nfc-next" onclick="nfcNav(1)">Next →</button>
+    </div>
+
+    <div class="afc-know-row" id="nfc-know-row">
+      <button class="afc-know-btn" onclick="nfcMarkLearned()">✓ I know this — set aside</button>
+    </div>
+  </div>
+
+  <!-- Reference table -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Речник — Noun Reference</div>
+  <div class="section-sub" style="margin-bottom:1.2rem">Singular · Latin · Plural · English — grouped by gender</div>
+  <div id="noun-table"></div>
+</div>
+
 <!-- ─── QUIZ ─── -->
 <div id="quiz" class="section">
   <div class="section-title">Квиз — Quiz</div>
@@ -1764,6 +2073,7 @@
       <button class="quiz-sel-btn active" onclick="qPick('cat','all',this)">All</button>
       <button class="quiz-sel-btn" onclick="qPick('cat','numbers',this)">Numbers</button>
       <button class="quiz-sel-btn" onclick="qPick('cat','vocab',this)">Vocabulary</button>
+      <button class="quiz-sel-btn" onclick="qPick('cat','nouns',this)">Nouns</button>
       <button class="quiz-sel-btn" onclick="qPick('cat','plurals',this)">Plurals</button>
       <button class="quiz-sel-btn" onclick="qPick('cat','verbs',this)">Verbs</button>
     </div>
@@ -1933,8 +2243,13 @@
   const searchIndex = [];
 
   function buildIndex() {
-    // Phrase rows (3-cell rows)
+    // Idempotent: several load handlers call this, so start from a clean slate.
+    searchIndex.length = 0;
+
+    // Phrase rows (3-cell rows). Skip the noun table's rows — they're 4-cell
+    // and indexed separately from the NOUNS dataset below.
     document.querySelectorAll('.phrase-row').forEach(row => {
+      if (row.classList.contains('noun-row')) return;
       const cells = row.querySelectorAll('.phrase-cell');
       if (cells.length >= 3) {
         searchIndex.push({
@@ -1986,6 +2301,16 @@
       const lat = cell.querySelector('.sum-lat')?.textContent || '';
       const eng = cell.querySelector('.sum-eng')?.textContent || '';
       if (cyr) searchIndex.push({ type: 'sum', cyr, lat, eng, group: 'Сум — To Be', section: 'sum' });
+    });
+
+    // Nouns — index both singular and plural forms (from the NOUNS dataset,
+    // so search covers them even though the table is rendered after this runs).
+    const GENDER_NAME = { m: 'masculine', f: 'feminine', n: 'neuter' };
+    NOUNS.forEach(n => {
+      searchIndex.push({ type: 'noun', cyr: n.cyr, lat: n.lat,
+        eng: `${n.eng} · ${GENDER_NAME[n.g]} noun`, group: 'Nouns — Именки', section: 'nouns' });
+      searchIndex.push({ type: 'noun', cyr: n.plCyr, lat: n.plLat,
+        eng: `${n.eng} (plural)`, group: 'Nouns — Именки', section: 'nouns' });
     });
 
     // Exercise blocks
@@ -2252,7 +2577,392 @@
     document.getElementById('fc-progress-bar').style.width = `${((fcIndex + 1) / fcDeck.length) * 100}%`;
   }
 
-  window.addEventListener('load', () => { buildIndex(); fcRender(); afcRender(); });
+  window.addEventListener('load', () => { buildIndex(); fcRender(); afcRender(); pfcInit(); nfcInit(); });
+
+  // ── Phrase flashcards ──
+  // The deck is built from the phrase rows already on the page, so there's no
+  // duplicated data — any phrase added to the tables shows up here automatically.
+  // Cards marked "learned" are set aside and persist across visits (localStorage).
+  const PFC_LEARNED_KEY = 'mk_pfc_learned';
+  let pfcLearned = pfcLoadLearned();
+  let PFC_ALL = [];        // every phrase card, from the DOM
+  let pfcGroups = [];      // unique group names, in page order
+  let pfcFilterVal = 'all';
+  let pfcDeck = [];
+  let pfcIndex = 0;
+
+  function pfcLoadLearned() {
+    try { return new Set(JSON.parse(localStorage.getItem(PFC_LEARNED_KEY) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function pfcSaveLearned() {
+    try { localStorage.setItem(PFC_LEARNED_KEY, JSON.stringify([...pfcLearned])); } catch (e) {}
+  }
+
+  function pfcInit() {
+    const sec = document.getElementById('phrases');
+    if (!sec) return;
+    PFC_ALL = [];
+    pfcGroups = [];
+    sec.querySelectorAll('.phrase-group').forEach(g => {
+      const gname = (g.querySelector('.phrase-group-title')?.textContent || '').trim();
+      if (gname && !pfcGroups.includes(gname)) pfcGroups.push(gname);
+      g.querySelectorAll('.phrase-row').forEach(row => {
+        const cyr = (row.querySelector('.cyr')?.textContent || '').trim();
+        const lat = (row.querySelector('.lat')?.textContent || '').trim();
+        const eng = (row.querySelector('.eng')?.textContent || '').trim();
+        if (cyr) PFC_ALL.push({ cyr, lat, eng, group: gname });
+      });
+    });
+    pfcBuildFilters();
+    pfcApplyFilter();
+  }
+
+  // Short label for a group title like "Поздрави — Greetings" → "Greetings".
+  function pfcShortLabel(g) {
+    const parts = g.split('—');
+    return (parts[1] || parts[0]).trim();
+  }
+
+  function pfcBuildFilters() {
+    const wrap = document.getElementById('pfc-filter');
+    wrap.innerHTML = '';
+    const mk = (label, val) => {
+      const b = document.createElement('button');
+      b.className = 'fc-filter-btn' + (val === pfcFilterVal ? ' active' : '');
+      b.textContent = label;
+      b.onclick = () => pfcFilter(val, b);
+      wrap.appendChild(b);
+    };
+    mk('All', 'all');
+    pfcGroups.forEach(g => mk(pfcShortLabel(g), g));
+  }
+
+  // The working deck = phrases matching the active group filter, minus learned.
+  function pfcApplyFilter() {
+    pfcDeck = PFC_ALL.filter(c =>
+      !pfcLearned.has(c.cyr) && (pfcFilterVal === 'all' || c.group === pfcFilterVal));
+    pfcIndex = 0;
+    document.getElementById('pfc-card').classList.remove('flipped');
+    pfcRender();
+  }
+
+  function pfcFilter(val, btn) {
+    document.querySelectorAll('#pfc-filter .fc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    pfcFilterVal = val;
+    pfcApplyFilter();
+  }
+
+  function pfcRender() {
+    const n = pfcLearned.size;
+    document.getElementById('pfc-learned-count').textContent = n;
+    document.getElementById('pfc-clear-btn').style.display = n > 0 ? '' : 'none';
+
+    // Nothing left in this filter → celebratory empty state.
+    const done = pfcDeck.length === 0;
+    document.getElementById('pfc-scene').style.display = done ? 'none' : '';
+    document.getElementById('pfc-nav').style.display = done ? 'none' : '';
+    document.getElementById('pfc-know-row').style.display = done ? 'none' : '';
+    document.getElementById('pfc-done').style.display = done ? 'block' : 'none';
+    if (done) {
+      document.getElementById('pfc-counter').textContent = '';
+      document.getElementById('pfc-progress-bar').style.width = '100%';
+      document.getElementById('pfc-done-sub').textContent = pfcFilterVal === 'all'
+        ? "You've set aside every phrase."
+        : "You've set aside every phrase in this group.";
+      return;
+    }
+
+    const card = pfcDeck[pfcIndex];
+    document.getElementById('pfc-front-cyr').textContent = card.cyr;
+    document.getElementById('pfc-back-lat').textContent = card.lat;
+    document.getElementById('pfc-back-eng').textContent = card.eng;
+    document.getElementById('pfc-group-hint').textContent = card.group ? pfcShortLabel(card.group) : '';
+    const counter = n > 0
+      ? `${pfcIndex + 1} / ${pfcDeck.length} · ${n} learned`
+      : `${pfcIndex + 1} / ${pfcDeck.length}`;
+    document.getElementById('pfc-counter').textContent = counter;
+    document.getElementById('pfc-prev').disabled = pfcIndex === 0;
+    document.getElementById('pfc-next').disabled = pfcIndex === pfcDeck.length - 1;
+    document.getElementById('pfc-progress-bar').style.width = `${((pfcIndex + 1) / pfcDeck.length) * 100}%`;
+  }
+
+  function pfcFlip() {
+    document.getElementById('pfc-card').classList.toggle('flipped');
+  }
+
+  function pfcNav(dir) {
+    pfcIndex = Math.max(0, Math.min(pfcDeck.length - 1, pfcIndex + dir));
+    document.getElementById('pfc-card').classList.remove('flipped');
+    setTimeout(pfcRender, 10);
+  }
+
+  // Set the current phrase aside as "learned"; deck advances to the next card.
+  function pfcMarkLearned() {
+    if (!pfcDeck.length) return;
+    pfcLearned.add(pfcDeck[pfcIndex].cyr);
+    pfcSaveLearned();
+    pfcDeck.splice(pfcIndex, 1);
+    if (pfcIndex > pfcDeck.length - 1) pfcIndex = Math.max(0, pfcDeck.length - 1);
+    document.getElementById('pfc-card').classList.remove('flipped');
+    pfcRender();
+  }
+
+  // Empty the learned pile and rebuild the deck for the current filter.
+  function pfcClearLearned() {
+    pfcLearned.clear();
+    pfcSaveLearned();
+    pfcApplyFilter();
+  }
+
+  function pfcShuffle() {
+    for (let i = pfcDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pfcDeck[i], pfcDeck[j]] = [pfcDeck[j], pfcDeck[i]];
+    }
+    pfcIndex = 0;
+    document.getElementById('pfc-card').classList.remove('flipped');
+    pfcRender();
+  }
+
+  function pfcReset() {
+    pfcApplyFilter();
+  }
+
+  function pfcSpeak() {
+    const card = pfcDeck[pfcIndex];
+    if (!card) return;
+    const flipped = document.getElementById('pfc-card').classList.contains('flipped');
+    const btn = document.getElementById(flipped ? 'pfc-speak-back' : 'pfc-speak-front');
+    mkPlay(card.cyr, card.lat, {
+      onstart: () => { btn.classList.add('speaking'); btn.textContent = '♪ …'; },
+      ondone:  () => { btn.classList.remove('speaking'); btn.textContent = '♪ Listen'; },
+    });
+  }
+
+  // ── Nouns ──
+  // One dataset drives both the reference table and the flashcards.
+  // g = gender (m/f/n); irr flags an irregular plural (shown in red).
+  const NOUNS = [
+    // Masculine — usually end in a consonant
+    { cyr:'стол',     lat:'stol',     g:'m', plCyr:'столови',   plLat:'stolovi',   eng:'chair' },
+    { cyr:'град',     lat:'grad',     g:'m', plCyr:'градови',   plLat:'gradovi',   eng:'city' },
+    { cyr:'парк',     lat:'park',     g:'m', plCyr:'паркови',   plLat:'parkovi',   eng:'park' },
+    { cyr:'стан',     lat:'stan',     g:'m', plCyr:'станови',   plLat:'stanovi',   eng:'apartment' },
+    { cyr:'дом',      lat:'dom',      g:'m', plCyr:'домови',    plLat:'domovi',    eng:'home' },
+    { cyr:'воз',      lat:'voz',      g:'m', plCyr:'возови',    plLat:'vozovi',    eng:'train' },
+    { cyr:'леб',      lat:'leb',      g:'m', plCyr:'лебови',    plLat:'lebovi',    eng:'bread' },
+    { cyr:'ресторан', lat:'restoran', g:'m', plCyr:'ресторани', plLat:'restorani', eng:'restaurant' },
+    { cyr:'телефон',  lat:'telefon',  g:'m', plCyr:'телефони',  plLat:'telefoni',  eng:'telephone' },
+    { cyr:'студент',  lat:'student',  g:'m', plCyr:'студенти',  plLat:'studenti',  eng:'student' },
+    { cyr:'пазар',    lat:'pazar',    g:'m', plCyr:'пазари',    plLat:'pazari',    eng:'market' },
+    { cyr:'хотел',    lat:'hotel',    g:'m', plCyr:'хотели',    plLat:'hoteli',    eng:'hotel' },
+    { cyr:'театар',   lat:'teatar',   g:'m', plCyr:'театри',    plLat:'teatri',    eng:'theatre' },
+    { cyr:'маж',      lat:'mazh',     g:'m', plCyr:'мажи',      plLat:'mazhi',     eng:'man / husband' },
+    // Feminine — usually end in -а
+    { cyr:'мачка',    lat:'machka',   g:'f', plCyr:'мачки',     plLat:'machki',    eng:'cat' },
+    { cyr:'книга',    lat:'kniga',    g:'f', plCyr:'книги',     plLat:'knigi',     eng:'book' },
+    { cyr:'куќа',     lat:'kuḱa',     g:'f', plCyr:'куќи',      plLat:'kuḱi',      eng:'house' },
+    { cyr:'маса',     lat:'masa',     g:'f', plCyr:'маси',      plLat:'masi',      eng:'table' },
+    { cyr:'зграда',   lat:'zgrada',   g:'f', plCyr:'згради',    plLat:'zgradi',    eng:'building' },
+    { cyr:'кола',     lat:'kola',     g:'f', plCyr:'коли',      plLat:'koli',      eng:'car' },
+    { cyr:'река',     lat:'reka',     g:'f', plCyr:'реки',      plLat:'reki',      eng:'river' },
+    { cyr:'вода',     lat:'voda',     g:'f', plCyr:'води',      plLat:'vodi',      eng:'water' },
+    { cyr:'жена',     lat:'zhena',    g:'f', plCyr:'жени',      plLat:'zheni',     eng:'woman / wife' },
+    { cyr:'чаша',     lat:'chasha',   g:'f', plCyr:'чаши',      plLat:'chashi',    eng:'glass' },
+    { cyr:'пица',     lat:'pica',     g:'f', plCyr:'пици',      plLat:'pici',      eng:'pizza' },
+    { cyr:'улица',    lat:'ulica',    g:'f', plCyr:'улици',     plLat:'ulici',     eng:'street' },
+    { cyr:'планина',  lat:'planina',  g:'f', plCyr:'планини',   plLat:'planini',   eng:'mountain' },
+    // Neuter — usually end in -о or -е
+    { cyr:'пенкало',  lat:'penkalo',  g:'n', plCyr:'пенкала',   plLat:'penkala',   eng:'pen' },
+    { cyr:'кино',     lat:'kino',     g:'n', plCyr:'кина',      plLat:'kina',      eng:'cinema' },
+    { cyr:'село',     lat:'selo',     g:'n', plCyr:'села',      plLat:'sela',      eng:'village' },
+    { cyr:'езеро',    lat:'ezero',    g:'n', plCyr:'езера',     plLat:'ezera',     eng:'lake' },
+    { cyr:'море',     lat:'more',     g:'n', plCyr:'мориња',    plLat:'morinja',   eng:'sea' },
+    { cyr:'куче',     lat:'kuche',    g:'n', plCyr:'кучиња',    plLat:'kuchinja',  eng:'dog' },
+    { cyr:'кафе',     lat:'kafe',     g:'n', plCyr:'кафиња',    plLat:'kafinja',   eng:'coffee' },
+    { cyr:'шише',     lat:'shishe',   g:'n', plCyr:'шишиња',    plLat:'shishinja', eng:'bottle' },
+    { cyr:'маче',     lat:'mache',    g:'n', plCyr:'мачиња',    plLat:'machinja',  eng:'kitten' },
+    { cyr:'дете',     lat:'dete',     g:'n', plCyr:'деца',      plLat:'deca',      eng:'child', irr:true },
+    { cyr:'око',      lat:'oko',      g:'n', plCyr:'очи',       plLat:'ochi',      eng:'eye', irr:true },
+    { cyr:'уво',      lat:'uvo',      g:'n', plCyr:'уши',       plLat:'ushi',      eng:'ear', irr:true },
+  ];
+
+  const NOUN_GENDER_GROUPS = [
+    ['m', 'Машки род — Masculine'],
+    ['f', 'Женски род — Feminine'],
+    ['n', 'Среден род — Neuter'],
+  ];
+  function nfcBadgeHtml(g) {
+    const label = g === 'm' ? 'm · машки' : g === 'f' ? 'f · женски' : 'n · среден';
+    return `<span class="gender-badge g-${g}">${label}</span>`;
+  }
+
+  // Reference table, grouped by gender.
+  function nounRenderTable() {
+    const wrap = document.getElementById('noun-table');
+    if (!wrap) return;
+    let html = '';
+    NOUN_GENDER_GROUPS.forEach(([g, title]) => {
+      html += `<div class="phrase-group"><div class="phrase-group-title">${title}</div>`;
+      html += `<div class="col-headers noun-row"><div class="col-header">Singular</div><div class="col-header">Latinica</div><div class="col-header">Plural</div><div class="col-header">English</div></div>`;
+      NOUNS.filter(n => n.g === g).forEach(n => {
+        html += `<div class="phrase-row noun-row">`
+          + `<div class="phrase-cell cyr">${n.cyr}</div>`
+          + `<div class="phrase-cell lat">${n.lat}</div>`
+          + `<div class="phrase-cell cyr noun-plural${n.irr ? ' irregular' : ''}">${n.plCyr} `
+          + `<span style="font-size:.72rem;color:var(--gold-light);font-family:'IBM Plex Mono',monospace">${n.plLat}</span></div>`
+          + `<div class="phrase-cell eng">${n.eng}</div>`
+          + `</div>`;
+      });
+      html += `</div>`;
+    });
+    wrap.innerHTML = html;
+  }
+
+  // Noun flashcards — same "learned pile" model as the alphabet & phrase cards.
+  const NFC_LEARNED_KEY = 'mk_nfc_learned';
+  let nfcLearned = nfcLoadLearned();
+  let nfcFilterVal = 'all';
+  let nfcDeck = [];
+  let nfcIndex = 0;
+
+  function nfcLoadLearned() {
+    try { return new Set(JSON.parse(localStorage.getItem(NFC_LEARNED_KEY) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function nfcSaveLearned() {
+    try { localStorage.setItem(NFC_LEARNED_KEY, JSON.stringify([...nfcLearned])); } catch (e) {}
+  }
+
+  function nfcInit() {
+    nounRenderTable();
+    nfcBuildFilters();
+    nfcApplyFilter();
+  }
+
+  function nfcBuildFilters() {
+    const wrap = document.getElementById('nfc-filter');
+    wrap.innerHTML = '';
+    const mk = (label, val) => {
+      const b = document.createElement('button');
+      b.className = 'fc-filter-btn' + (val === nfcFilterVal ? ' active' : '');
+      b.textContent = label;
+      b.onclick = () => nfcFilter(val, b);
+      wrap.appendChild(b);
+    };
+    mk('All', 'all');
+    mk('Masculine', 'm');
+    mk('Feminine', 'f');
+    mk('Neuter', 'n');
+  }
+
+  function nfcApplyFilter() {
+    nfcDeck = NOUNS.filter(n =>
+      !nfcLearned.has(n.cyr) && (nfcFilterVal === 'all' || n.g === nfcFilterVal));
+    nfcIndex = 0;
+    document.getElementById('nfc-card').classList.remove('flipped');
+    nfcRender();
+  }
+
+  function nfcFilter(val, btn) {
+    document.querySelectorAll('#nfc-filter .fc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    nfcFilterVal = val;
+    nfcApplyFilter();
+  }
+
+  function nfcRender() {
+    const n = nfcLearned.size;
+    document.getElementById('nfc-learned-count').textContent = n;
+    document.getElementById('nfc-clear-btn').style.display = n > 0 ? '' : 'none';
+
+    const done = nfcDeck.length === 0;
+    document.getElementById('nfc-scene').style.display = done ? 'none' : '';
+    document.getElementById('nfc-nav').style.display = done ? 'none' : '';
+    document.getElementById('nfc-know-row').style.display = done ? 'none' : '';
+    document.getElementById('nfc-done').style.display = done ? 'block' : 'none';
+    if (done) {
+      document.getElementById('nfc-counter').textContent = '';
+      document.getElementById('nfc-progress-bar').style.width = '100%';
+      document.getElementById('nfc-done-sub').textContent = nfcFilterVal === 'all'
+        ? "You've set aside every noun."
+        : "You've set aside every noun in this gender.";
+      return;
+    }
+
+    const card = nfcDeck[nfcIndex];
+    const badge = nfcBadgeHtml(card.g);
+    document.getElementById('nfc-front-badge').innerHTML = badge;
+    document.getElementById('nfc-back-badge').innerHTML = badge;
+    document.getElementById('nfc-front-cyr').textContent = card.cyr;
+    document.getElementById('nfc-back-lat').textContent = card.lat;
+    document.getElementById('nfc-back-eng').textContent = card.eng;
+    const plCyr = document.getElementById('nfc-plural-cyr');
+    plCyr.textContent = card.plCyr;
+    plCyr.classList.toggle('irregular', !!card.irr);
+    document.getElementById('nfc-plural-lat').textContent = card.plLat + (card.irr ? '  · irregular' : '');
+    const counter = n > 0
+      ? `${nfcIndex + 1} / ${nfcDeck.length} · ${n} learned`
+      : `${nfcIndex + 1} / ${nfcDeck.length}`;
+    document.getElementById('nfc-counter').textContent = counter;
+    document.getElementById('nfc-prev').disabled = nfcIndex === 0;
+    document.getElementById('nfc-next').disabled = nfcIndex === nfcDeck.length - 1;
+    document.getElementById('nfc-progress-bar').style.width = `${((nfcIndex + 1) / nfcDeck.length) * 100}%`;
+  }
+
+  function nfcFlip() {
+    document.getElementById('nfc-card').classList.toggle('flipped');
+  }
+
+  function nfcNav(dir) {
+    nfcIndex = Math.max(0, Math.min(nfcDeck.length - 1, nfcIndex + dir));
+    document.getElementById('nfc-card').classList.remove('flipped');
+    setTimeout(nfcRender, 10);
+  }
+
+  function nfcMarkLearned() {
+    if (!nfcDeck.length) return;
+    nfcLearned.add(nfcDeck[nfcIndex].cyr);
+    nfcSaveLearned();
+    nfcDeck.splice(nfcIndex, 1);
+    if (nfcIndex > nfcDeck.length - 1) nfcIndex = Math.max(0, nfcDeck.length - 1);
+    document.getElementById('nfc-card').classList.remove('flipped');
+    nfcRender();
+  }
+
+  function nfcClearLearned() {
+    nfcLearned.clear();
+    nfcSaveLearned();
+    nfcApplyFilter();
+  }
+
+  function nfcShuffle() {
+    for (let i = nfcDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [nfcDeck[i], nfcDeck[j]] = [nfcDeck[j], nfcDeck[i]];
+    }
+    nfcIndex = 0;
+    document.getElementById('nfc-card').classList.remove('flipped');
+    nfcRender();
+  }
+
+  function nfcReset() {
+    nfcApplyFilter();
+  }
+
+  function nfcSpeak(which) {
+    const card = nfcDeck[nfcIndex];
+    if (!card) return;
+    const isPl = which === 'pl';
+    const btn = document.getElementById(isPl ? 'nfc-speak-back' : 'nfc-speak-front');
+    const label = isPl ? '♪ Plural' : '♪ Listen';
+    mkPlay(isPl ? card.plCyr : card.cyr, isPl ? card.plLat : card.lat, {
+      onstart: () => { btn.classList.add('speaking'); btn.textContent = '♪ …'; },
+      ondone:  () => { btn.classList.remove('speaking'); btn.textContent = label; },
+    });
+  }
 
   // ── Alphabet flashcard data ──
   const AFC_DATA = [
@@ -2550,6 +3260,8 @@
     {mk:'Јас + сака',lat:'jas + saka',ans:'сакам',ansLat:'sakam',eng:'I want'},
     {mk:'Ние + пие',lat:'nie + pie',ans:'пиеме',ansLat:'pieme',eng:'we drink'},
   ];
+  // Derived from the single NOUNS dataset so the quiz stays in sync automatically.
+  const Q_NOUNS = NOUNS.map(n => ({ mk: n.cyr, lat: n.lat, eng: n.eng }));
 
   let qCat = 'all', qMode = 'read';
   let qDeck = [], qIdx = 0, qCorrect = 0, qCurrent = null;
@@ -2575,6 +3287,7 @@
     let pool = [];
     if (qCat==='all'||qCat==='numbers') pool.push(...Q_NUMS.map(q=>({...q,cat:'numbers'})));
     if (qCat==='all'||qCat==='vocab')   pool.push(...Q_VOCAB.map(q=>({...q,cat:'vocab'})));
+    if (qCat==='all'||qCat==='nouns')   pool.push(...Q_NOUNS.map(q=>({...q,cat:'nouns'})));
     if (qCat==='all'||qCat==='plurals') pool.push(...Q_PLURALS.map(q=>({...q,cat:'plurals'})));
     if (qCat==='all'||qCat==='verbs')   pool.push(...Q_VERBS.map(q=>({...q,cat:'verbs'})));
     return qShuffle(pool).slice(0, 10);
@@ -2624,7 +3337,7 @@
   }
 
   function qBuildOptions(type, correct) {
-    const allPool = [...Q_NUMS, ...Q_VOCAB, ...Q_PLURALS, ...Q_VERBS];
+    const allPool = [...Q_NUMS, ...Q_VOCAB, ...Q_NOUNS, ...Q_PLURALS, ...Q_VERBS];
     let pool;
     if (type === 'eng') {
       pool = [...new Set(allPool.map(q => q.eng))].filter(e => e && e !== correct);
