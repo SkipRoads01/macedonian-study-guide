@@ -1097,8 +1097,7 @@
 </header>
 
 <nav>
-  <button class="nav-lessons active" onclick="show('lessons', this)">Lessons</button>
-  <button onclick="show('alphabet', this)">Alphabet</button>
+  <button class="active" onclick="show('alphabet', this)">Alphabet</button>
   <button onclick="show('alpha-cards', this)">ABC Cards</button>
   <button onclick="show('phrases', this)">Phrases</button>
   <button onclick="show('restaurant', this)">Restaurant &amp; Café</button>
@@ -1110,6 +1109,7 @@
   <button onclick="show('nouns', this)">Nouns &amp; Именки</button>
   <button onclick="show('quiz', this)">Quiz</button>
   <button onclick="show('exercises', this)">Exercises</button>
+  <button class="nav-lessons" onclick="show('lessons', this)">Lessons</button>
 </nav>
 
 <div class="search-bar">
@@ -1122,7 +1122,7 @@
 <main>
 
 <!-- ─── GUIDED LESSONS ─── -->
-<div id="lessons" class="section active">
+<div id="lessons" class="section">
   <!-- Home: the lesson path -->
   <div id="les-home">
     <div class="section-title">Патека — Your Learning Path</div>
@@ -1221,7 +1221,7 @@
 </div>
 
 <!-- ─── ALPHABET ─── -->
-<div id="alphabet" class="section">
+<div id="alphabet" class="section active">
   <div class="section-title">Кирилица — The Cyrillic Alphabet</div>
   <div class="section-sub">31 letters · Macedonian Cyrillic</div>
   <div class="alpha-grid">
@@ -3735,7 +3735,7 @@
         {front:'Т т', back:'/t/', eng:'the “t” sound — like “Tom”', audio:'таа', answer:'t', note:'e.g. таа (taa) — she'},
       ]},
     { id:'l2', unit:'Unit 1 · Learning to read', kind:'sound',
-      title:'False friends', sub:'Look like English letters, but sound different',
+      title:'Look-alike letters', sub:'Look like Latin letters, but sound different',
       teach:`<h3>Careful — these are tricky</h3>
         <p>These six letters look like letters you know, but they make a
         <strong>different</strong> sound. They trip up every beginner, so give them
