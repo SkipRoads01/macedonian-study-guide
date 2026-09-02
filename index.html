@@ -991,10 +991,10 @@
     font-size: 1.5rem; margin-bottom: 0.8rem; color: var(--text);
   }
   .les-teach p { margin-bottom: 0.8rem; color: var(--text); }
-  .les-teach .les-key {
+  .les-key {
     font-family: 'Playfair Display', serif; color: var(--cyrillic); font-size: 1.1em;
   }
-  .les-teach .les-lat { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 0.9em; }
+  .les-lat { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 0.9em; }
   .les-cta-row { text-align: center; margin: 1.8rem 0; }
   .les-cta {
     background: var(--gold); color: #fff; border: none;
@@ -1102,6 +1102,7 @@
   <button onclick="show('phrases', this)">Phrases</button>
   <button onclick="show('restaurant', this)">Restaurant &amp; Café</button>
   <button onclick="show('travel', this)">Travel</button>
+  <button onclick="show('city', this)">City &amp; Directions</button>
   <button onclick="show('nationalities', this)">Nationalities</button>
   <button onclick="show('verbs', this)">Verbs</button>
   <button onclick="show('sum', this)">To Be — Сум</button>
@@ -1135,7 +1136,7 @@
       about yourself, then the grammar to build real sentences. Everything else in the top menu is
       your <strong>reference guide</strong> — dip into it any time.
       <div class="les-progress-summary">
-        <span id="les-progress-text">0 of 14 lessons complete</span>
+        <span id="les-progress-text">0 of 16 lessons complete</span>
         <button class="les-reset-btn" onclick="lesResetAll()">↺ Reset progress</button>
       </div>
     </div>
@@ -1682,6 +1683,318 @@
   </div>
 </div>
 
+<!-- ─── CITY & DIRECTIONS ─── -->
+<div id="city" class="section">
+  <div class="section-title">Во градот — City &amp; Directions</div>
+  <div class="section-sub">Places on the map · „The“ on the end · Asking the way · Weather</div>
+
+  <div class="nat-intro">
+    <strong>Мапа на Скопје — Центар.</strong> This lesson works from a map of central Skopje.
+    First learn the <em>places</em>, then stick <strong>„the“</strong> on the end of them, then ask
+    a stranger how to get there. Everything below is the vocabulary you need for that.
+  </div>
+
+  <!-- ── Places ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Места — Places</div>
+  <div class="section-sub" style="margin-bottom:1.2rem">Find these on the map · the gender badge tells you which ending „the“ takes</div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Најди неколку места — Find a few places</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🏨 хотел</div><div class="phrase-cell lat">hotel</div><div class="phrase-cell eng">hotel <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">⛪ црква</div><div class="phrase-cell lat">crkva</div><div class="phrase-cell eng">church <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🌳 парк</div><div class="phrase-cell lat">park</div><div class="phrase-cell eng">park <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🦁 зоолошка градина</div><div class="phrase-cell lat">zooloshka gradina</div><div class="phrase-cell eng">zoo (lit. “zoological garden”) <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🍽 ресторан</div><div class="phrase-cell lat">restoran</div><div class="phrase-cell eng">restaurant <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🍷 кафана</div><div class="phrase-cell lat">kafana</div><div class="phrase-cell eng">tavern — food, drink &amp; live music <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">☕ кафуле</div><div class="phrase-cell lat">kafule</div><div class="phrase-cell eng">café <span class="gender-badge g-n">n</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🏛 музеј</div><div class="phrase-cell lat">muzej</div><div class="phrase-cell eng">museum <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🏙 плоштад</div><div class="phrase-cell lat">ploshtad</div><div class="phrase-cell eng">square (the main square) <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🏰 тврдина</div><div class="phrase-cell lat">tvrdina</div><div class="phrase-cell eng">fortress <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🚌 автобуска станица</div><div class="phrase-cell lat">avtobuska stanica</div><div class="phrase-cell eng">bus station <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🛍 чаршија</div><div class="phrase-cell lat">charshija</div><div class="phrase-cell eng">old bazaar quarter <span class="gender-badge g-f">f</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🥬 пазар</div><div class="phrase-cell lat">pazar</div><div class="phrase-cell eng">market (open-air) <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🛒 маркет</div><div class="phrase-cell lat">market</div><div class="phrase-cell eng">supermarket / corner shop <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">🚉 станица</div><div class="phrase-cell lat">stanica</div><div class="phrase-cell eng">station <span class="gender-badge g-f">f</span></div></div>
+  </div>
+
+  <div class="nat-intro" style="border-left-color:var(--gold)">
+    <strong>Имиња од мапата — Names from the map.</strong>
+    <span class="les-key">Скопска тврдина Кале</span> (<em>Skopska tvrdina Kale</em>) — Skopje Fortress Kale ·
+    <span class="les-key">Стар пазар</span> (<em>Star pazar</em>) — the Old Bazaar ·
+    <span class="les-key">Градски парк</span> (<em>Gradski park</em>) — the City Park ·
+    <span class="les-key">Дебар Маало</span> (<em>Debar Maalo</em>) — a central Skopje neighbourhood.
+    <br><br>
+    <strong>Label the map:</strong> музеј · станица · ресторан · чаршија / пазар · маркет · плоштад.
+  </div>
+
+  <!-- ── The definite article ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">-ОТ / -ТА / -ТО / -ТЕ — Saying „the“</div>
+  <div class="section-sub" style="margin-bottom:1rem">Macedonian has no separate word for „the“ — it hangs on the end of the noun</div>
+
+  <div class="verb-note" style="margin-bottom:1rem">
+    Which ending you use depends on the noun's <strong>gender</strong> (singular) or its
+    <strong>plural ending</strong>. This is why the gender badges above matter: you can't ask
+    “where is <em>the</em> museum?” until you know музеј is masculine.
+  </div>
+
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+      <thead>
+        <tr>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Noun type</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Ending</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">a · without „the“</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">the · with „the“</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">singular <span class="gender-badge g-m">m</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold)">-от</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ресторан</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">restoran</span><br><span style="font-size:0.72rem;color:var(--muted)">a restaurant</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ресторан<strong>от</strong></span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">restoranot</span><br><span style="font-size:0.72rem;color:var(--muted)">the restaurant</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">singular <span class="gender-badge g-f">f</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold)">-та</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">станица</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">stanica</span><br><span style="font-size:0.72rem;color:var(--muted)">a station</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">станица<strong>та</strong></span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">stanicata</span><br><span style="font-size:0.72rem;color:var(--muted)">the station</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">singular <span class="gender-badge g-n">n</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold)">-то</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">кафуле</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kafule</span><br><span style="font-size:0.72rem;color:var(--muted)">a café</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">кафуле<strong>то</strong></span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kafuleto</span><br><span style="font-size:0.72rem;color:var(--muted)">the café</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">plural in <strong>-и</strong> / <strong>-ови</strong></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold)">-те</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">станици</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">stanici</span><br><span style="font-size:0.72rem;color:var(--muted)">stations</span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">станици<strong>те</strong></span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">stanicite</span><br><span style="font-size:0.72rem;color:var(--muted)">the stations</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">plural in <strong>-а</strong> / <strong>-иња</strong></td>
+          <td style="padding:9px 12px;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold)">-та</td>
+          <td style="padding:9px 12px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">кафулиња</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kafulinja</span><br><span style="font-size:0.72rem;color:var(--muted)">cafés</span></td>
+          <td style="padding:9px 12px"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">кафулиња<strong>та</strong></span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">kafulinjata</span><br><span style="font-size:0.72rem;color:var(--muted)">the cafés</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="verb-note" style="margin-bottom:1.5rem">
+    <strong>Watch out:</strong> when a noun has an adjective in front of it, the adjective takes
+    the ending instead — <span class="les-key">зоолошка градина</span> → <span class="les-key">зоолошка<strong>та</strong> градина</span>
+    (“the zoo”), not <em>зоолошка градината</em>. Same in
+    <span class="les-key">на трет<strong>иот</strong> кат</span> (“on the third floor”) over in the Travel tab.
+  </div>
+
+  <!-- ── Asking the way ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Каде е…? — Asking Where Something Is</div>
+  <div class="section-sub" style="margin-bottom:1.2rem">Каде <strong>е</strong> for one thing · Каде <strong>се</strong> for several</div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Прашања — The Questions</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Извинете, каде е ресторанот?</div><div class="phrase-cell lat">Izvinete, kade e restoranot?</div><div class="phrase-cell eng">Excuse me, where is the restaurant?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Извинете, каде е музејот?</div><div class="phrase-cell lat">Izvinete, kade e muzejot?</div><div class="phrase-cell eng">Excuse me, where is the museum?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде е станицата?</div><div class="phrase-cell lat">Kade e stanicata?</div><div class="phrase-cell eng">Where is the station?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде е кафулето?</div><div class="phrase-cell lat">Kade e kafuleto?</div><div class="phrase-cell eng">Where is the café?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде се станиците?</div><div class="phrase-cell lat">Kade se stanicite?</div><div class="phrase-cell eng">Where are the stations?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде се кафулињата?</div><div class="phrase-cell lat">Kade se kafulinjata?</div><div class="phrase-cell eng">Where are the cafés?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Блиску е?</div><div class="phrase-cell lat">Blisku e?</div><div class="phrase-cell eng">Is it close?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Далеку е?</div><div class="phrase-cell lat">Daleku e?</div><div class="phrase-cell eng">Is it far?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Како да стигнам до плоштадот?</div><div class="phrase-cell lat">Kako da stignam do ploshtadot?</div><div class="phrase-cell eng">How do I get to the square?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Како да стигнам од Дебар Маало до Зоолошката градина?</div><div class="phrase-cell lat">Kako da stignam od Debar Maalo do Zooloshkata gradina?</div><div class="phrase-cell eng">How do I get from Debar Maalo to the zoo?</div></div>
+  </div>
+
+  <div class="verb-note" style="margin-bottom:1.5rem">
+    <strong>Како да стигнам…?</strong> is the <em>да</em> construction from the Verbs tab:
+    Macedonian has no infinitive, so “how to get” comes out as
+    <span class="les-key">како да стигнам</span> — literally “how that I arrive”.
+    Change the verb to match who's asking: <em>да стигнам</em> (I), <em>да стигнеш</em> (you),
+    <em>да стигнеме</em> (we).
+    <br><br>
+    <strong>од… до…</strong> — <em>od… do…</em> — “from… to…”. Both prepositions, one route.
+  </div>
+
+  <!-- ── Directions ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Насоки — Giving Directions</div>
+  <div class="section-sub" style="margin-bottom:1.2rem">Three words carry most of it: лево, десно, право</div>
+
+  <div class="verb-groups" style="grid-template-columns:repeat(3,1fr)">
+    <div class="verb-group-card">
+      <div class="verb-group-label">← лево</div>
+      <div class="verb-headword">Лево</div>
+      <div class="verb-headword-lat">levo</div>
+      <div class="verb-headword-eng">left</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-cyr">Оди лево.</span><span class="conj-lat">Odi levo.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">Go left.</div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label">→ десно</div>
+      <div class="verb-headword">Десно</div>
+      <div class="verb-headword-lat">desno</div>
+      <div class="verb-headword-eng">right</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-cyr">Оди десно.</span><span class="conj-lat">Odi desno.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">Go right.</div>
+    </div>
+    <div class="verb-group-card">
+      <div class="verb-group-label">↑ право</div>
+      <div class="verb-headword">Право</div>
+      <div class="verb-headword-lat">pravo</div>
+      <div class="verb-headword-eng">straight ahead</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-cyr">Оди право.</span><span class="conj-lat">Odi pravo.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">Go straight.</div>
+    </div>
+  </div>
+
+  <div class="col-headers" style="margin-top:1.5rem">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Одговори — The Answers</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Оди право, па лево.</div><div class="phrase-cell lat">Odi pravo, pa levo.</div><div class="phrase-cell eng">Go straight, then left.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Потоа, оди десно.</div><div class="phrase-cell lat">Potoa, odi desno.</div><div class="phrase-cell eng">After that, go right.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Одете право.</div><div class="phrase-cell lat">Odete pravo.</div><div class="phrase-cell eng">Go straight. (formal / to more than one person)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Сврти лево.</div><div class="phrase-cell lat">Svrti levo.</div><div class="phrase-cell eng">Turn left.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Сврти десно.</div><div class="phrase-cell lat">Svrti desno.</div><div class="phrase-cell eng">Turn right.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Блиску е.</div><div class="phrase-cell lat">Blisku e.</div><div class="phrase-cell eng">It's close.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Далеку е.</div><div class="phrase-cell lat">Daleku e.</div><div class="phrase-cell eng">It's far.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Не знам, жал ми е.</div><div class="phrase-cell lat">Ne znam, zhal mi e.</div><div class="phrase-cell eng">I don't know, sorry.</div></div>
+  </div>
+
+  <div class="verb-note" style="margin-bottom:1.5rem">
+    <strong>па</strong> (<em>pa</em>) = “then / and then”, joining two moves in one breath ·
+    <strong>потоа</strong> (<em>potoa</em>) = “after that”, starting a new sentence.
+    Both do the same job; потоа just sounds a little more deliberate.
+  </div>
+
+  <!-- ── Weather ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Времето — The Weather</div>
+  <div class="section-sub" style="margin-bottom:1rem">One word, two meanings — време is both „weather“ and „time“</div>
+
+  <div class="verb-note" style="margin-bottom:1rem">
+    <span class="les-key">време</span> (<em>vreme</em>) means <strong>weather</strong> in
+    <em>Какво е времето?</em> and <strong>time</strong> in <em>Немам време</em> (“I have no time”).
+    Context tells them apart, exactly as “it's fine” does in English.
+  </div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Какво е времето? — What's the weather like?</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">време</div><div class="phrase-cell lat">vreme</div><div class="phrase-cell eng">weather · time <span class="gender-badge g-n">n</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">дожд</div><div class="phrase-cell lat">dozhd</div><div class="phrase-cell eng">rain (noun) <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">снег</div><div class="phrase-cell lat">sneg</div><div class="phrase-cell eng">snow <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">сонце</div><div class="phrase-cell lat">sonce</div><div class="phrase-cell eng">sun <span class="gender-badge g-n">n</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">ветер</div><div class="phrase-cell lat">veter</div><div class="phrase-cell eng">wind <span class="gender-badge g-m">m</span></div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Какво е времето?</div><div class="phrase-cell lat">Kakvo e vremeto?</div><div class="phrase-cell eng">What's the weather like?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Врне.</div><div class="phrase-cell lat">Vrne.</div><div class="phrase-cell eng">It's raining.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Врне дожд.</div><div class="phrase-cell lat">Vrne dozhd.</div><div class="phrase-cell eng">It's raining. (lit. “rain is falling”)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Врне снег.</div><div class="phrase-cell lat">Vrne sneg.</div><div class="phrase-cell eng">It's snowing.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Сончево е.</div><div class="phrase-cell lat">Sonchevo e.</div><div class="phrase-cell eng">It's sunny.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Облачно е.</div><div class="phrase-cell lat">Oblachno e.</div><div class="phrase-cell eng">It's cloudy.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Дува ветер.</div><div class="phrase-cell lat">Duva veter.</div><div class="phrase-cell eng">It's windy. (lit. “wind is blowing”)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Топло е.</div><div class="phrase-cell lat">Toplo e.</div><div class="phrase-cell eng">It's warm.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Студено е.</div><div class="phrase-cell lat">Studeno e.</div><div class="phrase-cell eng">It's cold.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Убаво време.</div><div class="phrase-cell lat">Ubavo vreme.</div><div class="phrase-cell eng">Nice weather.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Немам време.</div><div class="phrase-cell lat">Nemam vreme.</div><div class="phrase-cell eng">I don't have time. (време = time)</div></div>
+  </div>
+
+  <div class="verb-note" style="margin-bottom:1.5rem">
+    <strong>Врне</strong> is an <em>impersonal</em> verb — it only ever appears in the
+    тој/таа/тоа form, because nothing is doing the raining. There is no <em>„јас врнам“</em>.
+    English works the same way: “it rains”, where “it” is nobody in particular.
+  </div>
+
+  <!-- ── Travelling & the future ── -->
+  <div class="section-title" style="font-size:1.3rem;margin-top:2.5rem;margin-bottom:0.4rem">Каде ќе одиш? — Where Will You Go?</div>
+  <div class="section-sub" style="margin-bottom:1rem">ќе + present tense = future · see the full table in the Verbs tab</div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Патување — Making Plans</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">патува</div><div class="phrase-cell lat">patuva</div><div class="phrase-cell eng">to travel (Group 1)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде ќе одиш?</div><div class="phrase-cell lat">Kade ḱe odish?</div><div class="phrase-cell eng">Where will you go?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Ќе одам во Охрид.</div><div class="phrase-cell lat">Ḱe odam vo Ohrid.</div><div class="phrase-cell eng">I'll go to Ohrid.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Ќе патувам утре.</div><div class="phrase-cell lat">Ḱe patuvam utre.</div><div class="phrase-cell eng">I'll travel tomorrow.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Со кого ќе патуваш?</div><div class="phrase-cell lat">So kogo ḱe patuvash?</div><div class="phrase-cell eng">Who will you travel with?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Ќе врне утре.</div><div class="phrase-cell lat">Ḱe vrne utre.</div><div class="phrase-cell eng">It will rain tomorrow.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Нема да одам.</div><div class="phrase-cell lat">Nema da odam.</div><div class="phrase-cell eng">I won't go. (negative future)</div></div>
+  </div>
+
+  <!-- ── Exercises ── -->
+  <div class="nat-intro" style="margin-top:2.5rem;border-left-color:var(--gold)">
+    <strong>Вежби — Practise on the map:</strong> you're standing in the middle of Скопје.
+    Ask a stranger for four of the places above, then give the directions back yourself.
+    Tap <strong>Show Answer</strong> to check.
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„Excuse me, where is the museum?“</div>
+    <div class="exercise-eng">Translate to Macedonian — remember the -от</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Извинете, каде е музејот?</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Izvinete, kade e muzejot?</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„Where are the cafés?“</div>
+    <div class="exercise-eng">Plural — so каде <em>се</em>, and the plural article</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Каде се кафулињата?</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Kade se kafulinjata?</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Како да стигнам од Дебар Маало до Зоолошката градина?</div>
+    <div class="exercise-q-lat">Kako da stignam od Debar Maalo do Zooloshkata gradina?</div>
+    <div class="exercise-eng">Answer with a route — the pattern is what's being tested, not the map</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Оди право, па лево. Потоа, оди десно.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Odi pravo, pa levo. Potoa, odi desno.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Од Скопска тврдина Кале до Градски парк?</div>
+    <div class="exercise-q-lat">Od Skopska tvrdina Kale do Gradski park?</div>
+    <div class="exercise-eng">Give your own route — a model answer, then add „Блиску е.“ or „Далеку е.“</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Оди право, потоа сврти лево. Блиску е.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Odi pravo, potoa svrti levo. Blisku e.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„It's raining. Where will you go?“</div>
+    <div class="exercise-eng">Two sentences — the impersonal врне, then ќе + present</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Врне. Каде ќе одиш?</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Vrne. Kade ḱe odish?</div></div>
+  </div>
+</div>
+
 <!-- ─── NATIONALITIES ─── -->
 <div id="nationalities" class="section">
   <div class="section-title">Националности — Nationalities</div>
@@ -1916,8 +2229,8 @@
         <!-- ти -->
         <tr>
           <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">ти / ti / you</td>
-          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledaš</span><br><span style="font-size:0.72rem;color:var(--muted)">you watch</span></span></td>
-          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пијаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijaš</span><br><span style="font-size:0.72rem;color:var(--muted)">you drink</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">гледаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">gledash</span><br><span style="font-size:0.72rem;color:var(--muted)">you watch</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">пијаш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">pijash</span><br><span style="font-size:0.72rem;color:var(--muted)">you drink</span></span></td>
           <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">мислиш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">mislish</span><br><span style="font-size:0.72rem;color:var(--muted)">you think</span></span></td>
         </tr>
         <!-- тој/таа/тоа -->
@@ -1987,6 +2300,69 @@
   <div class="phrase-row"><div class="phrase-cell cyr">Спијам.</div><div class="phrase-cell lat">Spijam.</div><div class="phrase-cell eng">I sleep.</div></div>
   <br>
 
+
+  <!-- Future tense with ќе -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2rem">Ќе + Глагол — The Future Tense</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    <strong>Key rule:</strong> to talk about the future, put <strong>ќе</strong> in front of the
+    ordinary present tense. The verb itself does not change at all —
+    <span class="les-key">одам</span> (“I go”) becomes <span class="les-key">ќе одам</span> (“I will go”).
+    That is the whole rule.
+    <br><br>
+    To make it <strong>negative</strong>, ќе is replaced by <strong>нема да</strong>:
+    <span class="les-key">нема да одам</span> — “I won't go”. Note that <em>не ќе одам</em> is not how it's said.
+  </div>
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+    <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+      <thead>
+        <tr>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Person</th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Иднина — Future<br><span style="font-weight:400;color:var(--muted)">ќе + present</span></th>
+          <th style="padding:10px 12px;text-align:left;font-weight:500;color:var(--gold);border-bottom:1px solid var(--border);font-size:0.75rem;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em">Одречно — Negative<br><span style="font-weight:400;color:var(--muted)">нема да + present</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">јас / jas / I</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе одам</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odam</span><br><span style="font-size:0.72rem;color:var(--muted)">I will go</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да одам</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odam</span><br><span style="font-size:0.72rem;color:var(--muted)">I won't go</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">ти / ti / you</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе одиш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odish</span><br><span style="font-size:0.72rem;color:var(--muted)">you will go</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да одиш</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odish</span><br><span style="font-size:0.72rem;color:var(--muted)">you won't go</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">тој/таа/тоа<br>he/she/it</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе оди</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odi</span><br><span style="font-size:0.72rem;color:var(--muted)">he/she will go</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да оди</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odi</span><br><span style="font-size:0.72rem;color:var(--muted)">he/she won't go</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">ние / nie / we</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе одиме</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odime</span><br><span style="font-size:0.72rem;color:var(--muted)">we will go</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да одиме</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odime</span><br><span style="font-size:0.72rem;color:var(--muted)">we won't go</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">вие / vie / you (pl.)</td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе одите</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odite</span><br><span style="font-size:0.72rem;color:var(--muted)">you (pl.) will go</span></span></td>
+          <td style="padding:9px 12px;border-bottom:1px solid var(--border)"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да одите</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odite</span><br><span style="font-size:0.72rem;color:var(--muted)">you (pl.) won't go</span></span></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 12px;color:var(--muted);font-size:0.8rem;font-family:'IBM Plex Mono',monospace">тие / tie / they</td>
+          <td style="padding:9px 12px"><span style="background:#f5edda;border-radius:5px;padding:5px 9px;display:inline-block"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">ќе одат</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">ḱe odat</span><br><span style="font-size:0.72rem;color:var(--muted)">they will go</span></span></td>
+          <td style="padding:9px 12px"><span style="display:inline-block;padding:5px 9px"><span style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--cyrillic)">нема да одат</span><br><span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">nema da odat</span><br><span style="font-size:0.72rem;color:var(--muted)">they won't go</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Каде ќе одиш?</div><div class="phrase-cell lat">Kade ḱe odish?</div><div class="phrase-cell eng">Where will you go?</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Ќе патувам утре.</div><div class="phrase-cell lat">Ḱe patuvam utre.</div><div class="phrase-cell eng">I will travel tomorrow.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Ќе врне.</div><div class="phrase-cell lat">Ḱe vrne.</div><div class="phrase-cell eng">It will rain.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Ќе се слушнеме вечер.</div><div class="phrase-cell lat">Ḱe se slushneme vecher.</div><div class="phrase-cell eng">We'll talk tonight.</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">Нема да работам утре.</div><div class="phrase-cell lat">Nema da rabotam utre.</div><div class="phrase-cell eng">I won't work tomorrow.</div></div>
+  <br>
+
   <!-- Verb vocabulary -->
   <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:1rem">Глаголски речник — Verb Vocabulary</div>
   <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
@@ -2034,6 +2410,10 @@
   <div class="phrase-row"><div class="phrase-cell cyr">заборава</div><div class="phrase-cell lat">zaborava</div><div class="phrase-cell eng">to forget</div></div>
   <div class="phrase-row"><div class="phrase-cell cyr">се сеќава</div><div class="phrase-cell lat">se sekjava</div><div class="phrase-cell eng">to remember</div></div>
   <div class="phrase-row"><div class="phrase-cell cyr">има</div><div class="phrase-cell lat">ima</div><div class="phrase-cell eng">to have</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">патува</div><div class="phrase-cell lat">patuva</div><div class="phrase-cell eng">to travel</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">стигне</div><div class="phrase-cell lat">stigne</div><div class="phrase-cell eng">to arrive / to get somewhere (used with да)</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">сврти</div><div class="phrase-cell lat">svrti</div><div class="phrase-cell eng">to turn</div></div>
+  <div class="phrase-row"><div class="phrase-cell cyr">врне</div><div class="phrase-cell lat">vrne</div><div class="phrase-cell eng">to rain (impersonal — тој/таа/тоа form only)</div></div>
 
   <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2rem">Речник — General Vocabulary</div>
   <div class="col-headers"><div class="col-header">Македонски</div><div class="col-header">Latinica</div><div class="col-header">English</div></div>
@@ -2911,11 +3291,11 @@
     { group:'1', cyr:'чека', lat:'cheka', eng:'to wait',
       conj:[['Јас','чекам','chekam'],['Ти','чекаш','chekash'],['Тој/таа','чека','cheka'],['Ние','чекаме','chekame'],['Вие','чекате','chekate'],['Тие','чекаат','chekaat']] },
     { group:'1', cyr:'помага', lat:'pomaga', eng:'to help',
-      conj:[['Јас','помагам','pomagam'],['Ти','помагаш','pomagash'],['Тој/таа','помага','pomaga'],['Ние','помагаме','pomag ame'],['Вие','помагате','pomagate'],['Тие','помагаат','pomagaat']] },
+      conj:[['Јас','помагам','pomagam'],['Ти','помагаш','pomagash'],['Тој/таа','помага','pomaga'],['Ние','помагаме','pomagame'],['Вие','помагате','pomagate'],['Тие','помагаат','pomagaat']] },
     { group:'1', cyr:'почитува', lat:'pochituva', eng:'to respect',
       conj:[['Јас','почитувам','pochituvam'],['Ти','почитуваш','pochituvash'],['Тој/таа','почитува','pochituva'],['Ние','почитуваме','pochituvame'],['Вие','почитувате','pochituvate'],['Тие','почитуваат','pochituvaat']] },
     { group:'1', cyr:'заборава', lat:'zaborava', eng:'to forget',
-      conj:[['Јас','заборавам','zaboavam'],['Ти','забораваш','zaboravash'],['Тој/таа','заборава','zaborava'],['Ние','забораваме','zaboravame'],['Вие','заборавате','zaboravate'],['Тие','забораваат','zaboravaat']] },
+      conj:[['Јас','заборавам','zaboravam'],['Ти','забораваш','zaboravash'],['Тој/таа','заборава','zaborava'],['Ние','забораваме','zaboravame'],['Вие','заборавате','zaboravate'],['Тие','забораваат','zaboravaat']] },
     { group:'1', cyr:'се сеќава', lat:'se sekjava', eng:'to remember',
       conj:[['Јас','се сеќавам','se sekjavam'],['Ти','се сеќаваш','se sekjavash'],['Тој/таа','се сеќава','se sekjava'],['Ние','се сеќаваме','se sekjavame'],['Вие','се сеќавате','se sekjavate'],['Тие','се сеќаваат','se sekjavaat']] },
     { group:'1', cyr:'се насмевнува', lat:'se nasmevnuva', eng:'to smile',
@@ -2954,6 +3334,12 @@
       conj:[['Јас','свирам','sviram'],['Ти','свириш','svirish'],['Тој/таа','свири','sviri'],['Ние','свириме','svirime'],['Вие','свирите','svirite'],['Тие','свират','svirat']] },
     { group:'3', cyr:'вози', lat:'vozi', eng:'to drive',
       conj:[['Јас','возам','vozam'],['Ти','возиш','vozish'],['Тој/таа','вози','vozi'],['Ние','возиме','vozime'],['Вие','возите','vozite'],['Тие','возат','vozat']] },
+    { group:'1', cyr:'патува', lat:'patuva', eng:'to travel',
+      conj:[['Јас','патувам','patuvam'],['Ти','патуваш','patuvash'],['Тој/таа','патува','patuva'],['Ние','патуваме','patuvame'],['Вие','патувате','patuvate'],['Тие','патуваат','patuvaat']] },
+    { group:'2', cyr:'стигне', lat:'stigne', eng:'to arrive / get somewhere',
+      conj:[['Јас','стигнам','stignam'],['Ти','стигнеш','stignesh'],['Тој/таа','стигне','stigne'],['Ние','стигнеме','stigneme'],['Вие','стигнете','stignete'],['Тие','стигнат','stignat']] },
+    { group:'3', cyr:'сврти', lat:'svrti', eng:'to turn',
+      conj:[['Јас','свртам','svrtam'],['Ти','свртиш','svrtish'],['Тој/таа','сврти','svrti'],['Ние','свртиме','svrtime'],['Вие','свртите','svrtite'],['Тие','свртат','svrtat']] },
   ];
 
   let fcDeck = [...FC_ALL];
@@ -3666,6 +4052,15 @@
     {mk:'небо',lat:'nebo',eng:'sky'},{mk:'море',lat:'more',eng:'sea'},
     {mk:'сонце',lat:'sonce',eng:'sun'},{mk:'вода',lat:'voda',eng:'water'},
     {mk:'леб',lat:'leb',eng:'bread'},{mk:'парк',lat:'park',eng:'park'},
+    {mk:'дожд',lat:'dozhd',eng:'rain'},{mk:'снег',lat:'sneg',eng:'snow'},
+    {mk:'време',lat:'vreme',eng:'weather / time'},{mk:'ветер',lat:'veter',eng:'wind'},
+    {mk:'лево',lat:'levo',eng:'left'},{mk:'десно',lat:'desno',eng:'right'},
+    {mk:'право',lat:'pravo',eng:'straight ahead'},{mk:'блиску',lat:'blisku',eng:'close / near'},
+    {mk:'далеку',lat:'daleku',eng:'far'},{mk:'плоштад',lat:'ploshtad',eng:'square'},
+    {mk:'црква',lat:'crkva',eng:'church'},{mk:'музеј',lat:'muzej',eng:'museum'},
+    {mk:'станица',lat:'stanica',eng:'station'},{mk:'тврдина',lat:'tvrdina',eng:'fortress'},
+    {mk:'кафуле',lat:'kafule',eng:'café'},{mk:'кафана',lat:'kafana',eng:'tavern'},
+    {mk:'чаршија',lat:'charshija',eng:'old bazaar'},{mk:'маркет',lat:'market',eng:'supermarket'},
   ];
   const Q_PLURALS = [
     {mk:'мачка → ?',lat:'machka',ans:'мачки',ansLat:'machki',eng:'cats'},
@@ -3691,6 +4086,9 @@
     {mk:'Тој + оди',lat:'toj + odi',ans:'оди',ansLat:'odi',eng:'he goes'},
     {mk:'Јас + сака',lat:'jas + saka',ans:'сакам',ansLat:'sakam',eng:'I want'},
     {mk:'Ние + пие',lat:'nie + pie',ans:'пиеме',ansLat:'pieme',eng:'we drink'},
+    {mk:'Јас + патува',lat:'jas + patuva',ans:'патувам',ansLat:'patuvam',eng:'I travel'},
+    {mk:'Ти + ќе оди',lat:'ti + ḱe odi',ans:'ќе одиш',ansLat:'ḱe odish',eng:'you will go'},
+    {mk:'Јас + ќе патува',lat:'jas + ḱe patuva',ans:'ќе патувам',ansLat:'ḱe patuvam',eng:'I will travel'},
   ];
   // Derived from the single NOUNS dataset so the quiz stays in sync automatically.
   const Q_NOUNS = NOUNS.map(n => ({ mk: n.cyr, lat: n.lat, eng: n.eng }));
@@ -4130,6 +4528,62 @@
         {front:'ресторан', back:'restoran', eng:'restaurant', audio:'ресторан', answer:'restaurant'},
         {front:'чаша', back:'chasha', eng:'glass', audio:'чаша', answer:'glass'},
         {front:'маса', back:'masa', eng:'table', audio:'маса', answer:'table'},
+      ]},
+    { id:'l15', unit:'Unit 5 · Out in the world', kind:'meaning',
+      title:'Asking directions', sub:'Каде е…? — left, right and straight on',
+      teach:`<h3>Каде е…? — Where is…?</h3>
+        <p>Macedonian has no separate word for “the” — it hangs on the <strong>end</strong>
+        of the noun, and which ending you use depends on the noun’s gender:
+        <span class="les-key">-от</span> (m), <span class="les-key">-та</span> (f),
+        <span class="les-key">-то</span> (n), <span class="les-key">-те</span> (plural).</p>
+        <p>So <span class="les-key">музеј</span> (“a museum”) becomes
+        <span class="les-key">музејот</span> (“the museum”), and you can ask
+        <span class="les-key">Извинете, каде е музејот?</span>
+        (<span class="les-lat">Izvinete, kade e muzejot?</span>).</p>
+        <p>The answer comes back in three words:
+        <span class="les-key">лево</span> ←, <span class="les-key">десно</span> →,
+        <span class="les-key">право</span> ↑. Chain them with
+        <span class="les-key">па</span> (“then”):
+        <span class="les-key">Оди право, па лево.</span></p>`,
+      cards:[
+        {front:'лево', back:'levo', eng:'left', audio:'лево', answer:'left'},
+        {front:'десно', back:'desno', eng:'right', audio:'десно', answer:'right'},
+        {front:'право', back:'pravo', eng:'straight ahead', audio:'право', answer:'straight ahead'},
+        {front:'блиску', back:'blisku', eng:'close / near', audio:'блиску', answer:'close / near'},
+        {front:'далеку', back:'daleku', eng:'far', audio:'далеку', answer:'far'},
+        {front:'плоштад', back:'ploshtad', eng:'square', audio:'плоштад', answer:'square'},
+        {front:'црква', back:'crkva', eng:'church', audio:'црква', answer:'church'},
+        {front:'музеј', back:'muzej', eng:'museum', audio:'музеј', answer:'museum'},
+        {front:'станица', back:'stanica', eng:'station', audio:'станица', answer:'station'},
+        {front:'тврдина', back:'tvrdina', eng:'fortress', audio:'тврдина', answer:'fortress'},
+      ]},
+    { id:'l16', unit:'Unit 5 · Out in the world', kind:'meaning',
+      title:'Weather & the future', sub:'Врне · Каде ќе одиш?',
+      teach:`<h3>Времето — The weather</h3>
+        <p><span class="les-key">време</span> (<span class="les-lat">vreme</span>) does double
+        duty: it is both <strong>weather</strong> and <strong>time</strong>. Ask
+        <span class="les-key">Какво е времето?</span> and you get the forecast; say
+        <span class="les-key">Немам време</span> and you mean “I have no time”.</p>
+        <p><span class="les-key">Врне</span> means “it’s raining”. It only ever appears in the
+        тој/таа/тоа form — nothing is doing the raining, exactly as in English “it rains”.</p>
+        <h3>Ќе — the future</h3>
+        <p>Put <span class="les-key">ќе</span> in front of the ordinary present tense and you
+        have the future. The verb doesn’t change:
+        <span class="les-key">одиш</span> (“you go”) →
+        <span class="les-key">ќе одиш</span> (“you will go”). Hence
+        <span class="les-key">Каде ќе одиш?</span> —
+        <span class="les-lat">Kade ḱe odish?</span></p>`,
+      cards:[
+        {front:'време', back:'vreme', eng:'weather · time', audio:'време', answer:'weather · time'},
+        {front:'дожд', back:'dozhd', eng:'rain', audio:'дожд', answer:'rain'},
+        {front:'Врне.', back:'Vrne.', eng:'it’s raining', audio:'Врне.', answer:'it’s raining'},
+        {front:'снег', back:'sneg', eng:'snow', audio:'снег', answer:'snow'},
+        {front:'ветер', back:'veter', eng:'wind', audio:'ветер', answer:'wind'},
+        {front:'Сончево е.', back:'Sonchevo e.', eng:'it’s sunny', audio:'Сончево е.', answer:'it’s sunny'},
+        {front:'Студено е.', back:'Studeno e.', eng:'it’s cold', audio:'Студено е.', answer:'it’s cold'},
+        {front:'патува', back:'patuva', eng:'to travel', audio:'патува', answer:'to travel'},
+        {front:'Каде ќе одиш?', back:'Kade ḱe odish?', eng:'where will you go?', audio:'Каде ќе одиш?', answer:'where will you go?'},
+        {front:'Ќе патувам утре.', back:'Ḱe patuvam utre.', eng:'I will travel tomorrow', audio:'Ќе патувам утре.', answer:'I will travel tomorrow'},
       ]},
   ];
 
