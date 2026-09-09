@@ -584,6 +584,27 @@
     color: var(--gold-light);
     margin-bottom: 0.3rem;
   }
+  /* Headword + its pronunciation, shown on the BACK so the front stays a real test. */
+  .fc-back-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    width: 100%;
+    padding-bottom: 0.7rem;
+    margin-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .fc-back-head-cyr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--cyrillic);
+    line-height: 1;
+  }
+  .fc-back-head-lat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+  }
   .fc-word-eng {
     font-size: 0.9rem;
     color: var(--muted);
@@ -2262,7 +2283,7 @@
 <!-- ─── FLASHCARDS ─── -->
 <div id="flashcards" class="section">
   <div class="section-title">Флешкарти — Flashcards</div>
-  <div class="section-sub">Click a card to flip · Filter by group · Shuffle</div>
+  <div class="section-sub">Work out the pronunciation, then flip to check · Filter by group · Shuffle</div>
 
   <div class="fc-controls">
     <div class="fc-filter">
@@ -2283,12 +2304,15 @@
       <div class="fc-front" id="fc-front">
         <div class="fc-group-badge" id="fc-badge"></div>
         <div class="fc-word" id="fc-word"></div>
-        <div class="fc-word-lat" id="fc-lat"></div>
         <div class="fc-word-eng" id="fc-eng"></div>
-        <span class="fc-hint">click to flip</span>
+        <span class="fc-hint">say it aloud, then flip</span>
       </div>
       <div class="fc-back" id="fc-back">
-        <div class="fc-back-title">Full Conjugation</div>
+        <div class="fc-back-title">Pronunciation &amp; Full Conjugation</div>
+        <div class="fc-back-head">
+          <span class="fc-back-head-cyr" id="fc-back-cyr"></span>
+          <span class="fc-back-head-lat" id="fc-lat"></span>
+        </div>
         <div class="fc-conj-grid" id="fc-conj-grid"></div>
       </div>
     </div>
@@ -3176,8 +3200,9 @@
     const groupLabels = { '1': 'Group 1 · -А', '2': 'Group 2 · -Е', '3': 'Group 3 · -И', };
     document.getElementById('fc-badge').textContent = groupLabels[card.group] || '';
     document.getElementById('fc-word').textContent = card.cyr;
-    document.getElementById('fc-lat').textContent = card.lat;
     document.getElementById('fc-eng').textContent = card.eng;
+    document.getElementById('fc-back-cyr').textContent = card.cyr;
+    document.getElementById('fc-lat').textContent = card.lat;
     const grid = document.getElementById('fc-conj-grid');
     grid.innerHTML = card.conj.map(([pron, cyr, lat]) =>
       `<div class="fc-conj-item">
