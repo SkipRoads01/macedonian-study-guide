@@ -1102,6 +1102,7 @@
   <button onclick="show('phrases', this)">Phrases</button>
   <button onclick="show('restaurant', this)">Restaurant &amp; Café</button>
   <button onclick="show('travel', this)">Travel</button>
+  <button onclick="show('city', this)">In the City</button>
   <button onclick="show('nationalities', this)">Nationalities</button>
   <button onclick="show('verbs', this)">Verbs</button>
   <button onclick="show('sum', this)">To Be — Сум</button>
@@ -1679,6 +1680,187 @@
     <div class="exercise-eng">Translate to Macedonian</div>
     <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
     <div class="answer"><div class="answer-text">Ладно пиво, Ве молам.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Ladno pivo, Ve molam.</div></div>
+  </div>
+</div>
+
+<!-- ─── IN THE CITY ─── -->
+<div id="city" class="section">
+  <div class="section-title">Места во градот — Places in the City</div>
+  <div class="section-sub">Asking what's there · „The“ on the end · Има vs Имам · Directions</div>
+
+  <div class="nat-intro">
+    <strong>The one thing to take away:</strong> use the <em>plain</em> word when you don't know whether the
+    thing exists — <em>Каде <strong>има</strong> тоалет?</em> ("Where is there a toilet?") — and add
+    <strong>„the“ on the end</strong> once you both know which one you mean —
+    <em>Каде е тоалет<strong>от</strong>?</em> ("Where is the toilet?").
+    The ending follows the gender: <strong>-от</strong> (masc.) хотел<strong>от</strong> ·
+    <strong>-та</strong> (fem.) библиотека<strong>та</strong> ·
+    <strong>-то</strong> (neut.) езеро<strong>то</strong>.
+  </div>
+
+  <div class="col-headers">
+    <div class="col-header">Македонски</div>
+    <div class="col-header">Latinica</div>
+    <div class="col-header">English</div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Места во градот — Places in the City</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">хотел</div><div class="phrase-cell lat">hotel</div><div class="phrase-cell eng">hotel</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">црква</div><div class="phrase-cell lat">crkva</div><div class="phrase-cell eng">church</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">парк</div><div class="phrase-cell lat">park</div><div class="phrase-cell eng">park</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">зоолошка градина</div><div class="phrase-cell lat">zooloshka gradina</div><div class="phrase-cell eng">zoo</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">ресторан</div><div class="phrase-cell lat">restoran</div><div class="phrase-cell eng">restaurant</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">кафана</div><div class="phrase-cell lat">kafana</div><div class="phrase-cell eng">tavern (food, drink, live music)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">кафуле</div><div class="phrase-cell lat">kafule</div><div class="phrase-cell eng">café</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">музеј</div><div class="phrase-cell lat">muzej</div><div class="phrase-cell eng">museum</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">плоштад</div><div class="phrase-cell lat">ploshtad</div><div class="phrase-cell eng">town square</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">тврдина Кале</div><div class="phrase-cell lat">tvrdina Kale</div><div class="phrase-cell eng">Kale Fortress</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">автобуска станица</div><div class="phrase-cell lat">avtobuska stanica</div><div class="phrase-cell eng">bus station</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Секојдневни места — Everyday Places</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">пекара</div><div class="phrase-cell lat">pekara</div><div class="phrase-cell eng">bakery</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">библиотека</div><div class="phrase-cell lat">biblioteka</div><div class="phrase-cell eng">library</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">пазар</div><div class="phrase-cell lat">pazar</div><div class="phrase-cell eng">market (open-air)</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">аптека</div><div class="phrase-cell lat">apteka</div><div class="phrase-cell eng">pharmacy</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">маркет</div><div class="phrase-cell lat">market</div><div class="phrase-cell eng">shop / supermarket</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">базен</div><div class="phrase-cell lat">bazen</div><div class="phrase-cell eng">swimming pool</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">паркинг</div><div class="phrase-cell lat">parking</div><div class="phrase-cell eng">car park</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">канцеларија</div><div class="phrase-cell lat">kancelarija</div><div class="phrase-cell eng">office</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">тоалет</div><div class="phrase-cell lat">toalet</div><div class="phrase-cell eng">toilet</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">езеро</div><div class="phrase-cell lat">ezero</div><div class="phrase-cell eng">lake</div></div>
+  </div>
+
+  <!-- The three question openers -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2.5rem">Трите прашања — The Three Openers</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    <strong>Има ли …?</strong> — "Is there a …?" · <strong>Нема ли …?</strong> — "Isn't there a …?" ·
+    <strong>Колку … има?</strong> — "How many … are there?" The little word <strong>ли</strong> is the
+    question marker; in speech you can drop it and just lift your voice: <em>Има хотел?</em>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Има ли …? — Is there a …?</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Има хотел? Каде е хотелот?</div><div class="phrase-cell lat">Ima hotel? Kade e hotelot?</div><div class="phrase-cell eng">Is there a hotel? Where is the hotel?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Има ли аптека овде?</div><div class="phrase-cell lat">Ima li apteka ovde?</div><div class="phrase-cell eng">Is there a pharmacy here?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Нема ли базен?</div><div class="phrase-cell lat">Nema li bazen?</div><div class="phrase-cell eng">Isn't there a swimming pool?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Колку ресторани има?</div><div class="phrase-cell lat">Kolku restorani ima?</div><div class="phrase-cell eng">How many restaurants are there?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Колку тоалети има?</div><div class="phrase-cell lat">Kolku toaleti ima?</div><div class="phrase-cell eng">How many toilets are there?</div></div>
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Каде има …? / Каде е …? — A pair for every place</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има тоалет? Каде е тоалетот?</div><div class="phrase-cell lat">Kade ima toalet? Kade e toaletot?</div><div class="phrase-cell eng">Where is there a toilet? Where is the toilet?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има базен? Каде е базенот?</div><div class="phrase-cell lat">Kade ima bazen? Kade e bazenot?</div><div class="phrase-cell eng">Where is there a pool? Where is the pool?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има паркинг? Каде е паркингот?</div><div class="phrase-cell lat">Kade ima parking? Kade e parkingot?</div><div class="phrase-cell eng">Where is there a car park? Where is the car park?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има библиотека? Каде е библиотеката?</div><div class="phrase-cell lat">Kade ima biblioteka? Kade e bibliotekata?</div><div class="phrase-cell eng">Where is there a library? Where is the library?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има канцеларија? Каде е канцеларијата?</div><div class="phrase-cell lat">Kade ima kancelarija? Kade e kancelarijata?</div><div class="phrase-cell eng">Where is there an office? Where is the office?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има кафуле? Каде е кафулето?</div><div class="phrase-cell lat">Kade ima kafule? Kade e kafuleto?</div><div class="phrase-cell eng">Where is there a café? Where is the café?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде има езеро? Каде е езерото?</div><div class="phrase-cell lat">Kade ima ezero? Kade e ezeroto?</div><div class="phrase-cell eng">Where is there a lake? Where is the lake?</div></div>
+  </div>
+
+  <!-- Има: two different words that look identical -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2.5rem">Има — One Word, Two Jobs</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    <strong>Има</strong> does double duty. On its own it means <strong>"there is / there are"</strong> and never
+    changes — <em>Има маркет</em>, <em>Има маркети</em>. Conjugated, it's the ordinary verb
+    <strong>"to have"</strong> — <em>Имам куче</em>. Its negative is one word: <strong>нема</strong>, <strong>немам</strong>.
+  </div>
+
+  <div class="verb-groups" style="grid-template-columns:repeat(2,1fr)">
+    <div class="verb-group-card">
+      <div class="verb-group-label">1 · Има = there is / there are</div>
+      <div class="verb-headword">има</div>
+      <div class="verb-headword-lat">ima</div>
+      <div class="verb-headword-eng">there is / there are (never changes)</div>
+      <div class="conj-row"><span class="conj-cyr">Има маркет.</span><span class="conj-lat">Ima market.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">There is a shop.</div>
+      <div class="conj-row"><span class="conj-cyr">Има маркети.</span><span class="conj-lat">Ima marketi.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">There are shops. — same word, singular or plural</div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-cyr">Нема тоалет.</span><span class="conj-lat">Nema toalet.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">There is no toilet.</div>
+    </div>
+
+    <div class="verb-group-card">
+      <div class="verb-group-label">2 · Има = to have</div>
+      <div class="verb-headword">има</div>
+      <div class="verb-headword-lat">ima</div>
+      <div class="verb-headword-eng">to have</div>
+      <div class="conj-row"><span class="conj-pronoun">Јас</span><span class="conj-cyr">имам</span><span class="conj-lat">imam</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ти</span><span class="conj-cyr">имаш</span><span class="conj-lat">imash</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тој/таа</span><span class="conj-cyr">има</span><span class="conj-lat">ima</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Ние</span><span class="conj-cyr">имаме</span><span class="conj-lat">imame</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Вие</span><span class="conj-cyr">имате</span><span class="conj-lat">imate</span></div>
+      <div class="conj-row"><span class="conj-pronoun">Тие</span><span class="conj-cyr">имаат</span><span class="conj-lat">imaat</span></div>
+      <hr class="divider">
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">Имаш куче?</span><span class="conj-lat">Imash kuche?</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">Do you have a dog? (ти — friend)</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">Имате куче?</span><span class="conj-lat">Imate kuche?</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:0.3rem;margin-top:0.1rem">Do you have a dog? (вие — formal / plural)</div>
+      <div class="conj-row"><span class="conj-cyr" style="font-size:0.82rem">Немам прашање.</span><span class="conj-lat">Nemam prashanje.</span></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:0.1rem">I don't have a question.</div>
+    </div>
+  </div>
+
+  <!-- Directions -->
+  <div class="section-title" style="font-size:1.2rem;margin-bottom:0.3rem;margin-top:2.5rem">Оди — Getting Around</div>
+  <div class="verb-note" style="margin-bottom:1rem">
+    <strong>Оди</strong> ("to go") is a Group 3 verb: <strong>одам, одиш, оди, одиме, одите, одат</strong>.
+    Say where with <strong>во</strong> ("to / in") and string stops together with <strong>па</strong> ("then").
+  </div>
+
+  <div class="phrase-group">
+    <div class="phrase-group-title">Насоки — Directions</div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Одам во парк, па одам во музеј.</div><div class="phrase-cell lat">Odam vo park, pa odam vo muzej.</div><div class="phrase-cell eng">I'm going to the park, then to the museum.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Оди лево.</div><div class="phrase-cell lat">Odi levo.</div><div class="phrase-cell eng">Go left.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Оди десно.</div><div class="phrase-cell lat">Odi desno.</div><div class="phrase-cell eng">Go right.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Оди право.</div><div class="phrase-cell lat">Odi pravo.</div><div class="phrase-cell eng">Go straight.</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Каде одиш?</div><div class="phrase-cell lat">Kade odish?</div><div class="phrase-cell eng">Where are you going?</div></div>
+    <div class="phrase-row"><div class="phrase-cell cyr">Одам на пазар.</div><div class="phrase-cell lat">Odam na pazar.</div><div class="phrase-cell eng">I'm going to the market.</div></div>
+  </div>
+
+  <div class="nat-intro" style="margin-top:2.5rem;border-left-color:var(--gold)">
+    <strong>Вежба — Practice:</strong> Look around wherever you are and ask about five things you can see.
+    For each one, say both versions aloud: <em>Каде има …?</em> and then <em>Каде е …?</em> with „the“ on the end.
+    Tap <strong>Show Answer</strong> to check yourself.
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„Is there a hotel? Where is the hotel?“</div>
+    <div class="exercise-eng">Translate to Macedonian</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Има хотел? Каде е хотелот?</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Ima hotel? Kade e hotelot?</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„How many restaurants are there?“</div>
+    <div class="exercise-eng">Translate to Macedonian</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Колку ресторани има?</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Kolku restorani ima?</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">Add „the“: библиотека · кафуле · паркинг · езеро</div>
+    <div class="exercise-eng">Put the right ending on each place</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">библиотеката · кафулето · паркингот · езерото</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">-та (fem.) · -то (neut.) · -от (masc.) · -то (neut.)</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„I don't have a question.“</div>
+    <div class="exercise-eng">Translate to Macedonian</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Немам прашање.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Nemam prashanje.</div></div>
+  </div>
+
+  <div class="exercise-block">
+    <div class="exercise-q">„I'm going to the park, then to the museum.“</div>
+    <div class="exercise-eng">Translate to Macedonian</div>
+    <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+    <div class="answer"><div class="answer-text">Одам во парк, па одам во музеј.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--gold-light)">Odam vo park, pa odam vo muzej.</div></div>
   </div>
 </div>
 
@@ -4130,6 +4312,26 @@
         {front:'ресторан', back:'restoran', eng:'restaurant', audio:'ресторан', answer:'restaurant'},
         {front:'чаша', back:'chasha', eng:'glass', audio:'чаша', answer:'glass'},
         {front:'маса', back:'masa', eng:'table', audio:'маса', answer:'table'},
+      ]},
+    { id:'l15', unit:'Unit 5 · Out in the world', kind:'meaning',
+      title:'Places in the city', sub:'Има ли …? Каде е …?',
+      teach:`<h3>Места во градот — Places in the city</h3>
+        <p>Ask what a town has with <span class="les-key">Има ли …?</span> (“Is there a …?”)
+        and <span class="les-key">Колку … има?</span> (“How many … are there?”).</p>
+        <p>Then a small but important switch: use the plain word while the thing is still
+        unknown — <span class="les-key">Каде има тоалет?</span> — and hang “the” on the end
+        once you both know which one — <span class="les-key">Каде е тоалетот?</span></p>`,
+      cards:[
+        {front:'аптека', back:'apteka', eng:'pharmacy', audio:'аптека', answer:'pharmacy'},
+        {front:'пекара', back:'pekara', eng:'bakery', audio:'пекара', answer:'bakery'},
+        {front:'библиотека', back:'biblioteka', eng:'library', audio:'библиотека', answer:'library'},
+        {front:'музеј', back:'muzej', eng:'museum', audio:'музеј', answer:'museum'},
+        {front:'црква', back:'crkva', eng:'church', audio:'црква', answer:'church'},
+        {front:'плоштад', back:'ploshtad', eng:'town square', audio:'плоштад', answer:'town square'},
+        {front:'базен', back:'bazen', eng:'swimming pool', audio:'базен', answer:'swimming pool'},
+        {front:'тоалет', back:'toalet', eng:'toilet', audio:'тоалет', answer:'toilet'},
+        {front:'автобуска станица', back:'avtobuska stanica', eng:'bus station', audio:'автобуска станица', answer:'bus station'},
+        {front:'Каде е тоалетот?', back:'Kade e toaletot?', eng:'Where is the toilet?', audio:'Каде е тоалетот?', answer:'Where is the toilet?'},
       ]},
   ];
 

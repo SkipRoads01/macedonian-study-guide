@@ -69,9 +69,14 @@ NOUN_PLURALS = ["столови","градови","паркови","станов
     "куќи","маси","згради","коли","реки","води","жени","чаши","пици","улици","планини",
     "пенкала","кина","села","езера","мориња","кучиња","кафиња","шишиња","мачиња","деца","очи","уши"]
 
+# In the City tab / “Places in the city” lesson — places and the Каде е …? question.
+CITY = ["аптека","пекара","библиотека","музеј","црква","плоштад","базен","тоалет",
+    "автобуска станица","кафуле","кафана","зоолошка градина","тврдина Кале","маркет",
+    "паркинг","канцеларија","Каде е тоалетот?"]
+
 seen, words = set(), []
 for group in (ALPHABET, NUMBER_WORDS, NUMBER_SENTENCES, QUIZ_VOCAB, QUIZ_PLURALS, QUIZ_VERBS,
-              PHRASES, NOUN_SINGULARS, NOUN_PLURALS):
+              PHRASES, NOUN_SINGULARS, NOUN_PLURALS, CITY):
     for w in group:
         if w not in seen:
             seen.add(w); words.append(w)
